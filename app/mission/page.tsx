@@ -46,6 +46,29 @@ export default function MissionPage() {
           </div>
         </Container>
       </section>
+
+      {/* In Memoriam Section */}
+      <section className="py-16 sm:py-20">
+        <Container>
+          <div className="mx-auto max-w-3xl">
+            <div className="rounded-2xl border border-black/10 bg-gradient-to-br from-white to-gray-50 p-8 shadow-lg">
+              <div className="flex items-center gap-3 border-b border-black/10 pb-4">
+                <span className="text-3xl">🕯️</span>
+                <h2 className="text-2xl font-semibold text-primary">In Memoriam</h2>
+              </div>
+              <div className="mt-6 space-y-4 font-serif text-base leading-relaxed text-text/80">
+                <p>
+                  This section is dedicated to remembering those who have been part of our lab community 
+                  and contributed to our mission.
+                </p>
+                <p className="italic text-text/60">
+                  [Add specific memorial content here]
+                </p>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
     </div>
   );
 }

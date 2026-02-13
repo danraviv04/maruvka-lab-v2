@@ -33,6 +33,9 @@ export default function SiteFooter() {
               <Link className="text-text/70 hover:text-primary" href="/tools">
                 Software
               </Link>
+              <Link className="text-text/70 hover:text-primary" href="/collaborators">
+                Collaborators
+              </Link>
             </div>
           </div>
 

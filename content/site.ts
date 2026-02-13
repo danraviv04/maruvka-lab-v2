@@ -16,6 +16,7 @@ export const site = {
     { name: 'Publications', href: '/publications' },
     { name: 'Software', href: '/tools' },
     { name: 'Team', href: '/team' },
+    { name: 'Collaborators', href: '/collaborators' },
     { name: 'Mission', href: '/mission' },
     { name: 'Contact', href: '/contact' },
   ],
