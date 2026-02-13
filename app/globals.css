@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #1b8abf;
+  --color-secondary: #20c78a;
+  --color-accent: #20c78a;
+  --color-background: #eff5f5;
+  --color-text: #666666;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+.font-serif {
+  font-family: var(--font-merriweather), ui-serif, Georgia, Cambria, "Times New Roman", Times,
+    serif;
+}
