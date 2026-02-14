@@ -5,7 +5,7 @@ import { site } from '../../content/site';
 
 export const metadata: Metadata = {
   title: 'Contact',
-  description: 'How to reach the Maruvka Lab.',
+  description: 'Get in touch with the Maruvka Lab at Technion. Reach out about collaborations, rotations, or open positions.',
 };
 
 export default function ContactPage() {
@@ -26,8 +26,13 @@ export default function ContactPage() {
                 {site.email}
               </a>
 
-              <div className="mt-6 text-sm font-semibold text-primary">Location</div>
-              <p className="mt-2 text-sm text-text/70">{site.institution}<br />{site.location}</p>
+              <div className="mt-6 text-sm font-semibold text-primary">Address</div>
+              <p className="mt-2 text-sm text-text/70">
+                {site.institution}<br />
+                Faculty of Biotechnology and Food Engineering<br />
+                Haifa, 3200003<br />
+                Israel
+              </p>
 
               <div className="mt-6 text-sm font-semibold text-primary">For applicants</div>
               <p className="mt-2 font-serif text-sm text-text/80">
@@ -36,16 +41,34 @@ export default function ContactPage() {
             </div>
 
             <div className="rounded-2xl border border-black/5 bg-white p-6 shadow-soft lg:col-span-2">
-              <div className="text-sm font-semibold text-primary">Message template</div>
-              <p className="mt-3 font-serif text-sm leading-relaxed text-text/80">
-                Subject: Collaboration / rotation / position inquiry
-                <br />
-                Body: Who you are, what you want to do, why the lab is relevant, and links to anything concrete (paper, code, dataset).
-              </p>
-              <div className="mt-6 rounded-2xl bg-black/5 p-6">
-                <p className="text-sm text-text/70">
-                  Map embed placeholder - add an iframe or a static map image when you have the exact building address.
-                </p>
+              <div className="text-sm font-semibold text-primary">Getting to campus</div>
+              <div className="mt-4 space-y-4 text-sm text-text/70">
+                <div>
+                  <span className="font-semibold text-primary">By public transport:</span> Multiple bus lines connect to Technion from Haifa city center. 
+                  The campus has several entrances; the Faculty of Biotechnology is in the central campus area.
+                </div>
+                <div>
+                  <span className="font-semibold text-primary">By car:</span> Visitor parking is available near the main gate. 
+                  Follow signs to the Faculty of Biotechnology and Food Engineering.
+                </div>
+                <div>
+                  <span className="font-semibold text-primary">Campus map:</span> Visit{' '}
+                  <a href="https://www.technion.ac.il/en/about/campus-map/" target="_blank" rel="noopener noreferrer" className="font-semibold text-secondary hover:underline">
+                    technion.ac.il/en/about/campus-map
+                  </a>{' '}
+                  for an interactive map and detailed directions.
+                </div>
+              </div>
+
+              <div className="mt-6 text-sm font-semibold text-primary">Message template</div>
+              <div className="mt-3 rounded-xl bg-background p-4 font-serif text-sm leading-relaxed text-text/80">
+                <div className="font-semibold text-primary">Subject:</div>
+                <div className="mt-1">Collaboration / rotation / position inquiry</div>
+                <div className="mt-4 font-semibold text-primary">Body:</div>
+                <div className="mt-1">
+                  Who you are, what you want to do, why the lab is relevant, and links to anything concrete 
+                  (paper, code, dataset).
+                </div>
               </div>
             </div>
           </div>

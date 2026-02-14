@@ -4,7 +4,7 @@ import SectionHeader from '../../components/SectionHeader';
 
 export const metadata: Metadata = {
   title: 'Collaborators & Grants',
-  description: 'Our collaborators and funding sources at the Maruvka Lab.',
+  description: 'Research partnerships and funding supporting computational cancer genomics at the Maruvka Lab.',
 };
 
 const collaborators = [

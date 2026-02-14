@@ -4,7 +4,7 @@ import SectionHeader from '../../components/SectionHeader';
 
 export const metadata: Metadata = {
   title: 'Mission',
-  description: 'What we optimize for and how we work.',
+  description: 'Our approach to computational cancer genomics: reproducible methods, rigorous inference, and collaborative science.',
 };
 
 export default function MissionPage() {

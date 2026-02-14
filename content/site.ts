@@ -16,6 +16,7 @@ export const site = {
     { name: 'Publications', href: '/publications' },
     { name: 'Software', href: '/tools' },
     { name: 'Team', href: '/team' },
+    { name: 'Gallery', href: '/gallery' },
     { name: 'Collaborators', href: '/collaborators' },
     { name: 'Mission', href: '/mission' },
     { name: 'Contact', href: '/contact' },
@@ -43,18 +44,19 @@ export const site = {
     ],
 
     featured: {
-      title: 'Featured',
+      title: 'Latest: Statistical frameworks for ctDNA detection',
       body:
-        'Highlight one item here (a preprint, a dataset, or a tool) instead of duplicating the Publications page.',
-      primaryLabel: 'Browse publications',
+        'New methods for ultra-low allele fraction detection in cell-free DNA, published in Nature Methods. We develop probabilistic models that maintain calibrated false-positive rates even when signals are at or below sequencing error thresholds.',
+      primaryLabel: 'Read the paper',
       primaryHref: '/publications',
-      secondaryLabel: 'See software',
+      secondaryLabel: 'View code',
       secondaryHref: '/tools',
-      sideTitle: 'What we build',
+      sideTitle: 'Key innovations',
       bullets: [
-        'Models for clonal dynamics and selection',
-        'Mutational signatures and therapy-induced processes',
-        'ctDNA detection under sparse observations',
+        'Error-aware statistical inference for sparse observations',
+        'Bayesian framework with honest uncertainty quantification',
+        'Benchmarking across multiple ctDNA assay platforms',
+        'Open-source implementation with reproducible pipelines',
       ],
     },
 

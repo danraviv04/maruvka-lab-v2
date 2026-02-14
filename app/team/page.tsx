@@ -6,7 +6,7 @@ import { principalInvestigator, team } from '../../content/team';
 
 export const metadata: Metadata = {
   title: 'Team',
-  description: 'People in the Maruvka Lab.',
+  description: 'Meet the researchers, students, and engineers at the Maruvka Lab working on computational cancer genomics.',
 };
 
 export default function TeamPage() {
@@ -17,7 +17,7 @@ export default function TeamPage() {
           <SectionHeader
             eyebrow="People"
             title="Team"
-            description="Replace the placeholders with real names, photos, and links. This page is intentionally data-driven so updates do not require refactoring components."/>
+            description="A small group with a bias toward rigorous methods, reproducible code, and honest uncertainty."/>
 
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
             <div className="lg:col-span-1 rounded-2xl border border-black/5 bg-white p-6 shadow-soft">

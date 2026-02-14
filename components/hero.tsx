@@ -39,8 +39,8 @@ export default function Hero(props: Props) {
         }}
       />
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6 py-20 md:py-28">
-        <div className="max-w-3xl">
+      <div className="relative z-10 mx-auto max-w-screen-2xl px-6 py-20 md:py-28">
+        <div className="max-w-4xl">
           <div className="text-sm font-medium text-white/80">{eyebrow}</div>
 
           <h1 className="mt-4 text-4xl font-semibold tracking-tight text-white md:text-6xl">
