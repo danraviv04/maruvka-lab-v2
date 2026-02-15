@@ -6,14 +6,14 @@ export default function HomeFocus() {
   const top = focusAreas.slice(0, 3);
 
   return (
-    <section className="bg-white">
-      <div className="mx-auto max-w-6xl px-6 py-16">
-        <div className="max-w-2xl">
-          <div className="inline-flex items-center rounded-full border border-black/10 px-3 py-1 text-xs text-black/70">
+    <section className="bg-slate-50 dark:bg-slate-800/50 py-16 md:py-24">
+      <div className="relative mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary">
             Research
-          </div>
-          <h2 className="mt-4 text-3xl font-semibold tracking-tight">Focus areas</h2>
-          <p className="mt-3 text-black/70">
+          </span>
+          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-text">Focus areas</h2>
+          <p className="mt-3 text-muted">
             A few hard problems where careful modeling and clean data can move the needle.
           </p>
         </div>
@@ -23,30 +23,30 @@ export default function HomeFocus() {
             <Link
               key={a.title}
               href={a.href}
-              className="group rounded-2xl border border-black/10 p-6 shadow-sm transition hover:shadow-md"
+              className="group relative overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
             >
-              <div className="flex items-start justify-between gap-4">
-                <div className="text-lg font-semibold">{a.title}</div>
-                <span className="text-black/40 transition group-hover:text-black/70">→</span>
+              {a.tag && (
+                <span className="inline-block rounded-full bg-gradient-to-r from-primary/10 to-secondary/10 px-2.5 py-1 text-xs font-semibold text-primary">
+                  {a.tag}
+                </span>
+              )}
+              <h3 className="mt-3 text-lg font-semibold text-text">{a.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted">{a.description}</p>
+              <div className="mt-4 flex items-center gap-1 text-sm font-semibold text-primary transition group-hover:gap-2">
+                <span>Learn more</span>
+                <span className="transition group-hover:translate-x-0.5">→</span>
               </div>
-              <p className="mt-2 text-sm leading-relaxed text-black/70">{a.description}</p>
-              {a.tag ? (
-                <div className="mt-4">
-                  <span className="rounded-full bg-black/[0.04] px-2.5 py-1 text-xs text-black/70">
-                    {a.tag}
-                  </span>
-                </div>
-              ) : null}
             </Link>
           ))}
         </div>
 
-        <div className="mt-10">
+        <div className="mt-10 text-center">
           <Link
             href="/research"
-            className="inline-flex items-center rounded-full border border-black/15 px-4 py-2 text-sm font-medium hover:bg-black/[0.03]"
+            className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-5 py-2.5 text-sm font-medium text-text shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
           >
-            Explore all research →
+            <span>Explore all research</span>
+            <span>→</span>
           </Link>
         </div>
       </div>

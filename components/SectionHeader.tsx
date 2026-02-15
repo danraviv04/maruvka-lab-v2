@@ -20,7 +20,7 @@ export default function SectionHeader({
         {title}
       </h2>
       {description ? (
-        <p className="mt-4 font-serif text-base leading-relaxed text-text/80 sm:text-lg">
+        <p className="mt-4 font-serif text-base leading-relaxed text-muted sm:text-lg">
           {description}
         </p>
       ) : null}

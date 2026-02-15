@@ -39,3 +39,16 @@ export const team: TeamMember[] = [
     image: '/team/dan_raviv.jpeg',
   },
 ];
+
+export const alumni: TeamMember[] = [
+  {
+    name: 'Alumni Name (placeholder)',
+    role: 'Former PhD Student',
+    bio: 'Now at Company/Institution X.',
+  },
+  {
+    name: 'Alumni Name (placeholder)',
+    role: 'Former MSc Student',
+    bio: 'Now pursuing PhD at University Y.',
+  },
+];

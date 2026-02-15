@@ -208,7 +208,9 @@
 // app/page.tsx
 import Hero from "@/components/hero";
 import HomeProof from "@/components/home-proof";
+import HomeMission from "@/components/home-mission";
 import HomeFocus from "@/components/home-focus";
+import HomeNews from "@/components/home-news";
 import HomeFeatured from "@/components/home-featured";
 import HomeCTA from "@/components/home-cta";
 
@@ -217,7 +219,9 @@ export default function HomePage() {
     <>
       <Hero />
       <HomeProof />
+      <HomeMission />
       <HomeFocus />
+      <HomeNews />
       <HomeFeatured />
       <HomeCTA />
     </>

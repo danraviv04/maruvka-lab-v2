@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'selector',
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
@@ -13,6 +14,7 @@ module.exports = {
         accent: "var(--color-accent)",
         background: "var(--color-background)",
         text: "var(--color-text)",
+        muted: "var(--color-muted)",
       },
       fontFamily: {
         // Mapped from "design_system.typography"

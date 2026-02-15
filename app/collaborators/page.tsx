@@ -94,7 +94,7 @@ export default function CollaboratorsPage() {
             {collaborators.map((collab) => (
               <div
                 key={collab.name}
-                className="group rounded-2xl border border-black/5 bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-8"
+                className="group rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-8"
               >
                 <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
                   <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-3xl transition-transform duration-300 group-hover:scale-110">
@@ -116,11 +116,11 @@ export default function CollaboratorsPage() {
                           <h3 className="text-xl font-semibold text-primary">{collab.name}</h3>
                         )}
                         {collab.institution && (
-                          <p className="mt-1 text-sm text-text/60">{collab.institution}</p>
+                          <p className="mt-1 text-sm text-muted/80">{collab.institution}</p>
                         )}
                       </div>
                     </div>
-                    <p className="mt-3 font-serif text-base leading-relaxed text-text/80">
+                    <p className="mt-3 font-serif text-base leading-relaxed text-muted">
                       {collab.description}
                     </p>
                   </div>
@@ -144,7 +144,7 @@ export default function CollaboratorsPage() {
             {grants.map((grant) => (
               <div
                 key={grant.name}
-                className="group rounded-2xl border border-black/5 bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                className="group rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-secondary/10 text-2xl transition-transform duration-300 group-hover:scale-110">
                   {grant.logo}
@@ -162,7 +162,7 @@ export default function CollaboratorsPage() {
                   ) : (
                     <h3 className="text-base font-semibold text-primary">{grant.name}</h3>
                   )}
-                  <p className="mt-2 font-serif text-sm leading-relaxed text-text/70">
+                  <p className="mt-2 font-serif text-sm leading-relaxed text-muted">
                     {grant.description}
                   </p>
                 </div>

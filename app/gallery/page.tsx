@@ -33,7 +33,7 @@ export default function GalleryPage() {
                 className={`rounded-full px-4 py-2 text-sm font-medium transition ${
                   selectedCategory === cat.value
                     ? 'bg-primary text-white'
-                    : 'bg-white text-text/70 hover:bg-black/5 border border-black/10'
+                    : 'bg-white dark:bg-slate-800 text-muted hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'
                 }`}
               >
                 {cat.label}
@@ -47,7 +47,7 @@ export default function GalleryPage() {
               <button
                 key={item.id}
                 onClick={() => setSelectedImage(item)}
-                className="group overflow-hidden rounded-2xl border border-black/5 bg-white shadow-soft transition hover:-translate-y-1 hover:shadow-lg"
+                className="group overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
               >
                 <div className="relative aspect-[4/3] overflow-hidden bg-black/5">
                   <Image
@@ -65,7 +65,7 @@ export default function GalleryPage() {
                     <p className="mt-1 text-sm text-text/70 line-clamp-2">{item.description}</p>
                   )}
                   {item.date && (
-                    <p className="mt-2 text-xs text-text/50">{item.date}</p>
+                    <p className="mt-2 text-xs text-muted/80">{item.date}</p>
                   )}
                 </div>
               </button>
@@ -87,13 +87,13 @@ export default function GalleryPage() {
           onClick={() => setSelectedImage(null)}
         >
           <div
-            className="relative max-h-[90vh] w-full max-w-5xl overflow-hidden rounded-2xl bg-white shadow-2xl"
+            className="relative max-h-[90vh] w-full max-w-5xl overflow-hidden rounded-2xl bg-white dark:bg-slate-900 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close button */}
             <button
               onClick={() => setSelectedImage(null)}
-              className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-2xl text-primary shadow-lg transition hover:bg-white hover:scale-110"
+              className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 dark:bg-slate-800/90 text-2xl text-primary shadow-lg transition hover:bg-white dark:hover:bg-slate-800 hover:scale-110"
               aria-label="Close"
             >
               ×
@@ -115,9 +115,9 @@ export default function GalleryPage() {
             <div className="p-6">
               <h3 className="text-xl font-semibold text-primary">{selectedImage.title}</h3>
               {selectedImage.description && (
-                <p className="mt-2 text-sm text-text/80">{selectedImage.description}</p>
+                <p className="mt-2 text-sm text-muted">{selectedImage.description}</p>
               )}
-              <div className="mt-3 flex items-center gap-3 text-xs text-text/60">
+              <div className="mt-3 flex items-center gap-3 text-xs text-muted/80">
                 {selectedImage.date && <span>{selectedImage.date}</span>}
                 <span className="rounded-full bg-primary/10 px-2 py-1 text-primary">
                   {categories.find(c => c.value === selectedImage.category)?.label}

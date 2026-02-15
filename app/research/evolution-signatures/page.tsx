@@ -29,53 +29,53 @@ export default function EvolutionSignaturesPage() {
           />
 
           <div className="mx-auto mt-12 max-w-4xl space-y-8">
-            <div className="rounded-2xl border border-black/5 bg-white p-8 shadow-soft">
+            <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-sm transition hover:shadow-lg">
               <h3 className="text-xl font-semibold text-primary">Overview</h3>
-              <p className="mt-4 font-serif leading-relaxed text-text/80">
+              <p className="mt-4 font-serif leading-relaxed text-muted">
                 Tumors evolve through accumulation of mutations shaped by mutational processes (signatures) and selective 
                 pressures. Every observed genome is a snapshot of a hidden evolutionary trajectory. Our goal is to infer 
                 plausible histories from these snapshots and connect them to therapeutic outcomes.
               </p>
-              <p className="mt-4 font-serif leading-relaxed text-text/80">
+              <p className="mt-4 font-serif leading-relaxed text-muted">
                 We develop models that quantify mutational signature activities, reconstruct clonal phylogenies, and 
                 characterize therapy-induced selection—always with careful attention to uncertainty and identifiability.
               </p>
             </div>
 
-            <div className="rounded-2xl border border-black/5 bg-white p-8 shadow-soft">
+            <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-sm transition hover:shadow-lg">
               <h3 className="text-xl font-semibold text-primary">Current Projects</h3>
               <div className="mt-6 space-y-6">
                 <div>
                   <h4 className="font-semibold text-primary">Signature deconvolution with uncertainty estimates</h4>
-                  <p className="mt-2 text-sm text-text/70">
+                  <p className="mt-2 text-sm text-muted">
                     Bayesian and maximum-likelihood methods for attributing observed mutations to known or de novo 
                     mutational processes, with robust confidence intervals.
                   </p>
                 </div>
                 <div>
                   <h4 className="font-semibold text-primary">Clonal dynamics and therapy-driven selection</h4>
-                  <p className="mt-2 text-sm text-text/70">
+                  <p className="mt-2 text-sm text-muted">
                     Modeling how chemotherapy, targeted therapy, and immunotherapy reshape clonal landscapes. 
                     Integrating longitudinal sampling to distinguish neutral drift from selection.
                   </p>
                 </div>
                 <div>
                   <h4 className="font-semibold text-primary">Cohort-level quality control and harmonization</h4>
-                  <p className="mt-2 text-sm text-text/70">
+                  <p className="mt-2 text-sm text-muted">
                     Methods to detect batch effects, technical artifacts, and systematic biases in large-scale 
                     sequencing studies before biological interpretation.
                   </p>
                 </div>
                 <div>
                   <h4 className="font-semibold text-primary">Connecting signatures to mechanisms</h4>
-                  <p className="mt-2 text-sm text-text/70">
+                  <p className="mt-2 text-sm text-muted">
                     Experimental validation frameworks and literature integration to move from pattern recognition 
                     to mechanistic understanding of mutational processes.
                   </p>
                 </div>
                 <div>
                   <h4 className="font-semibold text-primary">Evolutionary predictors of drug resistance</h4>
-                  <p className="mt-2 text-sm text-text/70">
+                  <p className="mt-2 text-sm text-muted">
                     Using pre-treatment mutational patterns to forecast resistance mechanisms and guide therapy selection.
                   </p>
                 </div>
@@ -83,13 +83,13 @@ export default function EvolutionSignaturesPage() {
             </div>
 
             {relatedPubs.length > 0 && (
-              <div className="rounded-2xl border border-black/5 bg-white p-8 shadow-soft">
+              <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-sm transition hover:shadow-lg">
                 <h3 className="text-xl font-semibold text-primary">Related Publications</h3>
                 <div className="mt-6 space-y-4">
                   {relatedPubs.map((p) => (
                     <div key={p.title} className="border-l-2 border-secondary pl-4">
                       <p className="text-sm font-semibold text-primary">{p.title}</p>
-                      <p className="mt-1 text-xs text-text/70">{p.authors} — {p.venue} ({p.year})</p>
+                      <p className="mt-1 text-xs text-muted">{p.authors} — {p.venue} ({p.year})</p>
                       {p.links?.length && (
                         <div className="mt-2 flex gap-3">
                           {p.links.map((l) => (

@@ -29,46 +29,46 @@ export default function ImmunologyPreventionPage() {
           />
 
           <div className="mx-auto mt-12 max-w-4xl space-y-8">
-            <div className="rounded-2xl border border-black/5 bg-white p-8 shadow-soft">
+            <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-sm transition hover:shadow-lg">
               <h3 className="text-xl font-semibold text-primary">Overview</h3>
-              <p className="mt-4 font-serif leading-relaxed text-text/80">
+              <p className="mt-4 font-serif leading-relaxed text-muted">
                 Some cancers are highly immunogenic (e.g., microsatellite-unstable tumors), while others evade immune 
                 detection. Understanding why—and designing interventions that tip the balance toward surveillance and 
                 prevention—requires quantitative models that integrate genomic, immunologic, and clinical data.
               </p>
-              <p className="mt-4 font-serif leading-relaxed text-text/80">
+              <p className="mt-4 font-serif leading-relaxed text-muted">
                 We apply computational methods to MSI biology, immune-response signatures, and prevention trial design. 
                 The goal is to identify biomarkers robust enough to support clinical interventions, not just correlations.
               </p>
             </div>
 
-            <div className="rounded-2xl border border-black/5 bg-white p-8 shadow-soft">
+            <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-sm transition hover:shadow-lg">
               <h3 className="text-xl font-semibold text-primary">Current Projects</h3>
               <div className="mt-6 space-y-6">
                 <div>
                   <h4 className="font-semibold text-primary">Immune response modeling</h4>
-                  <p className="mt-2 text-sm text-text/70">
+                  <p className="mt-2 text-sm text-muted">
                     Quantifying patterns and constraints in tumor-immune interactions using transcriptomic and 
                     mutational data. Identifying features predictive of immunotherapy response.
                   </p>
                 </div>
                 <div>
                   <h4 className="font-semibold text-primary">MSI biology and Lynch syndrome</h4>
-                  <p className="mt-2 text-sm text-text/70">
+                  <p className="mt-2 text-sm text-muted">
                     Statistical frameworks for microsatellite instability detection, neoantigen prediction, and 
                     understanding why MSI-high tumors respond to immune checkpoint blockade.
                   </p>
                 </div>
                 <div>
                   <h4 className="font-semibold text-primary">Biomarkers for prevention strategies</h4>
-                  <p className="mt-2 text-sm text-text/70">
+                  <p className="mt-2 text-sm text-muted">
                     Developing and validating biomarkers that can stratify individuals for chemoprevention or 
                     early-intervention trials. Focus on germline + somatic integration.
                   </p>
                 </div>
                 <div>
                   <h4 className="font-semibold text-primary">Integrating genomics, immunology, and outcomes</h4>
-                  <p className="mt-2 text-sm text-text/70">
+                  <p className="mt-2 text-sm text-muted">
                     Building multi-modal models that link germline risk, somatic evolution, immune contexture, 
                     and long-term clinical outcomes in cohort studies.
                   </p>
@@ -77,13 +77,13 @@ export default function ImmunologyPreventionPage() {
             </div>
 
             {relatedPubs.length > 0 && (
-              <div className="rounded-2xl border border-black/5 bg-white p-8 shadow-soft">
+              <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-sm transition hover:shadow-lg">
                 <h3 className="text-xl font-semibold text-primary">Related Publications</h3>
                 <div className="mt-6 space-y-4">
                   {relatedPubs.map((p) => (
                     <div key={p.title} className="border-l-2 border-secondary pl-4">
                       <p className="text-sm font-semibold text-primary">{p.title}</p>
-                      <p className="mt-1 text-xs text-text/70">{p.authors} — {p.venue} ({p.year})</p>
+                      <p className="mt-1 text-xs text-muted">{p.authors} — {p.venue} ({p.year})</p>
                       {p.links?.length && (
                         <div className="mt-2 flex gap-3">
                           {p.links.map((l) => (

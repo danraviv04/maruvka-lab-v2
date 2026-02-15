@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Container from './Container';
+import ThemeToggle from './ThemeToggle';
 import { site } from '../content/site';
 
 function isActive(pathname: string, href: string) {
@@ -21,7 +22,7 @@ export default function SiteNav() {
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-black/5 bg-white/80 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-sm">
       <Container>
         <div className="flex h-18 items-center justify-between py-4">
           <Link href="/" className="flex items-center gap-3">
@@ -36,7 +37,7 @@ export default function SiteNav() {
             </div>
             <div className="leading-tight">
               <div className="text-base font-semibold text-primary">{site.name}</div>
-              <div className="text-xs text-text/70">{site.institution}</div>
+              <div className="text-xs text-muted">{site.institution}</div>
             </div>
           </Link>
 
@@ -49,26 +50,27 @@ export default function SiteNav() {
                   href={item.href}
                   className={
                     active
-                      ? 'text-sm font-semibold text-primary'
-                      : 'text-sm font-medium text-text/70 hover:text-primary'
+                      ? 'relative text-sm font-semibold text-primary after:absolute after:-bottom-1 after:left-0 after:right-0 after:h-0.5 after:bg-primary dark:after:bg-primary after:rounded-full'
+                      : 'text-sm font-medium text-muted hover:text-primary transition'
                   }
                 >
                   {item.name}
                 </Link>
               );
             })}
+            <ThemeToggle />
             <Link
               href="/open-positions"
-              className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white shadow-soft hover:bg-primary/90"
+              className="rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
             >
-              Join
+              Careers
             </Link>
           </nav>
 
           <button
             type="button"
             aria-label="Open menu"
-            className="md:hidden rounded-xl border border-black/10 px-3 py-2 text-sm font-semibold text-text/80"
+            className="md:hidden rounded-xl border border-slate-200 dark:border-slate-700 px-3 py-2 text-sm font-semibold text-text/80 hover:bg-slate-50 dark:hover:bg-slate-800"
             onClick={() => setOpen((v) => !v)}
           >
             {open ? 'Close' : 'Menu'}
@@ -77,7 +79,7 @@ export default function SiteNav() {
 
         {open ? (
           <div className="md:hidden pb-4">
-            <div className="rounded-2xl border border-black/10 bg-white p-4 shadow-soft">
+            <div className="rounded-2xl border border-slate-200 bg-white dark:bg-slate-900 dark:border-slate-700 p-4 shadow-lg">
               <div className="flex flex-col gap-2">
                 {site.nav.map((item) => {
                   const active = isActive(pathname, item.href);
@@ -87,19 +89,23 @@ export default function SiteNav() {
                       href={item.href}
                       className={
                         active
-                          ? 'rounded-xl bg-primary/5 px-3 py-2 text-sm font-semibold text-primary'
-                          : 'rounded-xl px-3 py-2 text-sm font-medium text-text/80 hover:bg-black/5'
+                          ? 'rounded-xl bg-primary/10 px-3 py-2 text-sm font-semibold text-primary'
+                          : 'rounded-xl px-3 py-2 text-sm font-medium text-muted hover:bg-slate-50 dark:hover:bg-slate-800 transition'
                       }
                     >
                       {item.name}
                     </Link>
                   );
                 })}
+                <div className="mt-2 flex items-center justify-between rounded-xl border border-slate-200 dark:border-slate-700 px-3 py-2">
+                  <span className="text-sm font-medium text-muted">Theme</span>
+                  <ThemeToggle />
+                </div>
                 <Link
                   href="/open-positions"
-                  className="mt-2 rounded-xl bg-primary px-3 py-2 text-sm font-semibold text-white"
+                  className="mt-2 rounded-xl bg-accent px-3 py-2 text-sm font-semibold text-white shadow-sm hover:shadow-md transition"
                 >
-                  Join
+                  Careers
                 </Link>
               </div>
             </div>

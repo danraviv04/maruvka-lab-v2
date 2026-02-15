@@ -3,6 +3,8 @@ import type { Metadata } from 'next';
 import { Inter, Merriweather } from 'next/font/google';
 import SiteNav from '../components/SiteNav';
 import SiteFooter from '../components/SiteFooter';
+import AccessibilityToolbar from '../components/AccessibilityToolbar';
+import ThemeProvider from '../components/ThemeProvider';
 import { site } from '../content/site';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
@@ -60,18 +62,39 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const savedTheme = localStorage.getItem('theme');
+                  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                  const theme = savedTheme || systemTheme;
+                  if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className={`${inter.variable} ${merriweather.variable} bg-background text-text antialiased`}>
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-xl focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-primary focus:shadow-soft"
-        >
-          Skip to content
-        </a>
-        <SiteNav />
-        <main id="main" className="min-h-[60vh]">
-          {children}
-        </main>
-        <SiteFooter />
+        <ThemeProvider>
+          <a
+            href="#main"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-xl focus:bg-white dark:focus:bg-slate-800 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-primary focus:shadow-soft"
+          >
+            Skip to content
+          </a>
+          <AccessibilityToolbar />
+          <SiteNav />
+          <main id="main" className="min-h-[60vh]">
+            {children}
+          </main>
+          <SiteFooter />
+        </ThemeProvider>
       </body>
     </html>
   );
