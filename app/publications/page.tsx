@@ -95,12 +95,12 @@ export default function PublicationsPage() {
           />
 
           {loading ? (
-            <div className="mt-12 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-12 text-center">
+            <div className="mt-12 rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-12 text-center shadow-md">
               <div className="mx-auto h-8 w-8 animate-spin rounded-full border-4 border-accent border-t-transparent"></div>
               <p className="mt-4 text-muted">Loading publications from Google Scholar...</p>
             </div>
           ) : error ? (
-            <div className="mt-12 rounded-2xl border border-red-200 dark:border-red-900 bg-red-50 dark:bg-red-900/20 p-12 text-center">
+            <div className="mt-12 rounded-2xl border-2 border-red-300 dark:border-red-900 bg-red-50 dark:bg-red-900/20 p-12 text-center shadow-md">
               <p className="text-red-600 dark:text-red-400">Error: {error}</p>
               <button 
                 onClick={() => window.location.reload()} 
@@ -147,7 +147,7 @@ export default function PublicationsPage() {
                     <select
                       value={selectedType}
                       onChange={(e) => setSelectedType(e.target.value)}
-                      className="rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-1.5 text-sm focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition"
+                      className="rounded-lg border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-1.5 text-sm text-text focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition"
                     >
                       {types.map((t) => (
                         <option key={t} value={t}>
@@ -161,7 +161,7 @@ export default function PublicationsPage() {
                     <select
                       value={selectedTag}
                       onChange={(e) => setSelectedTag(e.target.value)}
-                      className="rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-1.5 text-sm focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition"
+                      className="rounded-lg border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-1.5 text-sm text-text focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition"
                     >
                       {tags.map((t) => (
                         <option key={t} value={t}>
@@ -192,7 +192,7 @@ export default function PublicationsPage() {
                           };
                           
                           return (
-                            <article key={`${p.title}-${index}`} className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-sm transition hover:shadow-lg hover:-translate-y-0.5">
+                            <article key={`${p.title}-${index}`} className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-md transition hover:shadow-xl hover:-translate-y-0.5">
                               <div className="flex flex-wrap items-start justify-between gap-2">
                                 <h3 className="flex-1 text-lg font-semibold text-primary">
                                   <a 
@@ -242,7 +242,7 @@ export default function PublicationsPage() {
                     </div>
                   ))
                 ) : (
-                  <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-12 text-center">
+                  <div className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-12 text-center shadow-md">
                     <p className="text-muted">No publications match the selected filters.</p>
                   </div>
                 )}

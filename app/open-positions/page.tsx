@@ -21,7 +21,7 @@ export default function OpenPositionsPage() {
           />
 
           <div className="mx-auto mt-8 max-w-4xl">
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-sm transition hover:shadow-lg">
+            <div className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-md transition hover:shadow-xl">
               <h3 className="text-lg font-semibold text-primary">What we're looking for</h3>
               <p className="mt-3 font-serif text-sm leading-relaxed text-text/80">
                 Strong quantitative background (statistics, computer science, applied math, or computational biology). 
@@ -37,7 +37,7 @@ export default function OpenPositionsPage() {
 
           <div className="mt-8 grid gap-6">
             {positions.map((p) => (
-              <article key={p.title} className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-sm transition hover:shadow-lg">
+              <article key={p.title} className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-md transition hover:shadow-xl">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <h2 className="text-xl font-semibold text-primary">{p.title}</h2>
                   <span className="rounded-full bg-primary/5 px-3 py-1 text-xs font-semibold text-primary ring-1 ring-primary/10">

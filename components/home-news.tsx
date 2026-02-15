@@ -43,7 +43,7 @@ export default function HomeNews() {
           {recentNews.map((item, index) => (
             <article
               key={index}
-              className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+              className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-md transition hover:-translate-y-1 hover:shadow-xl"
             >
               <div className="flex items-start justify-between gap-2">
                 <span
@@ -81,7 +81,7 @@ export default function HomeNews() {
         <div className="mt-10 text-center">
           <Link
             href="/news"
-            className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-5 py-2.5 text-sm font-medium text-text shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+            className="inline-flex items-center gap-2 rounded-full border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-5 py-2.5 text-sm font-medium text-text shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
           >
             <span>View all news</span>
             <span>→</span>

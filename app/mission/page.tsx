@@ -19,8 +19,8 @@ export default function MissionPage() {
           />
 
           <div className="mx-auto mt-12 max-w-3xl">
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-gradient-to-br from-white dark:from-slate-800 to-slate-50 dark:to-slate-800/50 p-8 shadow-lg">
-              <div className="flex items-center gap-3 border-b border-slate-200 dark:border-slate-700 pb-4">
+            <div className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-gradient-to-br from-white dark:from-slate-800 to-slate-50 dark:to-slate-800/50 p-8 shadow-xl">
+              <div className="flex items-center gap-3 border-b-2 border-slate-300 dark:border-slate-700 pb-4">
                 <span className="text-3xl">🕯️</span>
                 <h2 className="text-2xl font-semibold text-primary">In Memory</h2>
               </div>

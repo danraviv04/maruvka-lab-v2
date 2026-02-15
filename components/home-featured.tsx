@@ -6,16 +6,16 @@ export default function HomeFeatured() {
   const f = site.home.featured;
 
   return (
-    <section className="border-t border-slate-200 bg-slate-900 py-16 md:py-24">
+    <section className="border-t-2 border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-900 py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
           {/* Left column: Content */}
           <div>
-            <span className="inline-block rounded-full border border-accent/20 bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-accent">
+            <span className="inline-block rounded-full border-2 border-accent/30 dark:border-accent/20 bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-accent">
               Featured Publication
             </span>
-            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white">{f.title}</h2>
-            <p className="mt-3 leading-relaxed text-slate-300">{f.body}</p>
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-text dark:text-white">{f.title}</h2>
+            <p className="mt-3 leading-relaxed text-muted dark:text-slate-300">{f.body}</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link
                 href={f.primaryHref}
@@ -33,11 +33,11 @@ export default function HomeFeatured() {
           </div>
 
           {/* Right column: Key innovations */}
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
-            <h3 className="text-sm font-semibold uppercase tracking-wide text-white/70">{f.sideTitle}</h3>
+          <div className="rounded-2xl border-2 border-slate-300 dark:border-white/10 bg-white dark:bg-white/5 p-6 shadow-md dark:backdrop-blur-sm">
+            <h3 className="text-sm font-semibold uppercase tracking-wide text-text dark:text-white/70">{f.sideTitle}</h3>
             <ul className="mt-4 space-y-3">
               {f.bullets.map((b) => (
-                <li key={b} className="flex items-start gap-3 text-sm leading-relaxed text-slate-300">
+                <li key={b} className="flex items-start gap-3 text-sm leading-relaxed text-muted dark:text-slate-300">
                   <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-secondary/20 text-xs text-secondary">
                     ✓
                   </span>

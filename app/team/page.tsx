@@ -20,7 +20,7 @@ export default function TeamPage() {
             description="A small group with a bias toward rigorous methods, reproducible code, and honest uncertainty."/>
 
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
-            <div className="lg:col-span-1 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-sm transition hover:shadow-lg">
+            <div className="lg:col-span-1 rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-md transition hover:shadow-xl">
               {principalInvestigator.image && (
                 <div className="mb-4 flex justify-center">
                   <div className="w-full aspect-square relative max-w-sm">
@@ -50,7 +50,7 @@ export default function TeamPage() {
 
             <div className="lg:col-span-2 grid gap-6 sm:grid-cols-2">
               {team.map((m) => (
-                <div key={m.name} className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-sm transition hover:shadow-lg">
+                <div key={m.name} className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-md transition hover:shadow-xl">
                   {m.image && (
                     <div className="mb-4 flex justify-center">
                       <div className="w-48 h-48 relative">
@@ -97,7 +97,7 @@ export default function TeamPage() {
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {alumni.map((m) => (
-              <div key={m.name} className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-sm transition hover:shadow-lg">
+              <div key={m.name} className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-md transition hover:shadow-xl">
                 {m.image && (
                   <div className="mb-4 flex justify-center">
                     <div className="w-32 h-32 relative">

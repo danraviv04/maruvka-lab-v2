@@ -29,7 +29,7 @@ export default function EvolutionSignaturesPage() {
           />
 
           <div className="mx-auto mt-12 max-w-4xl space-y-8">
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-sm transition hover:shadow-lg">
+            <div className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-md transition hover:shadow-xl">
               <h3 className="text-xl font-semibold text-primary">Overview</h3>
               <p className="mt-4 font-serif leading-relaxed text-muted">
                 Tumors evolve through accumulation of mutations shaped by mutational processes (signatures) and selective 
@@ -42,7 +42,7 @@ export default function EvolutionSignaturesPage() {
               </p>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-sm transition hover:shadow-lg">
+            <div className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-md transition hover:shadow-xl">
               <h3 className="text-xl font-semibold text-primary">Current Projects</h3>
               <div className="mt-6 space-y-6">
                 <div>
@@ -83,7 +83,7 @@ export default function EvolutionSignaturesPage() {
             </div>
 
             {relatedPubs.length > 0 && (
-              <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-sm transition hover:shadow-lg">
+              <div className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-md transition hover:shadow-xl">
                 <h3 className="text-xl font-semibold text-primary">Related Publications</h3>
                 <div className="mt-6 space-y-4">
                   {relatedPubs.map((p) => (

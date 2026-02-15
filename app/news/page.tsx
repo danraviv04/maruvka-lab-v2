@@ -44,7 +44,7 @@ export default function NewsPage() {
             {sortedNews.map((item, index) => (
               <article
                 key={index}
-                className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-sm transition hover:shadow-lg"
+                className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-md transition hover:shadow-xl"
               >
                 <div className="flex flex-wrap items-start justify-between gap-4">
                   <div className="flex-1">
@@ -93,7 +93,7 @@ export default function NewsPage() {
 
           {/* Empty state if no news */}
           {sortedNews.length === 0 && (
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-12 text-center">
+            <div className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-12 text-center shadow-md">
               <p className="text-muted">No news items yet. Check back soon for updates!</p>
             </div>
           )}

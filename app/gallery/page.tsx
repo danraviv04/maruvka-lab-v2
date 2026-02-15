@@ -30,10 +30,10 @@ export default function GalleryPage() {
               <button
                 key={cat.value}
                 onClick={() => setSelectedCategory(cat.value)}
-                className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+                className={`rounded-full px-4 py-2 text-sm font-medium transition shadow-md ${
                   selectedCategory === cat.value
                     ? 'bg-primary text-white'
-                    : 'bg-white dark:bg-slate-800 text-muted hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'
+                    : 'bg-white dark:bg-slate-800 text-muted hover:bg-slate-100 dark:hover:bg-slate-700 border-2 border-slate-300 dark:border-slate-700'
                 }`}
               >
                 {cat.label}
@@ -47,7 +47,7 @@ export default function GalleryPage() {
               <button
                 key={item.id}
                 onClick={() => setSelectedImage(item)}
-                className="group overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+                className="group overflow-hidden rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-md transition hover:-translate-y-1 hover:shadow-xl"
               >
                 <div className="relative aspect-[4/3] overflow-hidden bg-black/5">
                   <Image

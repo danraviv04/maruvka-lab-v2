@@ -20,7 +20,7 @@ export default function ContactPage() {
           />
 
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-sm transition hover:shadow-lg lg:col-span-1">
+            <div className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-md transition hover:shadow-xl lg:col-span-1">
               <div className="text-sm font-semibold text-primary">Email</div>
               <a href={`mailto:${site.email}`} className="mt-2 block text-sm font-semibold text-secondary hover:underline">
                 {site.email}
@@ -51,9 +51,9 @@ export default function ContactPage() {
               </p> */}
             </div>
 
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-sm transition hover:shadow-lg lg:col-span-2">
+            <div className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-md transition hover:shadow-xl lg:col-span-2">
               <div className="text-sm font-semibold text-primary">Campus Map</div>
-              <div className="mt-4 overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700">
+              <div className="mt-4 overflow-hidden rounded-xl border-2 border-slate-300 dark:border-slate-700">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3354.575720066947!2d35.024608176475!3d32.77699077366375!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151dbbddfd1db377%3A0xad3fc3c09059a8b8!2sEmerson%20Building%20for%20Life%20Sciences!5e0!3m2!1sen!2sil!4v1771088383984!5m2!1sen!2sil"
                   width="100%"

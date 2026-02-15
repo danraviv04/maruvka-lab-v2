@@ -34,7 +34,7 @@ export default function ToolsPage() {
                 <a
                   key={t.name}
                   href={t.href}
-                  className="group relative overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg hover:border-primary/30"
+                  className="group relative overflow-hidden rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-md transition hover:-translate-y-1 hover:shadow-xl hover:border-primary/60"
                 >
                   <div className={`absolute top-0 left-0 h-1 w-full bg-gradient-to-r ${gradients[idx % gradients.length]}`} />
                   <div className="flex items-center justify-between">

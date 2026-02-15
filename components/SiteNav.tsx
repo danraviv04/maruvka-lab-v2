@@ -22,7 +22,7 @@ export default function SiteNav() {
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-sm">
+    <header className="sticky top-0 z-50 border-b-2 border-slate-300 dark:border-slate-700 bg-white/95 dark:bg-slate-900/90 backdrop-blur-md shadow-md">
       <Container>
         <div className="flex h-18 items-center justify-between py-4">
           <Link href="/" className="flex items-center gap-3">
@@ -70,7 +70,7 @@ export default function SiteNav() {
           <button
             type="button"
             aria-label="Open menu"
-            className="md:hidden rounded-xl border border-slate-200 dark:border-slate-700 px-3 py-2 text-sm font-semibold text-text/80 hover:bg-slate-50 dark:hover:bg-slate-800"
+            className="md:hidden rounded-xl border-2 border-slate-300 dark:border-slate-700 px-3 py-2 text-sm font-semibold text-text/80 hover:bg-slate-100 dark:hover:bg-slate-800"
             onClick={() => setOpen((v) => !v)}
           >
             {open ? 'Close' : 'Menu'}
@@ -79,7 +79,7 @@ export default function SiteNav() {
 
         {open ? (
           <div className="md:hidden pb-4">
-            <div className="rounded-2xl border border-slate-200 bg-white dark:bg-slate-900 dark:border-slate-700 p-4 shadow-lg">
+            <div className="rounded-2xl border-2 border-slate-300 bg-white dark:bg-slate-900 dark:border-slate-700 p-4 shadow-xl">
               <div className="flex flex-col gap-2">
                 {site.nav.map((item) => {
                   const active = isActive(pathname, item.href);
