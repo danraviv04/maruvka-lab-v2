@@ -95,6 +95,7 @@ export default function SiteNav() {
                       {item.name}
                     </Link>
                   );
+                  
                 })}
                 <div className="mt-2 flex items-center justify-between rounded-xl border border-slate-200 dark:border-slate-700 px-3 py-2">
                   <span className="text-sm font-medium text-muted">Theme</span>
