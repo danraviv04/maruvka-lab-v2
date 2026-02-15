@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-primary: #1b8abf;
   --color-secondary: #20c78a;
@@ -23,7 +25,7 @@ html.dark {
   color-scheme: dark;
   --color-primary: #3b9dd8;
   --color-secondary: #2dd994;
-  --color-accent: #ff9557;
+  --color-accent: #fb8039;
   --color-background: #0f172a;
   --color-text: #f1f5f9;
   --color-muted: #94a3b8;

@@ -25,7 +25,7 @@ export default function HomeFeatured() {
               </Link>
               <Link
                 href={f.secondaryHref}
-                className="inline-flex items-center justify-center rounded-full border-2 border-white/20 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-sm transition hover:-translate-y-0.5 hover:bg-white/10"
+                className="inline-flex items-center justify-center rounded-full border-2 border-primary/30 bg-primary/10 px-5 py-2.5 text-sm font-semibold text-primary dark:border-white/20 dark:bg-white/5 dark:text-white dark:backdrop-blur-sm transition hover:-translate-y-0.5 hover:bg-primary/20 dark:hover:bg-white/10"
               >
                 {f.secondaryLabel}
               </Link>

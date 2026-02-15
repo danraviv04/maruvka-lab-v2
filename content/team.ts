@@ -42,12 +42,12 @@ export const team: TeamMember[] = [
 
 export const alumni: TeamMember[] = [
   {
-    name: 'Alumni Name (placeholder)',
+    name: 'Alumni Name 1 (placeholder)',
     role: 'Former PhD Student',
     bio: 'Now at Company/Institution X.',
   },
   {
-    name: 'Alumni Name (placeholder)',
+    name: 'Alumni Name 2 (placeholder)',
     role: 'Former MSc Student',
     bio: 'Now pursuing PhD at University Y.',
   },

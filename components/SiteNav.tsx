@@ -4,7 +4,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import Container from './Container';
 import ThemeToggle from './ThemeToggle';
 import { site } from '../content/site';
 
@@ -23,7 +22,7 @@ export default function SiteNav() {
 
   return (
     <header className="sticky top-0 z-50 border-b-2 border-slate-300 dark:border-slate-700 bg-white/95 dark:bg-slate-900/90 backdrop-blur-md shadow-md">
-      <Container>
+      <div className="mx-auto w-full max-w-screen-2xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-18 items-center justify-between py-4">
           <Link href="/" className="flex items-center gap-3">
             <div className="h-14 w-14">
@@ -41,7 +40,7 @@ export default function SiteNav() {
             </div>
           </Link>
 
-          <nav className="hidden items-center gap-6 md:flex">
+          <nav className="hidden items-center gap-6 lg:flex">
             {site.nav.map((item) => {
               const active = isActive(pathname, item.href);
               return (
@@ -70,7 +69,7 @@ export default function SiteNav() {
           <button
             type="button"
             aria-label="Open menu"
-            className="md:hidden rounded-xl border-2 border-slate-300 dark:border-slate-700 px-3 py-2 text-sm font-semibold text-text/80 hover:bg-slate-100 dark:hover:bg-slate-800"
+            className="lg:hidden rounded-xl border-2 border-slate-300 dark:border-slate-700 px-3 py-2 text-sm font-semibold text-text/80 hover:bg-slate-100 dark:hover:bg-slate-800"
             onClick={() => setOpen((v) => !v)}
           >
             {open ? 'Close' : 'Menu'}
@@ -78,7 +77,7 @@ export default function SiteNav() {
         </div>
 
         {open ? (
-          <div className="md:hidden pb-4">
+          <div className="lg:hidden pb-4">
             <div className="rounded-2xl border-2 border-slate-300 bg-white dark:bg-slate-900 dark:border-slate-700 p-4 shadow-xl">
               <div className="flex flex-col gap-2">
                 {site.nav.map((item) => {
@@ -111,7 +110,7 @@ export default function SiteNav() {
             </div>
           </div>
         ) : null}
-      </Container>
+      </div>
     </header>
   );
 }

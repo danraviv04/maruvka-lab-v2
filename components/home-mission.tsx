@@ -1,19 +1,19 @@
 export default function HomeMission() {
   return (
-    <section className="relative overflow-hidden bg-white dark:bg-gradient-to-br dark:from-primary/5 dark:via-secondary/5 dark:to-background py-12 sm:py-16">
+    <section className="relative overflow-hidden bg-white dark:bg-slate-950 dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-white/10 py-12 sm:py-16">
       {/* Decorative gradient orbs - matching hero style */}
       <div className="pointer-events-none absolute -top-24 right-1/4 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-24 left-1/4 h-72 w-72 rounded-full bg-secondary/10 blur-3xl" />
       
       <div className="relative z-10 mx-auto max-w-6xl px-6">
-        <div className="text-center">
-          <div className="inline-flex items-center rounded-full border-2 border-primary/20 dark:border-primary/30 bg-white dark:bg-slate-800 px-3 py-1 text-xs font-medium text-primary">  
-            Our Mission
-          </div>
-          <h2 className="mt-4 text-2xl font-semibold text-text sm:text-3xl">
-            Building methods that survive real data
-          </h2>
+      <div className="text-center rounded-2xl">
+        <div className="inline-flex items-center rounded-full border-2 border-primary/20 dark:border-primary/30 bg-white/70 dark:bg-slate-950/55 backdrop-blur-sm px-3 py-1 text-xs font-medium text-primary">
+          Our Mission
         </div>
+        <h2 className="mt-4 text-2xl font-semibold text-text sm:text-3xl">
+          Building methods that survive real data
+        </h2>
+      </div>
 
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           <div className="group rounded-xl border-2 border-slate-300 dark:border-slate-700/60 bg-white dark:bg-slate-800 p-5 shadow-md transition hover:border-primary/50 hover:shadow-xl">
