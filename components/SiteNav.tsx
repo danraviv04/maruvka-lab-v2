@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import ThemeToggle from './ThemeToggle';
 import { site } from '../content/site';
 
@@ -15,16 +15,67 @@ function isActive(pathname: string, href: string) {
 export default function SiteNav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [compact, setCompact] = useState(false);
+
+  const rowRef = useRef<HTMLDivElement | null>(null);
+  const logoRef = useRef<HTMLAnchorElement | null>(null);
+  const navRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    if (!compact) setOpen(false);
+  }, [compact]);
+
+  useLayoutEffect(() => {
+    const rowEl = rowRef.current;
+    const logoEl = logoRef.current;
+    const navEl = navRef.current;
+    if (!rowEl || !logoEl || !navEl) return;
+
+    const GAP_SAFETY_PX = 40; // accounts for gaps/padding between logo and nav
+
+    const compute = () => {
+      const rowW = rowEl.clientWidth;
+      const logoW = logoEl.clientWidth;
+      const available = Math.max(0, rowW - logoW - GAP_SAFETY_PX);
+
+      // scrollWidth reflects the space the nav would like to occupy.
+      const needed = navEl.scrollWidth;
+
+      // Hysteresis to avoid flicker around the boundary.
+      const ENTER_COMPACT_PX = 8;
+      const EXIT_COMPACT_PX = 24;
+
+      setCompact((prev) => {
+        if (!prev) return needed > available + ENTER_COMPACT_PX;
+        return needed > available - EXIT_COMPACT_PX;
+      });
+    };
+
+    compute();
+
+    const ro = new ResizeObserver(() => compute());
+    ro.observe(rowEl);
+    ro.observe(logoEl);
+    ro.observe(navEl);
+
+    // Also react to font-loading/layout shifts.
+    window.addEventListener('resize', compute);
+
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', compute);
+    };
+  }, []);
+
   return (
     <header className="sticky top-0 z-50 border-b-2 border-slate-300 dark:border-slate-700 bg-white/95 dark:bg-slate-900/90 backdrop-blur-md shadow-md">
       <div className="mx-auto w-full max-w-screen-2xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-18 items-center justify-between py-4">
-          <Link href="/" className="flex items-center gap-3">
+        <div ref={rowRef} className="flex h-18 items-center justify-between py-4">
+          <Link ref={logoRef} href="/" className="flex items-center gap-3">
             <div className="h-14 w-14">
               <Image 
                 src="/logoLAB.svg" 
@@ -40,7 +91,15 @@ export default function SiteNav() {
             </div>
           </Link>
 
-          <nav className="hidden items-center gap-6 lg:flex">
+          <nav
+            ref={navRef}
+            aria-hidden={compact ? true : undefined}
+            className={
+              compact
+                ? 'pointer-events-none absolute left-[-9999px] top-[-9999px] flex items-center gap-6'
+                : 'flex items-center gap-6'
+            }
+          >
             {site.nav.map((item) => {
               const active = isActive(pathname, item.href);
               return (
@@ -69,15 +128,19 @@ export default function SiteNav() {
           <button
             type="button"
             aria-label="Open menu"
-            className="lg:hidden rounded-xl border-2 border-slate-300 dark:border-slate-700 px-3 py-2 text-sm font-semibold text-text/80 hover:bg-slate-100 dark:hover:bg-slate-800"
+            className={
+              compact
+                ? 'rounded-xl border-2 border-slate-300 dark:border-slate-700 px-3 py-2 text-sm font-semibold text-text/80 hover:bg-slate-100 dark:hover:bg-slate-800'
+                : 'hidden'
+            }
             onClick={() => setOpen((v) => !v)}
           >
             {open ? 'Close' : 'Menu'}
           </button>
         </div>
 
-        {open ? (
-          <div className="lg:hidden pb-4">
+        {open && compact ? (
+          <div className="pb-4">
             <div className="rounded-2xl border-2 border-slate-300 bg-white dark:bg-slate-900 dark:border-slate-700 p-4 shadow-xl">
               <div className="flex flex-col gap-2">
                 {site.nav.map((item) => {

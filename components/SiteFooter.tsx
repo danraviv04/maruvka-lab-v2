@@ -57,11 +57,14 @@ export default function SiteFooter() {
         <div className="flex flex-col items-center justify-between gap-3 border-t border-slate-200 dark:border-slate-700 py-6 text-xs text-muted md:flex-row">
           <div>© {new Date().getFullYear()} {site.name}. All rights reserved.</div>
           <div className="flex items-center gap-4">
+            <Link className="hover:text-primary" href="/research">
+              Research
+            </Link>
             <Link className="hover:text-accent transition" href="/contact">
               Contact
             </Link>
-            <Link className="hover:text-primary" href="/mission">
-              Mission
+            <Link className="hover:text-accent transition" href="/open-positions">
+              Careers
             </Link>
           </div>
         </div>
