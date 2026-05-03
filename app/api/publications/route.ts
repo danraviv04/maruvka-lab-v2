@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import * as cheerio from 'cheerio';
+import { publications as fallbackPublications } from '../../../content/publications';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 3600; // Cache for 1 hour
@@ -80,17 +81,27 @@ export async function GET() {
   } catch (error) {
     console.error('API Error:', error);
     
-    // In production, return a more graceful error
-    // You might want to implement a fallback to cached data here
+    // Return static fallback publications when scraping fails
     if (USE_FALLBACK_ON_ERROR) {
+      const transformed = fallbackPublications.map(pub => ({
+        title: pub.title,
+        authors: pub.authors,
+        venue: pub.venue || 'Publication',
+        year: pub.year,
+        citations: 0,
+        link: pub.links?.[0]?.href || '#',
+      }));
+
       return NextResponse.json(
         {
-          success: false,
-          error: 'Temporarily unable to fetch publications from Google Scholar',
-          message: 'Please try again later or check the static publications page',
-          data: [], // Could add fallback static data here
+          success: true,
+          count: transformed.length,
+          data: transformed,
+          lastUpdated: new Date().toISOString(),
+          source: 'static-fallback',
+          message: 'Using static publications (real-time data unavailable)',
         },
-        { status: 503 } // Service Unavailable
+        { status: 200 }
       );
     }
     

@@ -16,14 +16,14 @@ export const site = {
   nav: [
     { name: 'Research', href: '/research' },
     { name: 'Publications', href: '/publications' },
-    { name: 'Software', href: '/tools' },
+    { name: 'Tools', href: '/tools' },
     { name: 'Team', href: '/team' },
     { name: 'News', href: '/news' },
     { name: 'Gallery', href: '/gallery' },
     { name: 'Collaborators', href: '/collaborators' },
     { name: 'In Memoriam', href: '/mission' },
     { name: 'Contact', href: '/contact' },
-    { name: 'Members', href: '/members' },
+    // { name: 'Members', href: '/members' },
   ],
   affiliations: ['Technion', 'ISF', 'NIH'],
 

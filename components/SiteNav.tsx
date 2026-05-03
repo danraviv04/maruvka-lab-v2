@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import ThemeToggle from './ThemeToggle';
 import { site } from '../content/site';
 
@@ -14,20 +14,13 @@ function isActive(pathname: string, href: string) {
 
 export default function SiteNav() {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
+  const [menu, setMenu] = useState({ pathname: '', open: false });
   const [compact, setCompact] = useState(false);
+  const menuOpen = compact && menu.pathname === pathname && menu.open;
 
   const rowRef = useRef<HTMLDivElement | null>(null);
   const logoRef = useRef<HTMLAnchorElement | null>(null);
   const navRef = useRef<HTMLElement | null>(null);
-
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
-
-  useEffect(() => {
-    if (!compact) setOpen(false);
-  }, [compact]);
 
   useLayoutEffect(() => {
     const rowEl = rowRef.current;
@@ -72,7 +65,11 @@ export default function SiteNav() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b-2 border-slate-300 dark:border-slate-700 bg-white/95 dark:bg-slate-900/90 backdrop-blur-md shadow-md">
+    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/92 shadow-md shadow-slate-900/5 backdrop-blur-xl dark:border-slate-700/80 dark:bg-slate-900/88">
+      <div
+        aria-hidden="true"
+        className="h-1 bg-gradient-to-r from-primary via-secondary to-accent"
+      />
       <div className="mx-auto w-full max-w-screen-2xl px-4 sm:px-6 lg:px-8">
         <div ref={rowRef} className="flex h-18 items-center justify-between py-4">
           <Link ref={logoRef} href="/" className="flex items-center gap-3">
@@ -82,7 +79,14 @@ export default function SiteNav() {
                 alt="Maruvka Lab Logo" 
                 width={65} 
                 height={65}
-                className="h-full w-full"
+                className="h-full w-full dark:hidden"
+              />
+              <Image
+                src="/logoLAB3.svg"
+                alt="Maruvka Lab Logo"
+                width={65}
+                height={65}
+                className="hidden h-full w-full dark:block"
               />
             </div>
             <div className="leading-tight">
@@ -97,7 +101,7 @@ export default function SiteNav() {
             className={
               compact
                 ? 'pointer-events-none absolute left-[-9999px] top-[-9999px] flex items-center gap-6'
-                : 'flex items-center gap-6'
+                : 'flex items-center gap-2'
             }
           >
             {site.nav.map((item) => {
@@ -108,8 +112,8 @@ export default function SiteNav() {
                   href={item.href}
                   className={
                     active
-                      ? 'relative text-sm font-semibold text-primary after:absolute after:-bottom-1 after:left-0 after:right-0 after:h-0.5 after:bg-primary dark:after:bg-primary after:rounded-full'
-                      : 'text-sm font-medium text-muted hover:text-primary transition'
+                      ? 'relative rounded-full border border-primary/20 bg-primary/10 px-3 py-2 text-sm font-semibold text-primary shadow-sm shadow-primary/5 dark:border-primary/25 dark:bg-primary/15'
+                      : 'rounded-full px-3 py-2 text-sm font-medium text-muted transition hover:bg-primary/5 hover:text-primary dark:hover:bg-white/5'
                   }
                 >
                   {item.name}
@@ -127,21 +131,27 @@ export default function SiteNav() {
 
           <button
             type="button"
-            aria-label="Open menu"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
             className={
               compact
-                ? 'rounded-xl border-2 border-slate-300 dark:border-slate-700 px-3 py-2 text-sm font-semibold text-text/80 hover:bg-slate-100 dark:hover:bg-slate-800'
+                ? 'rounded-xl border border-slate-300 bg-white/75 px-3 py-2 text-sm font-semibold text-text/80 shadow-sm transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900/75 dark:hover:bg-slate-800'
                 : 'hidden'
             }
-            onClick={() => setOpen((v) => !v)}
+            onClick={() =>
+              setMenu((current) => ({
+                pathname,
+                open: current.pathname === pathname ? !current.open : true,
+              }))
+            }
           >
-            {open ? 'Close' : 'Menu'}
+            {menuOpen ? 'Close' : 'Menu'}
           </button>
         </div>
 
-        {open && compact ? (
+        {menuOpen ? (
           <div className="pb-4">
-            <div className="rounded-2xl border-2 border-slate-300 bg-white dark:bg-slate-900 dark:border-slate-700 p-4 shadow-xl">
+            <div className="rounded-2xl border border-slate-200 bg-white/96 p-4 shadow-xl shadow-slate-900/10 backdrop-blur-xl dark:border-slate-700 dark:bg-slate-900/96">
               <div className="flex flex-col gap-2">
                 {site.nav.map((item) => {
                   const active = isActive(pathname, item.href);
@@ -149,16 +159,16 @@ export default function SiteNav() {
                     <Link
                       key={item.name}
                       href={item.href}
+                      onClick={() => setMenu({ pathname, open: false })}
                       className={
                         active
-                          ? 'rounded-xl bg-primary/10 px-3 py-2 text-sm font-semibold text-primary'
-                          : 'rounded-xl px-3 py-2 text-sm font-medium text-muted hover:bg-slate-50 dark:hover:bg-slate-800 transition'
+                          ? 'rounded-xl border border-primary/20 bg-primary/10 px-3 py-2 text-sm font-semibold text-primary'
+                          : 'rounded-xl px-3 py-2 text-sm font-medium text-muted transition hover:bg-slate-50 hover:text-primary dark:hover:bg-slate-800'
                       }
                     >
                       {item.name}
                     </Link>
                   );
-                  
                 })}
                 <div className="mt-2 flex items-center justify-between rounded-xl border border-slate-200 dark:border-slate-700 px-3 py-2">
                   <span className="text-sm font-medium text-muted">Theme</span>

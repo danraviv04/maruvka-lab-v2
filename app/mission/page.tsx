@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Container from '../../components/Container';
 import SectionHeader from '../../components/SectionHeader';
 
@@ -18,20 +19,51 @@ export default function MissionPage() {
             description="Honoring those who have been part of our lab community and contributed to our mission."
           />
 
-          <div className="mx-auto mt-12 max-w-3xl">
+          <div className="mx-auto mt-12 max-w-5xl">
             <div className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-gradient-to-br from-white dark:from-slate-800 to-slate-50 dark:to-slate-800/50 p-8 shadow-xl">
               <div className="flex items-center gap-3 border-b-2 border-slate-300 dark:border-slate-700 pb-4">
                 <span className="text-3xl">🕯️</span>
                 <h2 className="text-2xl font-semibold text-primary">In Memory</h2>
               </div>
-              <div className="mt-6 space-y-4 font-serif text-base leading-relaxed text-muted">
-                <p>
-                  This section is dedicated to remembering those who have been part of our lab community 
-                  and contributed to our mission.
+              <div className="mt-6 space-y-6">
+                <p className="font-serif text-base leading-relaxed text-muted">
+                  Due to the loss of two dear and beloved people, my research shifted from a theoretical focus to a more applied cancer focus.
                 </p>
-                <p className="italic text-muted/80">
-                  [Add specific memorial content here]
-                </p>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
+                  <div className="flex flex-col items-center">
+                    <div className="relative w-full max-w-xs rounded-xl overflow-hidden shadow-lg border-2 border-slate-200 dark:border-slate-700">
+                      <Image
+                        src="/in_memoriam/abraham.jpg"
+                        alt="In memoriam - Abraham"
+                        width={300}
+                        height={225}
+                        className="w-full h-auto"
+                      />
+                    </div>
+                    <p className="mt-3 text-center font-serif text-sm text-muted font-medium">
+                      My father-in-law, Abraham Colton,
+                      <br />
+                      passed away at age 77 from Lymphoma cancer
+                    </p>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <div className="relative w-full max-w-xs rounded-xl overflow-hidden shadow-lg border-2 border-slate-200 dark:border-slate-700">
+                      <Image
+                        src="/in_memoriam/dov.jpg"
+                        alt="In memoriam - Dov"
+                        width={300}
+                        height={225}
+                        className="w-full h-auto"
+                      />
+                    </div>
+                    <p className="mt-3 text-center font-serif text-sm text-muted font-medium">
+                      My cousin, Dov (Irad) Eisenbach,
+                      <br />
+                      passed away at age 33 from tongue cancer.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

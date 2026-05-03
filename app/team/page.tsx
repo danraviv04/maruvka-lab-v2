@@ -53,7 +53,7 @@ export default function TeamPage() {
                 <div key={m.name} className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-md transition hover:shadow-xl">
                   {m.image && (
                     <div className="mb-4 flex justify-center">
-                      <div className="w-48 h-48 relative">
+                      <div className="w-64 h-64 relative">
                         <Image
                           src={m.image}
                           alt={m.name}
