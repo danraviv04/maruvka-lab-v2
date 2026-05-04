@@ -66,6 +66,9 @@ export default function SiteFooter() {
             <Link className="hover:text-accent transition" href="/open-positions">
               Careers
             </Link>
+            <Link className="hover:text-accent transition" href="/admin/news">
+              News admin
+            </Link>
           </div>
         </div>
       </Container>

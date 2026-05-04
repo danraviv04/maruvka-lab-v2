@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { news } from '@/content/news';
+import { getNews, sortNewsByDate } from '@/lib/news';
 
 function formatDate(dateString: string): string {
   const date = new Date(dateString);
@@ -18,11 +18,8 @@ function getCategoryColor(category: string): string {
   return colors[category] || 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300';
 }
 
-export default function HomeNews() {
-  // Get the 3 most recent news items
-  const recentNews = [...news]
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, 3);
+export default async function HomeNews() {
+  const recentNews = sortNewsByDate(await getNews()).slice(0, 3);
 
   if (recentNews.length === 0) return null;
 

@@ -6,10 +6,10 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 3600; // Cache for 1 hour
 
 const SCHOLAR_ID = 'q8BKwrYAAAAJ';
-const SCHOLAR_URL = `https://scholar.google.com/citations?user=${SCHOLAR_ID}&hl=en&cstart=0&pagesize=100`;
+const SCHOLAR_URL = `https://scholar.google.com/citations?user=${SCHOLAR_ID}&hl=en&view_op=list_works&sortby=pubdate&cstart=0&pagesize=100`;
 
 // Fallback mode: set to true to use static fallback if Scholar scraping fails
-const USE_FALLBACK_ON_ERROR = true;
+const USE_FALLBACK_ON_ERROR = false;
 
 interface Publication {
   title: string;

@@ -214,6 +214,8 @@ import HomeNews from "@/components/home-news";
 import HomeFeatured from "@/components/home-featured";
 import HomeCTA from "@/components/home-cta";
 
+export const dynamic = "force-dynamic";
+
 export default function HomePage() {
   return (
     <>

@@ -14,6 +14,12 @@ The publications page automatically fetches and displays publications from Googl
 
 See [docs/PUBLICATIONS.md](docs/PUBLICATIONS.md) for detailed documentation.
 
+### News Admin
+
+The site includes a password-protected news editor at `/admin/news`. Configure `NEWS_ADMIN_PASSWORD` before use; for Git-backed deployments, also configure GitHub write access so new items are committed to `content/news.json`.
+
+See [docs/NEWS_ADMIN.md](docs/NEWS_ADMIN.md) for setup details.
+
 ## Getting Started
 
 First, run the development server:

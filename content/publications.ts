@@ -11,16 +11,15 @@ export type Publication = {
 // Add your actual publications here. This is an expanded template with realistic structure.
 export const publications: Publication[] = [
   {
-    year: 2025,
-    title: 'Statistical frameworks for ultra-low allele fraction detection in cell-free DNA',
-    authors: 'Maruvka Y.E., Smith A., Johnson B., et al.',
-    venue: 'Nature Methods',
+    year: 2026,
+    title: 'Multi-cancer framework with cancer-aware attention and adversarial mutual-information minimization for whole slide image classification',
+    authors: 'Peled S., Maruvka Y.E., Freiman M.',
+    venue: 'Medical Image Analysis',
     type: 'journal',
     links: [
-      { label: 'DOI', href: '#' },
-      { label: 'PDF', href: '#' },
+      { label: 'DOI', href: 'https://doi.org/10.1016/j.media.2025.103927' },
     ],
-    tags: ['cfDNA', 'inference', 'detection'],
+    tags: ['computational pathology', 'whole slide image', 'multi-cancer'],
   },
   {
     year: 2025,

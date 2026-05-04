@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
 import Container from '../../components/Container';
 import SectionHeader from '../../components/SectionHeader';
-import Badge from '../../components/Badge';
-import { news } from '../../content/news';
+import { getNews, sortNewsByDate } from '../../lib/news';
 
 export const metadata: Metadata = {
   title: 'News',
   description: 'Latest updates, publications, awards, and announcements from the Maruvka Lab.',
 };
+
+export const dynamic = 'force-dynamic';
 
 function formatDate(dateString: string): string {
   const date = new Date(dateString);
@@ -26,9 +27,8 @@ function getCategoryColor(category: string): string {
   return colors[category] || 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300';
 }
 
-export default function NewsPage() {
-  // Sort news by date (most recent first)
-  const sortedNews = [...news].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+export default async function NewsPage() {
+  const sortedNews = sortNewsByDate(await getNews());
 
   return (
     <div className="bg-background">

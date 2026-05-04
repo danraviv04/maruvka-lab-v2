@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { site } from "@/content/site";
+import ScrollDownButton from "@/components/ScrollDownButton";
 
 type Props = {
   eyebrow?: string;
@@ -45,7 +46,7 @@ export default function Hero(props: Props) {
       <div className="pointer-events-none absolute -bottom-24 right-1/4 h-96 w-96 rounded-full bg-primary/20 blur-3xl" />
 
       {/* Two-column layout */}
-      <div className="relative z-10 mx-auto max-w-screen-2xl px-6 py-20 md:py-28">
+      <div className="relative z-10 mx-auto max-w-screen-2xl px-6 pb-24 pt-14 md:pb-36 md:pt-18">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
           {/* Left column: Content */}
           <div className="max-w-2xl">
@@ -112,6 +113,8 @@ export default function Hero(props: Props) {
           </div>
         </div>
       </div>
+
+      <ScrollDownButton targetId="home-proof" />
     </section>
   );
 }
