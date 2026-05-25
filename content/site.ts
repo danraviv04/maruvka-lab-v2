@@ -23,6 +23,7 @@ export const site = {
     { name: 'Collaborators & Funding', href: '/collaborators' },
     { name: 'In Memoriam', href: '/mission' },
     { name: 'Contact', href: '/contact' },
+    { name: 'Lab Tools', href: '/lab-tools' },
     // { name: 'Members', href: '/members' },
   ],
   affiliations: ['Technion', 'ISF', 'NIH'],

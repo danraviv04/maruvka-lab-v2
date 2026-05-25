@@ -9,10 +9,42 @@
   --color-background: #f8fafc;
   --color-text: #0f172a;
   --color-muted: #475569;
+
+  /* shadcn-compatible tokens (used by lab-tools section) */
+  --color-foreground: #0f172a;
+  --color-card: #ffffff;
+  --color-card-foreground: #0f172a;
+  --color-muted-foreground: #64748b;
+  --color-border: #e2e8f0;
+  --color-input: #e2e8f0;
+  --color-primary-foreground: #ffffff;
+  --color-ring: #1b8abf;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #0f172a;
 }
 
 :root {
   color-scheme: light;
+}
+
+/* Lab-tools scope: override muted to be a light surface (shadcn convention) */
+.lab-tools-scope {
+  --color-muted: #f1f5f9;
+}
+
+html.dark .lab-tools-scope {
+  --color-card: #1e293b;
+  --color-card-foreground: #f1f5f9;
+  --color-muted: #1e293b;
+  --color-muted-foreground: #94a3b8;
+  --color-border: #334155;
+  --color-input: #334155;
+  --color-foreground: #f1f5f9;
+  --color-popover: #1e293b;
+  --color-popover-foreground: #f1f5f9;
+  --color-card-foreground: #f1f5f9;
 }
 
 body {

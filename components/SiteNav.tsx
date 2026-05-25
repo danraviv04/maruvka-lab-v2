@@ -193,10 +193,10 @@ export default function SiteNav() {
     const navEl = navRef.current;
     if (!headerEl || !rowEl || !logoEl || !navEl) return;
 
-    const GAP_SAFETY_PX = 40; // accounts for gaps/padding between logo and nav
+    const GAP_SAFETY_PX = 12; // accounts for gaps/padding between logo and nav
     const VISUAL_GUTTER_PX = 24;
-    const ENTER_COMPACT_PX = 8;
-    const EXIT_COMPACT_PX = 24;
+    const ENTER_COMPACT_PX = 16;
+    const EXIT_COMPACT_PX = 32;
 
     const compute = () => {
       const rowW = rowEl.clientWidth;
@@ -380,8 +380,8 @@ export default function SiteNav() {
             aria-hidden={compact ? true : undefined}
             className={
               compact
-                ? 'pointer-events-none absolute left-[-9999px] top-[-9999px] flex shrink-0 items-center gap-2 whitespace-nowrap'
-                : 'flex shrink-0 items-center gap-2 whitespace-nowrap'
+                ? 'pointer-events-none absolute left-[-9999px] top-[-9999px] flex shrink-0 items-center gap-0.5 whitespace-nowrap'
+                : 'flex shrink-0 items-center gap-0.5 whitespace-nowrap'
             }
           >
             {site.nav.map((item) => {
@@ -393,8 +393,8 @@ export default function SiteNav() {
                   data-nav-active={active ? 'true' : undefined}
                   className={
                     active
-                      ? 'relative rounded-full border border-white/70 bg-white px-3 py-2 text-sm font-semibold text-primary shadow-md shadow-slate-900/15'
-                      : 'rounded-full px-3 py-2 text-sm font-medium text-white/80 transition hover:bg-white/10 hover:text-white'
+                      ? 'relative rounded-full border border-white/70 bg-white px-2.5 py-1.5 text-sm font-semibold text-primary shadow-md shadow-slate-900/15'
+                      : 'rounded-full px-2.5 py-1.5 text-sm font-medium text-white/80 transition hover:bg-white/10 hover:text-white'
                   }
                 >
                   {item.name}

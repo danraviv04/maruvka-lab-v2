@@ -1,10 +1,10 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter, Merriweather } from 'next/font/google';
-import SiteNav from '../components/SiteNav';
-import SiteFooter from '../components/SiteFooter';
+import SiteShell from '../components/SiteShell';
 import AccessibilityToolbar from '../components/AccessibilityToolbar';
 import ThemeProvider from '../components/ThemeProvider';
+import { Toaster } from 'sonner';
 import { site } from '../content/site';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
@@ -89,11 +89,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             Skip to content
           </a>
           <AccessibilityToolbar />
-          <SiteNav />
-          <main id="main" className="min-h-[60vh]">
-            {children}
-          </main>
-          <SiteFooter />
+          <SiteShell>{children}</SiteShell>
+          <Toaster position="bottom-right" richColors />
         </ThemeProvider>
       </body>
     </html>
