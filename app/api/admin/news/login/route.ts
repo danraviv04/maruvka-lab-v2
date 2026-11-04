@@ -2,8 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import {
   NEWS_ADMIN_COOKIE_NAME,
   NEWS_ADMIN_SESSION_SECONDS,
+  clearLoginAttempts,
   createNewsAdminToken,
+  getLoginRateLimitKey,
+  isLoginRateLimited,
   isNewsAdminConfigured,
+  registerFailedLogin,
   verifyNewsAdminPassword,
 } from '@/lib/news-admin-auth';
 
@@ -17,10 +21,20 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  const rateLimitKey = getLoginRateLimitKey(request);
+
+  if (isLoginRateLimited(rateLimitKey)) {
+    return NextResponse.json(
+      { success: false, error: 'Too many sign-in attempts. Try again in a few minutes.' },
+      { status: 429 }
+    );
+  }
+
   const body = (await request.json().catch(() => null)) as { password?: unknown } | null;
   const password = typeof body?.password === 'string' ? body.password : '';
 
   if (!verifyNewsAdminPassword(password)) {
+    registerFailedLogin(rateLimitKey);
     return NextResponse.json({ success: false, error: 'Invalid password.' }, { status: 401 });
   }
 
@@ -32,6 +46,8 @@ export async function POST(request: NextRequest) {
       { status: 503 }
     );
   }
+
+  clearLoginAttempts(rateLimitKey);
 
   const response = NextResponse.json({ success: true });
   response.cookies.set({

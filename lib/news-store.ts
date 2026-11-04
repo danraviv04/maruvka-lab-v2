@@ -1,13 +1,20 @@
 import { promises as fs } from 'fs';
 import type { NewsItem } from '@/content/news';
-import { getNews, NEWS_CONTENT_PATH, parseNewsItems, sortNewsByDate } from '@/lib/news';
+import { NEWS_CONTENT_PATH, readNewsFromFile } from '@/lib/news';
+import { isBlobStorageConfigured, readNewsFromBlob, writeNewsToBlob } from '@/lib/news-blob';
+import { parseNewsItems, sortNewsByDate } from '@/lib/news-schema';
+
+export type NewsStorage = 'blob' | 'github' | 'local';
 
 type NewsWriteResult = {
   item: NewsItem;
-  storage: 'github' | 'local';
+  storage: NewsStorage;
 };
 
 export type NewsItemTarget = Pick<NewsItem, 'title' | 'date'>;
+
+/** Produces the new feed, plus the item the caller should report back. */
+type NewsTransform = (currentNews: NewsItem[]) => { item: NewsItem; news: NewsItem[] };
 
 type GithubConfig = {
   owner: string;
@@ -17,57 +24,86 @@ type GithubConfig = {
   token: string;
 };
 
-export async function addNewsItem(item: NewsItem): Promise<NewsWriteResult> {
-  const githubConfig = getGithubConfig();
-
-  if (githubConfig) {
-    return addNewsItemToGithub(item, githubConfig);
+export function getNewsStorage(): NewsStorage {
+  if (isBlobStorageConfigured()) {
+    return 'blob';
   }
 
-  return addNewsItemToLocalFile(item);
+  return getGithubConfig() ? 'github' : 'local';
+}
+
+export async function addNewsItem(item: NewsItem): Promise<NewsWriteResult> {
+  return mutateNews(
+    (currentNews) => ({ item, news: mergeNewsItem(currentNews, item) }),
+    (added) => `Add lab news: ${added.title.slice(0, 60)}`
+  );
+}
+
+export async function updateNewsItem(target: NewsItemTarget, item: NewsItem): Promise<NewsWriteResult> {
+  return mutateNews(
+    (currentNews) => ({ item, news: replaceNewsItem(currentNews, target, item) }),
+    (updated) => `Update lab news: ${updated.title.slice(0, 60)}`
+  );
 }
 
 export async function deleteNewsItem(target: NewsItemTarget): Promise<NewsWriteResult> {
+  return mutateNews(
+    (currentNews) => {
+      const { deletedItem, updatedNews } = removeNewsItem(currentNews, target);
+      return { item: deletedItem, news: updatedNews };
+    },
+    (deleted) => `Delete lab news: ${deleted.title.slice(0, 60)}`
+  );
+}
+
+/**
+ * Reads the current feed from whichever backend is configured, applies the
+ * transform, and writes it back. Reading and writing always hit the same
+ * backend, so the admin list never disagrees with what the public pages show.
+ */
+async function mutateNews(transform: NewsTransform, describe: (item: NewsItem) => string): Promise<NewsWriteResult> {
+  if (isBlobStorageConfigured()) {
+    // A store that has never been written falls back to the repo file as a seed.
+    const currentNews = (await readNewsFromBlob()) ?? (await readNewsFromFile());
+    const { item, news } = transform(currentNews);
+
+    await writeNewsToBlob(news);
+
+    return { item, storage: 'blob' };
+  }
+
   const githubConfig = getGithubConfig();
 
   if (githubConfig) {
-    return deleteNewsItemFromGithub(target, githubConfig);
+    const currentFile = await fetchGithubNewsFile(githubConfig);
+    const { item, news } = transform(parseNewsItems(JSON.parse(currentFile.content)));
+
+    await writeGithubNewsFile(githubConfig, news, currentFile.sha, describe(item));
+
+    return { item, storage: 'github' };
   }
 
-  return deleteNewsItemFromLocalFile(target);
-}
+  const { item, news } = transform(await readNewsFromFile());
 
-async function addNewsItemToLocalFile(item: NewsItem): Promise<NewsWriteResult> {
-  const currentNews = await getNews();
-  const updatedNews = mergeNewsItem(currentNews, item);
-
-  await fs.writeFile(NEWS_CONTENT_PATH, serializeNews(updatedNews), 'utf8');
+  await fs.writeFile(NEWS_CONTENT_PATH, serializeNews(news), 'utf8');
 
   return { item, storage: 'local' };
 }
 
-async function deleteNewsItemFromLocalFile(target: NewsItemTarget): Promise<NewsWriteResult> {
-  const currentNews = await getNews();
-  const { deletedItem, updatedNews } = removeNewsItem(currentNews, target);
-
-  await fs.writeFile(NEWS_CONTENT_PATH, serializeNews(updatedNews), 'utf8');
-
-  return { item: deletedItem, storage: 'local' };
-}
-
-async function addNewsItemToGithub(item: NewsItem, config: GithubConfig): Promise<NewsWriteResult> {
-  const currentFile = await fetchGithubNewsFile(config);
-  const currentNews = parseNewsItems(JSON.parse(currentFile.content));
-  const updatedNews = mergeNewsItem(currentNews, item);
-
+async function writeGithubNewsFile(
+  config: GithubConfig,
+  news: NewsItem[],
+  sha: string,
+  message: string
+): Promise<void> {
   const response = await fetch(githubContentsUrl(config), {
     method: 'PUT',
     headers: githubHeaders(config.token),
     body: JSON.stringify({
       branch: config.branch,
-      content: Buffer.from(serializeNews(updatedNews), 'utf8').toString('base64'),
-      message: `Add lab news: ${item.title.slice(0, 60)}`,
-      sha: currentFile.sha,
+      content: Buffer.from(serializeNews(news), 'utf8').toString('base64'),
+      message,
+      sha,
     }),
     cache: 'no-store',
   });
@@ -75,32 +111,6 @@ async function addNewsItemToGithub(item: NewsItem, config: GithubConfig): Promis
   if (!response.ok) {
     throw new Error(`GitHub write failed: ${await readGithubError(response)}`);
   }
-
-  return { item, storage: 'github' };
-}
-
-async function deleteNewsItemFromGithub(target: NewsItemTarget, config: GithubConfig): Promise<NewsWriteResult> {
-  const currentFile = await fetchGithubNewsFile(config);
-  const currentNews = parseNewsItems(JSON.parse(currentFile.content));
-  const { deletedItem, updatedNews } = removeNewsItem(currentNews, target);
-
-  const response = await fetch(githubContentsUrl(config), {
-    method: 'PUT',
-    headers: githubHeaders(config.token),
-    body: JSON.stringify({
-      branch: config.branch,
-      content: Buffer.from(serializeNews(updatedNews), 'utf8').toString('base64'),
-      message: `Delete lab news: ${deletedItem.title.slice(0, 60)}`,
-      sha: currentFile.sha,
-    }),
-    cache: 'no-store',
-  });
-
-  if (!response.ok) {
-    throw new Error(`GitHub write failed: ${await readGithubError(response)}`);
-  }
-
-  return { item: deletedItem, storage: 'github' };
 }
 
 async function fetchGithubNewsFile(config: GithubConfig): Promise<{ content: string; sha: string }> {
@@ -129,6 +139,24 @@ function mergeNewsItem(currentNews: NewsItem[], item: NewsItem): NewsItem[] {
   const itemKey = newsItemKey(item);
   const withoutExistingMatch = currentNews.filter((existingItem) => newsItemKey(existingItem) !== itemKey);
   return sortNewsByDate([item, ...withoutExistingMatch]);
+}
+
+function replaceNewsItem(currentNews: NewsItem[], target: NewsItemTarget, item: NewsItem): NewsItem[] {
+  const targetKey = newsItemKey(target);
+
+  if (!currentNews.some((existingItem) => newsItemKey(existingItem) === targetKey)) {
+    throw new Error('News item was not found.');
+  }
+
+  const itemKey = newsItemKey(item);
+
+  if (itemKey !== targetKey && currentNews.some((existingItem) => newsItemKey(existingItem) === itemKey)) {
+    throw new Error('Another news item already uses that title and date.');
+  }
+
+  return sortNewsByDate(
+    currentNews.map((existingItem) => (newsItemKey(existingItem) === targetKey ? item : existingItem))
+  );
 }
 
 function removeNewsItem(

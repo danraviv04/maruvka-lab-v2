@@ -1,11 +1,15 @@
 'use client';
 
-import { FormEvent, useCallback, useEffect, useMemo, useState } from 'react';
+import { upload } from '@vercel/blob/client';
+import { ChangeEvent, FormEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { newsCategories, type NewsCategory, type NewsItem } from '@/content/news';
 
 type SessionState = 'loading' | 'authenticated' | 'guest' | 'disabled';
 type SubmitState = 'idle' | 'saving' | 'success' | 'error';
 type NewsListState = 'idle' | 'loading' | 'ready' | 'error';
+type UploadState = 'idle' | 'uploading' | 'error';
+
+type NewsItemTarget = Pick<NewsItem, 'title' | 'date'>;
 
 type NewsFormState = {
   title: string;
@@ -25,6 +29,8 @@ type ApiResponse = {
   data?: NewsItem[];
 };
 
+const MAX_IMAGE_BYTES = 10 * 1024 * 1024;
+
 const initialFormState = (): NewsFormState => ({
   title: '',
   date: localDateString(),
@@ -37,8 +43,11 @@ const initialFormState = (): NewsFormState => ({
 
 export default function NewsAdminForm() {
   const [sessionState, setSessionState] = useState<SessionState>('loading');
+  const [uploadsEnabled, setUploadsEnabled] = useState(false);
+  const [storage, setStorage] = useState('');
   const [password, setPassword] = useState('');
   const [form, setForm] = useState<NewsFormState>(() => initialFormState());
+  const [editingTarget, setEditingTarget] = useState<NewsItemTarget | null>(null);
   const [loginError, setLoginError] = useState('');
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
   const [submitMessage, setSubmitMessage] = useState('');
@@ -46,6 +55,10 @@ export default function NewsAdminForm() {
   const [newsListState, setNewsListState] = useState<NewsListState>('idle');
   const [newsListMessage, setNewsListMessage] = useState('');
   const [deletingKey, setDeletingKey] = useState('');
+  const [uploadState, setUploadState] = useState<UploadState>('idle');
+  const [uploadMessage, setUploadMessage] = useState('');
+  const formRef = useRef<HTMLFormElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const loadNewsItems = useCallback(async () => {
     setNewsListState('loading');
@@ -70,9 +83,17 @@ export default function NewsAdminForm() {
     async function loadSession() {
       try {
         const response = await fetch('/api/admin/news/session', { cache: 'no-store' });
-        const data = (await response.json()) as { authenticated?: boolean; configured?: boolean };
+        const data = (await response.json()) as {
+          authenticated?: boolean;
+          configured?: boolean;
+          uploadsEnabled?: boolean;
+          storage?: string;
+        };
 
         if (!isMounted) return;
+
+        setUploadsEnabled(Boolean(data.uploadsEnabled));
+        setStorage(data.storage || '');
 
         if (!data.configured) {
           setSessionState('disabled');
@@ -99,6 +120,17 @@ export default function NewsAdminForm() {
   const canSubmit = useMemo(() => {
     return Boolean(form.title.trim() && form.date && form.category && form.description.trim());
   }, [form]);
+
+  function resetForm() {
+    setForm(initialFormState());
+    setEditingTarget(null);
+    setUploadState('idle');
+    setUploadMessage('');
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  }
 
   async function handleLogin(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -129,6 +161,43 @@ export default function NewsAdminForm() {
     setNewsItems([]);
     setNewsListState('idle');
     setNewsListMessage('');
+    resetForm();
+  }
+
+  async function handleImageUpload(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+    if (file.size > MAX_IMAGE_BYTES) {
+      setUploadState('error');
+      setUploadMessage('That image is larger than 10 MB. Please pick a smaller file.');
+      return;
+    }
+
+    setUploadState('uploading');
+    setUploadMessage('');
+
+    try {
+      const result = await upload(`news/images/${safeFileName(file.name)}`, file, {
+        access: 'public',
+        handleUploadUrl: '/api/admin/news/upload',
+        contentType: file.type,
+      });
+
+      setForm((currentForm) => ({ ...currentForm, image: result.url }));
+      setUploadState('idle');
+      setUploadMessage('Image uploaded.');
+    } catch (error) {
+      setUploadState('error');
+      setUploadMessage(error instanceof Error ? error.message : 'Unable to upload the image.');
+    } finally {
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    }
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -144,10 +213,11 @@ export default function NewsAdminForm() {
       linkLabel: form.linkLabel,
       linkHref: form.linkHref,
       image: form.image,
+      ...(editingTarget ? { original: editingTarget } : {}),
     };
 
     const response = await fetch('/api/admin/news', {
-      method: 'POST',
+      method: editingTarget ? 'PUT' : 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     });
@@ -160,13 +230,27 @@ export default function NewsAdminForm() {
     }
 
     setSubmitState('success');
-    setSubmitMessage(
-      data.storage === 'github'
-        ? 'News item committed to GitHub. The live site will update after deployment.'
-        : 'News item saved locally.'
-    );
-    setForm(initialFormState());
+    setSubmitMessage(storageMessage(editingTarget ? 'updated' : 'saved', data.storage));
+    resetForm();
     loadNewsItems();
+  }
+
+  function handleEditNews(item: NewsItem) {
+    setEditingTarget({ title: item.title, date: item.date });
+    setForm({
+      title: item.title,
+      date: item.date,
+      category: item.category,
+      description: item.description,
+      linkLabel: item.link?.label || 'Read more',
+      linkHref: item.link?.href || '',
+      image: item.image || '',
+    });
+    setSubmitState('idle');
+    setSubmitMessage('');
+    setUploadState('idle');
+    setUploadMessage('');
+    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   async function handleDeleteNews(item: NewsItem) {
@@ -194,13 +278,13 @@ export default function NewsAdminForm() {
       return;
     }
 
+    if (editingTarget && newsItemKey(editingTarget) === newsItemKey(item)) {
+      resetForm();
+    }
+
     setNewsItems((currentItems) => currentItems.filter((currentItem) => newsItemKey(currentItem) !== newsItemKey(item)));
     setNewsListState('ready');
-    setNewsListMessage(
-      data.storage === 'github'
-        ? 'News item deleted in GitHub. The live site will update after deployment.'
-        : 'News item deleted locally.'
-    );
+    setNewsListMessage(storageMessage('deleted', data.storage));
   }
 
   if (sessionState === 'loading') {
@@ -250,7 +334,14 @@ export default function NewsAdminForm() {
 
   return (
     <div className="mx-auto mt-10 max-w-3xl">
-      <div className="mb-4 flex justify-end">
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+        {storage === 'blob' ? (
+          <p className="text-xs text-muted">Edits publish straight to the live site.</p>
+        ) : storage === 'github' ? (
+          <p className="text-xs text-muted">Edits commit to GitHub and go live after the deployment finishes.</p>
+        ) : (
+          <p className="text-xs text-muted">Edits are written to the local content file.</p>
+        )}
         <button
           type="button"
           onClick={handleLogout}
@@ -261,9 +352,23 @@ export default function NewsAdminForm() {
       </div>
 
       <form
+        ref={formRef}
         onSubmit={handleSubmit}
         className="rounded-lg border border-slate-300 bg-white p-6 shadow-md dark:border-slate-700 dark:bg-slate-800"
       >
+        {editingTarget ? (
+          <div className="mb-5 flex flex-wrap items-center justify-between gap-3 rounded-lg bg-amber-50 px-4 py-3 text-sm font-medium text-amber-900 dark:bg-amber-950/40 dark:text-amber-100">
+            <span>Editing: {editingTarget.title}</span>
+            <button
+              type="button"
+              onClick={resetForm}
+              className="rounded-lg border border-amber-300 px-3 py-1.5 text-xs font-semibold transition hover:bg-amber-100 dark:border-amber-700 dark:hover:bg-amber-900/40"
+            >
+              Cancel edit
+            </button>
+          </div>
+        ) : null}
+
         <div className="grid gap-5 sm:grid-cols-2">
           <div className="sm:col-span-2">
             <label className="block text-sm font-semibold text-text" htmlFor="news-title">
@@ -352,20 +457,71 @@ export default function NewsAdminForm() {
           </div>
 
           <div className="sm:col-span-2">
-            <label className="block text-sm font-semibold text-text" htmlFor="news-image">
-              Image path or URL
+            <span className="block text-sm font-semibold text-text">Image</span>
+
+            {uploadsEnabled ? (
+              <div className="mt-2">
+                <input
+                  ref={fileInputRef}
+                  id="news-image-file"
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp,image/gif,image/avif"
+                  onChange={handleImageUpload}
+                  disabled={uploadState === 'uploading'}
+                  className="block w-full cursor-pointer rounded-lg border border-slate-300 bg-white text-sm text-text file:mr-4 file:cursor-pointer file:rounded-l-lg file:border-0 file:bg-primary file:px-4 file:py-2.5 file:text-sm file:font-semibold file:text-white hover:file:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-60 dark:border-slate-600 dark:bg-slate-900"
+                />
+                <p className="mt-2 text-xs leading-relaxed text-muted">
+                  Choose a picture from your computer, up to 10 MB. It uploads straight to the website.
+                </p>
+              </div>
+            ) : (
+              <p className="mt-2 rounded-lg bg-amber-50 px-3 py-2 text-xs leading-relaxed text-amber-900 dark:bg-amber-950/40 dark:text-amber-100">
+                File uploads need a Vercel Blob store. Paste an image address below instead.
+              </p>
+            )}
+
+            {uploadState === 'uploading' ? (
+              <p className="mt-2 text-xs font-medium text-muted">Uploading image...</p>
+            ) : null}
+
+            {uploadMessage ? (
+              <p
+                className={`mt-2 text-xs font-medium ${
+                  uploadState === 'error' ? 'text-red-600 dark:text-red-300' : 'text-green-700 dark:text-green-300'
+                }`}
+              >
+                {uploadMessage}
+              </p>
+            ) : null}
+
+            <label className="mt-4 block text-xs font-semibold uppercase tracking-wide text-muted" htmlFor="news-image">
+              Image address
             </label>
             <input
               id="news-image"
               value={form.image}
               onChange={(event) => setForm({ ...form, image: event.target.value })}
               className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-text shadow-sm outline-none transition focus:border-primary dark:border-slate-600 dark:bg-slate-900"
-              placeholder="/team/dan_raviv.jpg"
+              placeholder="https://example.com/photo.jpg"
             />
-            <p className="mt-2 text-xs leading-relaxed text-muted">
-              Use an existing file from the public folder, such as /team/dan_raviv.jpg, or paste a full https URL.
-              Local computer paths like /Users/... are not visible to the website.
-            </p>
+
+            {form.image ? (
+              <div className="mt-3 flex items-center gap-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={form.image}
+                  alt="Selected news image preview"
+                  className="h-16 w-16 rounded-lg object-cover"
+                />
+                <button
+                  type="button"
+                  onClick={() => setForm({ ...form, image: '' })}
+                  className="text-xs font-semibold text-red-600 hover:underline dark:text-red-300"
+                >
+                  Remove image
+                </button>
+              </div>
+            ) : null}
           </div>
         </div>
 
@@ -384,9 +540,9 @@ export default function NewsAdminForm() {
         <button
           type="submit"
           className="mt-6 inline-flex w-full items-center justify-center rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
-          disabled={!canSubmit || submitState === 'saving'}
+          disabled={!canSubmit || submitState === 'saving' || uploadState === 'uploading'}
         >
-          {submitState === 'saving' ? 'Saving...' : 'Add news'}
+          {submitState === 'saving' ? 'Saving...' : editingTarget ? 'Save changes' : 'Add news'}
         </button>
       </form>
 
@@ -394,7 +550,7 @@ export default function NewsAdminForm() {
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <h3 className="text-lg font-semibold text-primary">Existing news</h3>
-            <p className="mt-1 text-sm text-muted">Delete outdated or mistaken updates from the news feed.</p>
+            <p className="mt-1 text-sm text-muted">Edit or delete updates already on the news feed.</p>
           </div>
           <button
             type="button"
@@ -442,14 +598,24 @@ export default function NewsAdminForm() {
                     <h4 className="mt-2 text-base font-semibold text-text">{item.title}</h4>
                     <p className="mt-1 max-w-2xl text-sm leading-relaxed text-muted">{item.description}</p>
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => handleDeleteNews(item)}
-                    className="inline-flex items-center justify-center rounded-lg border border-red-300 bg-white px-3 py-2 text-sm font-semibold text-red-700 shadow-sm transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-60 dark:border-red-800 dark:bg-slate-900 dark:text-red-300 dark:hover:bg-red-950/40"
-                    disabled={Boolean(deletingKey)}
-                  >
-                    {isDeleting ? 'Deleting...' : 'Delete'}
-                  </button>
+                  <div className="flex shrink-0 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => handleEditNews(item)}
+                      className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-text shadow-sm transition hover:border-primary disabled:cursor-not-allowed disabled:opacity-60 dark:border-slate-700 dark:bg-slate-900"
+                      disabled={Boolean(deletingKey)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteNews(item)}
+                      className="inline-flex items-center justify-center rounded-lg border border-red-300 bg-white px-3 py-2 text-sm font-semibold text-red-700 shadow-sm transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-60 dark:border-red-800 dark:bg-slate-900 dark:text-red-300 dark:hover:bg-red-950/40"
+                      disabled={Boolean(deletingKey)}
+                    >
+                      {isDeleting ? 'Deleting...' : 'Delete'}
+                    </button>
+                  </div>
                 </article>
               );
             })}
@@ -458,6 +624,23 @@ export default function NewsAdminForm() {
       </section>
     </div>
   );
+}
+
+function storageMessage(action: 'saved' | 'updated' | 'deleted', storage?: string): string {
+  if (storage === 'blob') {
+    return `News item ${action}. It is live on the site now.`;
+  }
+
+  if (storage === 'github') {
+    return `News item ${action} in GitHub. The live site will update after the deployment finishes.`;
+  }
+
+  return `News item ${action} in the local content file.`;
+}
+
+function safeFileName(name: string): string {
+  const base = name.split(/[\\/]/).pop() || 'image';
+  return base.replace(/[^a-zA-Z0-9._-]/g, '-').slice(-100) || 'image';
 }
 
 function localDateString(): string {
