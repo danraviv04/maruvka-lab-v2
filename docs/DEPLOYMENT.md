@@ -66,22 +66,37 @@ CMD ["npm", "start"]
 
 ## Environment Variables
 
-No environment variables are strictly required, but you can add:
+See [.env.example](../.env.example) for the full annotated list. Three matter
+for a working production deploy:
 
 ```bash
-# Optional: Override Scholar ID
+# Required: unlocks /admin/news. Without it the news editor is disabled.
+NEWS_ADMIN_PASSWORD=...
+
+# Required: unlocks /lab-tools. NOT NEXT_PUBLIC_LAB_PASSWORD - nothing reads that.
+LAB_TOOLS_PASSWORD=...
+
+# Strongly recommended: injected by connecting a Vercel Blob store.
+# Without it, posting news FAILS on Vercel - the deployed filesystem is read-only.
+BLOB_READ_WRITE_TOKEN=...
+```
+
+Optional tuning, already wired up in
+[app/api/publications/route.ts](../app/api/publications/route.ts):
+
+```bash
+# Override the scraped Google Scholar profile
 SCHOLAR_ID=q8BKwrYAAAAJ
 
-# Optional: Cache duration in seconds (default: 3600)
+# Cache duration for a successful scrape, in seconds (default 3600)
 REVALIDATE_SECONDS=7200
+
+# Absolute base URL for canonical links and social previews
+NEXT_PUBLIC_BASE_URL=https://www.maruvkalab.com
 ```
 
-Update [app/api/publications/route.ts](../app/api/publications/route.ts):
-
-```typescript
-const SCHOLAR_ID = process.env.SCHOLAR_ID || 'q8BKwrYAAAAJ';
-export const revalidate = Number(process.env.REVALIDATE_SECONDS) || 3600;
-```
+Environment variables only apply to **new** deployments, so redeploy after
+adding or changing any of them.
 
 ## Testing Before Deployment
 
@@ -120,7 +135,14 @@ Visit `https://your-domain.com/api/publications` and verify:
 **Option 3: Manual Updates**
 - Periodically export Scholar data manually
 - Store in `/content/publications.ts`
-- Modify API to read from static file
+- Then set `USE_FALLBACK_ON_ERROR = true` in the publications route
+
+> ⚠️ **Do not enable that flag before cleaning the file.** Most entries in
+> `content/publications.ts` are template placeholders — invented titles and
+> authors with `#` links. Turning the fallback on as-is would present
+> fabricated papers as the lab's publication record. Until the file holds only
+> real papers, the page shows a "temporarily unavailable" notice linking to the
+> live Scholar profile, which is accurate rather than misleading.
 
 **Option 4: Scholar API Alternatives**
 - Use Semantic Scholar API (free, but requires sign-up)

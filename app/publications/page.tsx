@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import type { Metadata } from 'next';
 import Container from '../../components/Container';
 import SectionHeader from '../../components/SectionHeader';
 import { Publication, categorizePublication, extractTags } from '../../lib/publications';
@@ -14,12 +13,16 @@ type ExtendedPublication = Publication & {
   tags: string[];
 };
 
+// Used until the API reports the profile it actually scraped (it honours SCHOLAR_ID).
+const DEFAULT_SCHOLAR_PROFILE = 'https://scholar.google.com/citations?user=q8BKwrYAAAAJ&hl=en';
+
 export default function PublicationsPage() {
   const [publications, setPublications] = useState<ExtendedPublication[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [lastUpdated, setLastUpdated] = useState<string | null>(null);
   const [refreshing, setRefreshing] = useState(false);
+  const [profileUrl, setProfileUrl] = useState(DEFAULT_SCHOLAR_PROFILE);
   
   const [selectedType, setSelectedType] = useState<string>('all');
   const [selectedTag, setSelectedTag] = useState<string>('all');
@@ -30,6 +33,10 @@ export default function PublicationsPage() {
         cache: 'no-store', // Force fresh data
       });
       const result = await response.json();
+
+      if (result.profileUrl) {
+        setProfileUrl(result.profileUrl);
+      }
 
       if (result.success && result.data) {
         // Enhance publications with type and tags
@@ -100,14 +107,32 @@ export default function PublicationsPage() {
               <p className="mt-4 text-muted">Loading publications from Google Scholar...</p>
             </div>
           ) : error ? (
-            <div className="mt-12 rounded-2xl border-2 border-red-300 dark:border-red-900 bg-red-50 dark:bg-red-900/20 p-12 text-center shadow-md">
-              <p className="text-red-600 dark:text-red-400">Error: {error}</p>
-              <button 
-                onClick={() => window.location.reload()} 
-                className="mt-4 rounded-lg bg-red-600 px-4 py-2 text-sm text-white hover:bg-red-700 transition"
-              >
-                Retry
-              </button>
+            <div className="mt-12 rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-12 text-center shadow-md">
+              <h3 className="text-xl font-semibold text-primary">
+                Publications are temporarily unavailable
+              </h3>
+              <p className="mx-auto mt-3 max-w-xl text-muted">
+                We load this list live from Google Scholar, which occasionally rate-limits automated
+                requests. The full, up-to-date publication list is always available on the lab&apos;s
+                Scholar profile.
+              </p>
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                <a
+                  href={profileUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-primary/90"
+                >
+                  <span>View on Google Scholar</span>
+                  <span aria-hidden="true">→</span>
+                </a>
+                <button
+                  onClick={() => window.location.reload()}
+                  className="rounded-lg border-2 border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-text shadow-sm transition hover:border-primary dark:border-slate-700 dark:bg-slate-900"
+                >
+                  Try again
+                </button>
+              </div>
             </div>
           ) : (
             <>

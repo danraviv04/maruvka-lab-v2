@@ -5,10 +5,20 @@ import { publications as fallbackPublications } from '../../../content/publicati
 export const dynamic = 'force-dynamic';
 export const revalidate = 3600; // Cache for 1 hour
 
-const SCHOLAR_ID = 'q8BKwrYAAAAJ';
+const SCHOLAR_ID = process.env.SCHOLAR_ID || 'q8BKwrYAAAAJ';
 const SCHOLAR_URL = `https://scholar.google.com/citations?user=${SCHOLAR_ID}&hl=en&view_op=list_works&sortby=pubdate&cstart=0&pagesize=100`;
+const SCHOLAR_PROFILE_URL = `https://scholar.google.com/citations?user=${SCHOLAR_ID}&hl=en`;
 
-// Fallback mode: set to true to use static fallback if Scholar scraping fails
+const SCRAPE_CACHE_SECONDS = Number(process.env.REVALIDATE_SECONDS) || 3600;
+
+/**
+ * Serve content/publications.ts when Scholar scraping fails.
+ *
+ * KEEP THIS false until content/publications.ts holds only real papers. Most of
+ * the entries there are template placeholders with '#' links, and publishing
+ * those would present invented papers as the lab's record. The page links to
+ * the real Scholar profile on failure instead.
+ */
 const USE_FALLBACK_ON_ERROR = false;
 
 interface Publication {
@@ -26,7 +36,7 @@ async function fetchPublications(): Promise<Publication[]> {
       headers: {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
       },
-      next: { revalidate: 3600 } // Cache for 1 hour
+      next: { revalidate: SCRAPE_CACHE_SECONDS }
     });
 
     if (!response.ok) {
@@ -77,6 +87,7 @@ export async function GET() {
       data: publications,
       lastUpdated: new Date().toISOString(),
       source: 'google-scholar',
+      profileUrl: SCHOLAR_PROFILE_URL,
     });
   } catch (error) {
     console.error('API Error:', error);
@@ -110,6 +121,7 @@ export async function GET() {
         success: false,
         error: 'Failed to fetch publications',
         message: error instanceof Error ? error.message : 'Unknown error',
+        profileUrl: SCHOLAR_PROFILE_URL,
       },
       { status: 500 }
     );

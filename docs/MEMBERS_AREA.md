@@ -14,14 +14,19 @@ A password-protected internal space for Maruvka Lab members to access shared res
 ## Setup
 
 ### 1. Set Your Password
-The default password is `maruvka2026`. To change it:
+There is no default password. The area stays locked until you set one:
 
-1. Edit `.env.local` file (create it if it doesn't exist)
-2. Set `NEXT_PUBLIC_LAB_PASSWORD` to your desired password:
+1. Edit `.env.local` (create it if it doesn't exist)
+2. Set `LAB_TOOLS_PASSWORD` to your desired password:
    ```env
-   NEXT_PUBLIC_LAB_PASSWORD=your_secure_password_here
+   LAB_TOOLS_PASSWORD=your_secure_password_here
    ```
 3. Restart your development server
+
+The variable is `LAB_TOOLS_PASSWORD`, with **no** `NEXT_PUBLIC_` prefix. That
+prefix would compile the password into the browser bundle where any visitor
+could read it, and `lib/lab-tools-auth.ts` does not read that name anyway — so
+setting `NEXT_PUBLIC_LAB_PASSWORD` leaves the area permanently locked.
 
 **Important:** The `.env.local` file is git-ignored and won't be committed to the repository.
 
@@ -107,8 +112,9 @@ If you need stronger protection, consider:
 ### Deployment
 When deploying to production (Vercel, Netlify, etc.):
 1. Add the environment variable in your hosting platform's dashboard
-2. Set `NEXT_PUBLIC_LAB_PASSWORD` to your secure password
-3. Never commit `.env.local` to the repository
+2. Set `LAB_TOOLS_PASSWORD` to your secure password
+3. Redeploy — environment variables only apply to new deployments
+4. Never commit `.env.local` to the repository
 
 ## Usage Tips
 
