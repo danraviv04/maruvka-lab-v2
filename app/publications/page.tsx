@@ -98,13 +98,13 @@ export default function PublicationsPage() {
           <SectionHeader
             eyebrow="Outputs"
             title="Publications"
-            description="Peer-reviewed papers, preprints, and conference proceedings from the lab. Automatically fetched from Google Scholar."
+            description="Peer-reviewed papers, preprints, and conference proceedings from the lab. Updated automatically from the lab's OpenAlex record."
           />
 
           {loading ? (
             <div className="mt-12 rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-12 text-center shadow-md">
               <div className="mx-auto h-8 w-8 animate-spin rounded-full border-4 border-accent border-t-transparent"></div>
-              <p className="mt-4 text-muted">Loading publications from Google Scholar...</p>
+              <p className="mt-4 text-muted">Loading publications...</p>
             </div>
           ) : error ? (
             <div className="mt-12 rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-12 text-center shadow-md">
@@ -112,9 +112,8 @@ export default function PublicationsPage() {
                 Publications are temporarily unavailable
               </h3>
               <p className="mx-auto mt-3 max-w-xl text-muted">
-                We load this list live from Google Scholar, which occasionally rate-limits automated
-                requests. The full, up-to-date publication list is always available on the lab&apos;s
-                Scholar profile.
+                The live list could not be loaded just now. The full, up-to-date publication
+                list is always available on the lab&apos;s Scholar profile.
               </p>
               <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
                 <a
@@ -144,7 +143,7 @@ export default function PublicationsPage() {
                     onClick={handleRefresh}
                     disabled={refreshing}
                     className="flex items-center gap-2 rounded-lg bg-primary/10 px-3 py-1.5 text-primary transition hover:bg-primary/20 disabled:opacity-50"
-                    title="Refresh publications from Google Scholar"
+                    title="Reload the publication list"
                   >
                     <svg 
                       className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`}
@@ -257,7 +256,7 @@ export default function PublicationsPage() {
                                   rel="noopener noreferrer"
                                   className="text-sm font-semibold text-secondary hover:underline"
                                 >
-                                  View on Google Scholar →
+                                  Read the paper →
                                 </a>
                               </div>
                             </article>

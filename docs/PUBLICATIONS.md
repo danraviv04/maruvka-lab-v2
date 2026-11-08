@@ -1,116 +1,81 @@
-# Dynamic Publications System
+# Publications
 
-## Overview
+The publications page builds itself from the lab's publication record. Nobody
+edits a list by hand, and new papers appear on their own.
 
-The publications page dynamically fetches data from Google Scholar, eliminating the need to manually update publication lists.
+## Where the data comes from
 
-## How It Works
+[OpenAlex](https://openalex.org), a free, open catalogue of scholarly work. The
+API needs no key and is built to be queried by servers.
 
-### 1. API Route (`/app/api/publications/route.ts`)
+**This used to scrape Google Scholar, and that did not work in production.**
+Scholar returns `403` to datacenter IP addresses, so the page worked on a
+developer's laptop and failed on every deployment — visitors only ever saw the
+error card. OpenAlex carries the same records and answers from anywhere, so the
+list now works wherever the site is hosted.
 
-The API route:
-- Fetches publications from Google Scholar profile (user ID: `q8BKwrYAAAAJ`)
-- Parses HTML to extract: title, authors, venue, year, citations, and link
-- Caches results for 1 hour (3600 seconds) to avoid rate limiting
-- Returns JSON with all publications
+Scholar is still linked from the page as the lab's public profile. It is simply
+no longer the data source.
 
-### 2. Utilities (`/lib/publications.ts`)
+## How it fits together
 
-Helper functions to:
-- **categorizePublication**: Automatically categorizes publications as journal, preprint, conference, or other based on venue
-- **extractTags**: Automatically tags publications based on keywords in title/venue (cfDNA, signatures, evolution, immunology, MSI, inference, detection, therapy)
+| Piece | Job |
+| --- | --- |
+| `app/api/publications/route.ts` | Queries OpenAlex, normalises the records |
+| `content/publications.ts` | A stored copy, served if OpenAlex is unreachable |
+| `lib/publications.ts` | Categorises by venue, derives topic tags |
+| `app/publications/page.tsx` | The full page, with type and topic filters |
+| `components/home/PublicationsSection.tsx` | The short list on the home page |
 
-### 3. Publications Page (`/app/publications/page.tsx`)
-
-The page:
-- Loads publications from the API on mount
-- Displays loading state while fetching
-- Provides filters by type and topic
-- Groups publications by year
-- Shows citation counts
-- Links directly to Google Scholar pages
-
-## Features
-
-- ✅ **Automatic Updates**: Data refreshes every hour (configurable)
-- ✅ **Smart Categorization**: Publications are automatically categorized by type
-- ✅ **Topic Tagging**: Automatic tagging based on research areas
-- ✅ **Citation Counts**: Shows citation metrics from Google Scholar
-- ✅ **Filtering**: Filter by publication type and research topic
-- ✅ **Direct Links**: Each publication links to its Google Scholar page
-- ✅ **Loading States**: User-friendly loading and error handling
+The route always answers `200` with `success: true`. The `source` field says
+where the data came from — `openalex` for the live list, `stored` for the
+fallback — so the page never has to render an error state in normal operation.
 
 ## Configuration
 
-### Change Scholar ID
+All optional; the defaults are the lab's own.
 
-Edit [`/app/api/publications/route.ts`](../app/api/publications/route.ts):
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `OPENALEX_AUTHOR_ID` | `A5086771704` | Whose publications to list |
+| `SCHOLAR_ID` | `q8BKwrYAAAAJ` | Only for the "View on Google Scholar" link |
+| `REVALIDATE_SECONDS` | `3600` | How long a successful response is cached |
+| `OPENALEX_CONTACT_EMAIL` | the lab address in `content/site.ts` | Identifies the site to OpenAlex |
 
-```typescript
-const SCHOLAR_ID = 'q8BKwrYAAAAJ'; // Change this to your Google Scholar ID
+To find a different author's OpenAlex ID:
+
+```bash
+curl -s 'https://api.openalex.org/authors?search=Jane%20Doe' | head -c 2000
 ```
 
-### Adjust Cache Duration
+## Refreshing the stored fallback
 
-Modify the `revalidate` value (in seconds):
+`content/publications.ts` is generated, not written by hand. It holds 18 real
+papers — the recent work plus the most-cited — and only appears if OpenAlex is
+down. Regenerate it when it drifts too far behind:
 
-```typescript
-export const revalidate = 3600; // 1 hour (default)
-// Or: 7200 for 2 hours, 86400 for 24 hours, etc.
+```bash
+curl -s 'https://api.openalex.org/works?filter=author.id:A5086771704,type:article&sort=publication_date:desc&per-page=40'
 ```
 
-### Customize Tags
-
-Edit the `tagMap` in [`/lib/publications.ts`](../lib/publications.ts):
-
-```typescript
-const tagMap: Record<string, string[]> = {
-  'Your Tag': ['keyword1', 'keyword2'],
-  // Add more tags and keywords
-};
-```
-
-## Technical Details
-
-### Caching Strategy
-
-- **Server-side caching**: Next.js revalidates data every hour
-- **Client-side**: Fetches fresh on page load
-- **Rate limiting protection**: Reduces requests to Google Scholar
-
-### Data Flow
-
-```
-Google Scholar → API Route → Client → UI
-                  ↓
-                Cache
-              (1 hour)
-```
+**Never hand-write entries into that file.** It was previously filled with
+template placeholders — invented titles, invented co-authors, `href: '#'` links
+— and an earlier version of the API route was one boolean away from serving
+them. Publishing fabricated papers as the lab's record would be considerably
+worse than showing no list at all.
 
 ## Troubleshooting
 
-### Publications not loading
+**The list is short, or a known paper is missing.** The route asks for
+`type:article`, which excludes conference abstracts, errata and corrections. It
+also drops records with no DOI. Check the raw query above to see whether
+OpenAlex has the paper at all; if not, the fix belongs upstream at OpenAlex,
+not in this code.
 
-1. Check if the dev server is running
-2. Test the API directly: `curl http://localhost:3000/api/publications`
-3. Google Scholar might be blocking requests - increase cache duration
+**Everything is badged "other".** `categorizePublication` in
+`lib/publications.ts` treats any named venue as a journal, so this only happens
+when the venue is empty.
 
-### Wrong publications showing
-
-- Verify the Google Scholar ID in `/app/api/publications/route.ts`
-- Check the Scholar profile URL: `https://scholar.google.com/citations?user=YOUR_ID`
-
-### Tags not accurate
-
-- Update the `tagMap` in `/lib/publications.ts` with more specific keywords
-- Tags are extracted automatically, so adjust keywords to match your research areas
-
-## Future Enhancements
-
-Consider adding:
-- Admin panel to manually curate publications
-- Database storage for faster loading
-- Background job to update periodically
-- Export functionality (BibTeX, CSV)
-- Search functionality
-- Publication details modal with abstract
+**The page shows the stored list.** `source: "stored"` means the OpenAlex call
+failed. Check the server logs for the reason — the route logs it before falling
+back.

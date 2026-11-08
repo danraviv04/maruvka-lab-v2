@@ -55,7 +55,7 @@ export default function PublicationsSection() {
           index="03"
           kicker="Selected work"
           title="Recent publications."
-          description="Pulled live from Google Scholar, so this list never goes stale."
+          description="Pulled live from the lab's OpenAlex record, so this list never goes stale."
           deepHref="/publications"
           deepLabel="All publications"
         />

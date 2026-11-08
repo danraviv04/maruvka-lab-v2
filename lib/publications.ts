@@ -48,13 +48,10 @@ export function categorizePublication(venue: string): 'journal' | 'preprint' | '
     return 'conference';
   }
   
-  if (venueLower.includes('nature') || venueLower.includes('science') || 
-      venueLower.includes('cell') || venueLower.includes('plos') ||
-      venueLower.includes('journal') || venueLower.includes('jama')) {
-    return 'journal';
-  }
-  
-  return 'other';
+  // Anything else that names a venue is a journal. This used to be a list of
+  // well-known names, which sent real venues such as 'JCO Precision Oncology'
+  // and 'HemaSphere' to 'other' and left most of the page badged as unknown.
+  return venueLower.trim() ? 'journal' : 'other';
 }
 
 // Helper to extract tags/topics from titles and venues

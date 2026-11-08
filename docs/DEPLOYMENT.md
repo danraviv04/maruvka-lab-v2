@@ -4,21 +4,15 @@
 
 This Next.js application can be deployed to any platform that supports Node.js, including Vercel, Netlify, AWS, or your own server.
 
-## ⚠️ Important: Google Scholar Scraping
+## Publications
 
-The publications page fetches data by scraping Google Scholar. This approach has some considerations for production:
+The publications page reads the lab's record from OpenAlex, a free API that
+needs no key and answers from any host. There is nothing to configure.
 
-### Potential Issues
-
-1. **Rate Limiting**: Google Scholar may block or rate-limit requests from cloud servers
-2. **IP Blocking**: Some hosting providers' IPs might be blocked by Google
-3. **HTML Changes**: If Google changes their HTML structure, scraping will break
-
-### Current Safeguards
-
-✅ **1-hour caching** - Reduces requests to Scholar  
-✅ **User-Agent headers** - Makes requests appear more legitimate  
-✅ **Error handling** - Graceful fallbacks when scraping fails  
+This page used to scrape Google Scholar, which returns `403` to datacenter IP
+addresses — so it worked locally and failed on every deployment. If you see
+advice anywhere about caching harder or rotating user agents to keep Scholar
+happy, it is out of date; see [PUBLICATIONS.md](PUBLICATIONS.md).
 
 ## Recommended Deployment Platforms
 
@@ -38,7 +32,7 @@ vercel
 - Free tier available
 
 **Cons:**
-- Google Scholar may rate-limit Vercel IPs over time
+- Serverless filesystem is read-only, so news needs a Blob store (see below)
 
 ### 2. Netlify
 
@@ -51,7 +45,7 @@ netlify deploy --prod
 
 ### 3. Self-Hosted (Docker)
 
-Most reliable for Scholar scraping (your own IP):
+If you would rather run it on lab hardware:
 
 ```dockerfile
 FROM node:20-alpine
@@ -85,10 +79,13 @@ Optional tuning, already wired up in
 [app/api/publications/route.ts](../app/api/publications/route.ts):
 
 ```bash
-# Override the scraped Google Scholar profile
+# Whose publications to list (OpenAlex author ID)
+OPENALEX_AUTHOR_ID=A5086771704
+
+# Only used for the "View on Google Scholar" link, not for the data
 SCHOLAR_ID=q8BKwrYAAAAJ
 
-# Cache duration for a successful scrape, in seconds (default 3600)
+# Cache duration for a successful response, in seconds (default 3600)
 REVALIDATE_SECONDS=7200
 
 # Absolute base URL for canonical links and social previews
@@ -122,42 +119,25 @@ Visit `https://your-domain.com/api/publications` and verify:
 - Publications array is populated
 - No error messages
 
-### If Scholar Scraping Fails
+### If the publication list is missing or stale
 
-**Option 1: Increase Cache Duration**
-- Set `revalidate` to 24 hours (86400 seconds)
-- Reduces requests to Google Scholar
+The route answers `200` even when the live call fails, serving the stored copy
+in `content/publications.ts` instead. Check the `source` field in
+`/api/publications` to see which you got:
 
-**Option 2: Use a Scraping Service**
-- Consider services like ScraperAPI or Bright Data
-- They handle rate limiting and IP rotation
+- `"source": "openalex"` — the live list, working normally
+- `"source": "stored"` — OpenAlex was unreachable; the server log says why
 
-**Option 3: Manual Updates**
-- Periodically export Scholar data manually
-- Store in `/content/publications.ts`
-- Then set `USE_FALLBACK_ON_ERROR = true` in the publications route
+If it is stuck on `stored`, query OpenAlex directly to see whether the problem
+is upstream:
 
-> ⚠️ **Do not enable that flag before cleaning the file.** Most entries in
-> `content/publications.ts` are template placeholders — invented titles and
-> authors with `#` links. Turning the fallback on as-is would present
-> fabricated papers as the lab's publication record. Until the file holds only
-> real papers, the page shows a "temporarily unavailable" notice linking to the
-> live Scholar profile, which is accurate rather than misleading.
+```bash
+curl -s 'https://api.openalex.org/works?filter=author.id:A5086771704,type:article&per-page=3'
+```
 
-**Option 4: Scholar API Alternatives**
-- Use Semantic Scholar API (free, but requires sign-up)
-- Use OpenAlex API (free, open data)
-- These are more reliable but may have different data
-
-## Alternative: Static Generation
-
-If scraping becomes unreliable, you can switch to static generation:
-
-1. Uncomment the static publications in `/content/publications.ts`
-2. Update `/app/publications/page.tsx` to import from the file
-3. Manually update publications periodically
-
-This sacrifices automation but ensures reliability.
+`content/publications.ts` is generated from that same query. Never hand-write
+entries into it — see [PUBLICATIONS.md](PUBLICATIONS.md) for why that file is
+treated carefully.
 
 ## Deployment Checklist
 
@@ -166,7 +146,6 @@ This sacrifices automation but ensures reliability.
 - [ ] Verify API endpoint works
 - [ ] Check publications page loads
 - [ ] Test filters and interactions
-- [ ] Monitor for Scholar rate limiting
 - [ ] Set up error alerting (optional)
 - [ ] Document maintenance process
 
@@ -175,16 +154,8 @@ This sacrifices automation but ensures reliability.
 ### Publications not loading in production
 
 1. Check browser console for errors
-2. Visit `/api/publications` directly
-3. Check server logs for Scholar errors
-4. Verify caching is working
-
-### 503 Service Unavailable
-
-This means Google Scholar is blocking requests:
-- Increase `revalidate` time to reduce requests
-- Consider adding a CDN/proxy
-- Switch to alternative data source
+2. Visit `/api/publications` directly and read the `source` field
+3. Check server logs — the route logs the reason before falling back
 
 ### Builds failing
 
