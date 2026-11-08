@@ -1,19 +1,36 @@
 /**
- * Sections of the one-page home, in document order.
+ * Everything in the main navigation bar.
  *
- * The nav, the scroll-spy and the page itself all read this list, so adding a
- * section means adding one entry here and one component on the page.
- *
- * `deepHref` is the full page that section summarises, if there is one. The
- * home page only previews those; the full lists stay on their own routes.
+ * Two kinds of entry sit side by side. A `section` scrolls to part of the
+ * one-page home (and jumps home first when you are on another page); a `page`
+ * is an ordinary route. Both appear in the same bar — the lab asked for one
+ * set of links rather than a short bar with the rest hidden behind "More".
  */
-export type HomeSection = {
-  id: string;
-  label: string;
-  deepHref?: string;
-};
+export type NavEntry =
+  | { kind: 'section'; id: string; label: string; deepHref?: string }
+  | { kind: 'page'; href: string; label: string };
 
-export const homeSections: HomeSection[] = [
+export const navEntries: NavEntry[] = [
+  { kind: 'section', id: 'about', label: 'About', deepHref: '/mission' },
+  { kind: 'section', id: 'research', label: 'Research', deepHref: '/research' },
+  { kind: 'section', id: 'publications', label: 'Publications', deepHref: '/publications' },
+  { kind: 'section', id: 'team', label: 'Team', deepHref: '/team' },
+  { kind: 'section', id: 'news', label: 'News', deepHref: '/news' },
+  { kind: 'page', href: '/tools', label: 'Tools' },
+  { kind: 'page', href: '/gallery', label: 'Gallery' },
+  { kind: 'page', href: '/collaborators', label: 'Collaborators' },
+  { kind: 'page', href: '/mission', label: 'In Memoriam' },
+  { kind: 'page', href: '/lab-tools', label: 'Lab Tools' },
+  // Contact is the full page rather than the home section, because that is
+  // where the address, the map and the directions to the lab live.
+  { kind: 'page', href: '/contact', label: 'Contact' },
+];
+
+/**
+ * Sections of the one-page home, in document order. The page itself renders
+ * from this, so a section exists even when it has no nav entry of its own.
+ */
+export const homeSections = [
   { id: 'about', label: 'About', deepHref: '/mission' },
   { id: 'research', label: 'Research', deepHref: '/research' },
   { id: 'publications', label: 'Publications', deepHref: '/publications' },
@@ -25,12 +42,7 @@ export const homeSections: HomeSection[] = [
 /** Where the "Join the lab" button points, on every page. */
 export const JOIN_SECTION_ID = 'join';
 
-/** Routes that are not part of the one-pager and keep their own nav entry. */
-export const secondaryRoutes = [
-  { name: 'Tools', href: '/tools' },
-  { name: 'Gallery', href: '/gallery' },
-  { name: 'Collaborators & Funding', href: '/collaborators' },
-  { name: 'In Memoriam', href: '/mission' },
-  { name: 'Open positions', href: '/open-positions' },
-  { name: 'Lab Tools', href: '/lab-tools' },
-];
+/** Only sections with a nav entry are worth highlighting as you scroll. */
+export const spySectionIds = navEntries
+  .filter((entry): entry is Extract<NavEntry, { kind: 'section' }> => entry.kind === 'section')
+  .map((entry) => entry.id);
