@@ -27,7 +27,7 @@ export default async function NewsSection() {
   return (
     <section
       id="news"
-      className="scroll-mt-24 border-y border-slate-200 bg-white py-20 sm:py-28 dark:border-slate-800 dark:bg-slate-900/40"
+      className="scroll-mt-24 border-y border-emerald-200/70 bg-emerald-100/60 py-20 sm:py-28 dark:border-emerald-900/40 dark:bg-emerald-950/40"
     >
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeading
@@ -41,7 +41,7 @@ export default async function NewsSection() {
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {recent.map((item, index) => (
             <Reveal as="article" key={`${item.date}-${item.title}`} index={index}>
-              <HoverLift className="flex h-full flex-col rounded-2xl border border-slate-200 bg-background p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+              <HoverLift className="flex h-full flex-col rounded-2xl border border-emerald-100 bg-white p-6 shadow-sm transition-colors hover:border-secondary/50 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-secondary/50">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <span
                     className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
@@ -62,7 +62,7 @@ export default async function NewsSection() {
                 {item.link ? (
                   <a
                     href={item.link.href}
-                    className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
+                    className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-secondary hover:underline"
                   >
                     <span>{item.link.label}</span>
                     <span aria-hidden="true">→</span>

@@ -59,7 +59,7 @@ export default async function NewsPage() {
                       <time className="text-sm text-muted">{formatDate(item.date)}</time>
                     </div>
 
-                    <h3 className="mt-3 text-xl font-semibold text-primary">{item.title}</h3>
+                    <h3 className="mt-3 text-xl font-semibold text-secondary">{item.title}</h3>
                     <p className="mt-3 font-serif text-base leading-relaxed text-muted">
                       {item.description}
                     </p>

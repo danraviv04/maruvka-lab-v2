@@ -30,7 +30,7 @@ export default function EvolutionSignaturesPage() {
 
           <div className="mx-auto mt-12 max-w-4xl space-y-8">
             <div className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-md transition hover:shadow-xl">
-              <h3 className="text-xl font-semibold text-primary">Overview</h3>
+              <h3 className="text-xl font-semibold text-secondary">Overview</h3>
               <p className="mt-4 font-serif leading-relaxed text-muted">
                 Tumors evolve through accumulation of mutations shaped by mutational processes (signatures) and selective 
                 pressures. Every observed genome is a snapshot of a hidden evolutionary trajectory. Our goal is to infer 
@@ -43,38 +43,38 @@ export default function EvolutionSignaturesPage() {
             </div>
 
             <div className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-md transition hover:shadow-xl">
-              <h3 className="text-xl font-semibold text-primary">Current Projects</h3>
+              <h3 className="text-xl font-semibold text-secondary">Current Projects</h3>
               <div className="mt-6 space-y-6">
                 <div>
-                  <h4 className="font-semibold text-primary">Signature deconvolution with uncertainty estimates</h4>
+                  <h4 className="font-semibold text-secondary">Signature deconvolution with uncertainty estimates</h4>
                   <p className="mt-2 text-sm text-muted">
                     Bayesian and maximum-likelihood methods for attributing observed mutations to known or de novo 
                     mutational processes, with robust confidence intervals.
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-primary">Clonal dynamics and therapy-driven selection</h4>
+                  <h4 className="font-semibold text-secondary">Clonal dynamics and therapy-driven selection</h4>
                   <p className="mt-2 text-sm text-muted">
                     Modeling how chemotherapy, targeted therapy, and immunotherapy reshape clonal landscapes. 
                     Integrating longitudinal sampling to distinguish neutral drift from selection.
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-primary">Cohort-level quality control and harmonization</h4>
+                  <h4 className="font-semibold text-secondary">Cohort-level quality control and harmonization</h4>
                   <p className="mt-2 text-sm text-muted">
                     Methods to detect batch effects, technical artifacts, and systematic biases in large-scale 
                     sequencing studies before biological interpretation.
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-primary">Connecting signatures to mechanisms</h4>
+                  <h4 className="font-semibold text-secondary">Connecting signatures to mechanisms</h4>
                   <p className="mt-2 text-sm text-muted">
                     Experimental validation frameworks and literature integration to move from pattern recognition 
                     to mechanistic understanding of mutational processes.
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-primary">Evolutionary predictors of drug resistance</h4>
+                  <h4 className="font-semibold text-secondary">Evolutionary predictors of drug resistance</h4>
                   <p className="mt-2 text-sm text-muted">
                     Using pre-treatment mutational patterns to forecast resistance mechanisms and guide therapy selection.
                   </p>
@@ -84,11 +84,11 @@ export default function EvolutionSignaturesPage() {
 
             {relatedPubs.length > 0 && (
               <div className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-md transition hover:shadow-xl">
-                <h3 className="text-xl font-semibold text-primary">Related Publications</h3>
+                <h3 className="text-xl font-semibold text-secondary">Related Publications</h3>
                 <div className="mt-6 space-y-4">
                   {relatedPubs.map((p) => (
                     <div key={p.title} className="border-l-2 border-secondary pl-4">
-                      <p className="text-sm font-semibold text-primary">{p.title}</p>
+                      <p className="text-sm font-semibold text-secondary">{p.title}</p>
                       <p className="mt-1 text-xs text-muted">{p.authors} — {p.venue} ({p.year})</p>
                       {p.links?.length && (
                         <div className="mt-2 flex gap-3">
@@ -105,7 +105,7 @@ export default function EvolutionSignaturesPage() {
               </div>
             )}
 
-            <div className="rounded-2xl bg-primary p-8 text-white shadow-soft">
+            <div className="rounded-2xl bg-emerald-700 p-8 text-white shadow-soft">
               <h3 className="text-xl font-semibold">Collaborate or Join</h3>
               <p className="mt-3 font-serif text-white/90">
                 We're interested in collaborations around longitudinal tumor sequencing, signature validation, 
@@ -115,7 +115,7 @@ export default function EvolutionSignaturesPage() {
               <div className="mt-6 flex flex-wrap gap-4">
                 <Link
                   href="/contact"
-                  className="rounded-full bg-secondary px-5 py-2 text-sm font-semibold text-white hover:bg-secondary/90"
+                  className="rounded-full bg-white px-5 py-2 text-sm font-semibold text-emerald-800 shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
                 >
                   Contact us
                 </Link>

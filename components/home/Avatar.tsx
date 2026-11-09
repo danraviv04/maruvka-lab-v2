@@ -32,7 +32,7 @@ export default function Avatar({ name, image, size }: AvatarProps) {
   if (showInitials) {
     return (
       <div
-        className="flex shrink-0 items-center justify-center rounded-full bg-primary/12 font-semibold text-primary"
+        className="flex shrink-0 items-center justify-center rounded-full bg-secondary/12 font-semibold text-secondary"
         style={{ width: size, height: size, fontSize: size / 2.8 }}
         aria-hidden="true"
       >

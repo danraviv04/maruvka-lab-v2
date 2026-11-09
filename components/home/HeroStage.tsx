@@ -47,10 +47,15 @@ export default function HeroStage() {
       // Light and airy by day, deep but never black by night. The hero used to
       // be slate-950 in both themes, which left a dark slab across an
       // otherwise white page whenever light mode was chosen.
-      className="relative isolate flex min-h-[86vh] items-center overflow-hidden bg-gradient-to-br from-sky-50 via-white to-emerald-50/70 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800"
+      className="relative isolate flex min-h-[86vh] items-center overflow-hidden border-b border-emerald-100 bg-gradient-to-br from-emerald-100 via-emerald-50 to-emerald-200/80 dark:border-emerald-900/40 dark:from-slate-900 dark:via-slate-900 dark:to-emerald-950/70"
       aria-labelledby="hero-title"
     >
-      <HelixCanvas className="absolute inset-0 h-full w-full" animate={animating} />
+      {/* Masked top and bottom so the helix fades out instead of being cut
+          off square by the section edge. */}
+      <HelixCanvas
+        className="absolute inset-0 h-full w-full [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_86%,transparent)]"
+        animate={animating}
+      />
 
       {/* The video, once a file actually exists and can play. */}
       <video
@@ -71,16 +76,17 @@ export default function HeroStage() {
 
       {/* Colour wash, and a readability scrim under the text only. */}
       <div
-        className="absolute inset-0 bg-[radial-gradient(ellipse_at_72%_45%,rgba(27,138,191,0.12),transparent_60%)] dark:bg-[radial-gradient(ellipse_at_72%_45%,rgba(59,157,216,0.22),transparent_62%)]"
+        className="absolute inset-0 bg-[radial-gradient(ellipse_at_72%_45%,rgba(4,120,87,0.16),transparent_62%)] dark:bg-[radial-gradient(ellipse_at_72%_45%,rgba(45,217,148,0.2),transparent_62%)]"
         aria-hidden="true"
       />
       <div
-        className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-white via-white/85 to-transparent sm:w-3/4 dark:from-slate-900 dark:via-slate-900/85"
+        className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-emerald-50 via-emerald-50/85 to-transparent sm:w-3/4 dark:from-slate-900 dark:via-slate-900/85"
         aria-hidden="true"
       />
 
       <div className="relative mx-auto w-full max-w-6xl px-6 py-24 sm:py-28">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary dark:text-secondary">
+        <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-secondary">
+          <span className="h-px w-8 bg-secondary" aria-hidden="true" />
           {site.institution}
         </p>
 
@@ -100,7 +106,7 @@ export default function HeroStage() {
           <a
             href="#research"
             onClick={(event) => onSectionClick(event, 'research')}
-            className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary dark:bg-secondary dark:text-slate-950 dark:hover:bg-secondary/90"
+            className="group inline-flex items-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-900/20 transition hover:-translate-y-0.5 hover:bg-emerald-800 hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary dark:text-slate-950 dark:hover:bg-secondary/90"
           >
             <span>Explore our research</span>
             <span className="transition-transform group-hover:translate-x-1" aria-hidden="true">
@@ -110,7 +116,7 @@ export default function HeroStage() {
           <a
             href="#team"
             onClick={(event) => onSectionClick(event, 'team')}
-            className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-primary hover:bg-white/60 hover:text-primary dark:border-white/30 dark:text-white dark:hover:border-white/60 dark:hover:bg-white/10 dark:hover:text-white"
+            className="inline-flex items-center gap-2 rounded-full border border-emerald-600/40 px-6 py-3 text-sm font-semibold text-emerald-900 backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-secondary hover:bg-white/70 hover:text-secondary dark:border-white/30 dark:text-white dark:hover:border-secondary dark:hover:bg-white/10 dark:hover:text-secondary"
           >
             Meet the team
           </a>

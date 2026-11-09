@@ -317,13 +317,13 @@ export default function NewsAdminForm() {
           type="password"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
-          className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-text shadow-sm outline-none transition focus:border-primary dark:border-slate-600 dark:bg-slate-900"
+          className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-text shadow-sm outline-none transition focus:border-secondary dark:border-slate-600 dark:bg-slate-900"
           autoComplete="current-password"
         />
         {loginError ? <p className="mt-3 text-sm font-medium text-red-600 dark:text-red-300">{loginError}</p> : null}
         <button
           type="submit"
-          className="mt-5 inline-flex w-full items-center justify-center rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-60"
+          className="mt-5 inline-flex w-full items-center justify-center rounded-lg bg-secondary px-4 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-secondary/90 disabled:cursor-not-allowed disabled:opacity-60 dark:text-slate-950"
           disabled={!password}
         >
           Sign in
@@ -345,7 +345,7 @@ export default function NewsAdminForm() {
         <button
           type="button"
           onClick={handleLogout}
-          className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-text shadow-sm transition hover:border-primary dark:border-slate-700 dark:bg-slate-800"
+          className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-text shadow-sm transition hover:border-secondary dark:border-slate-700 dark:bg-slate-800"
         >
           Sign out
         </button>
@@ -378,7 +378,7 @@ export default function NewsAdminForm() {
               id="news-title"
               value={form.title}
               onChange={(event) => setForm({ ...form, title: event.target.value })}
-              className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-text shadow-sm outline-none transition focus:border-primary dark:border-slate-600 dark:bg-slate-900"
+              className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-text shadow-sm outline-none transition focus:border-secondary dark:border-slate-600 dark:bg-slate-900"
               maxLength={160}
               required
             />
@@ -393,7 +393,7 @@ export default function NewsAdminForm() {
               type="date"
               value={form.date}
               onChange={(event) => setForm({ ...form, date: event.target.value })}
-              className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-text shadow-sm outline-none transition focus:border-primary dark:border-slate-600 dark:bg-slate-900"
+              className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-text shadow-sm outline-none transition focus:border-secondary dark:border-slate-600 dark:bg-slate-900"
               required
             />
           </div>
@@ -406,7 +406,7 @@ export default function NewsAdminForm() {
               id="news-category"
               value={form.category}
               onChange={(event) => setForm({ ...form, category: event.target.value as NewsCategory })}
-              className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-text shadow-sm outline-none transition focus:border-primary dark:border-slate-600 dark:bg-slate-900"
+              className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-text shadow-sm outline-none transition focus:border-secondary dark:border-slate-600 dark:bg-slate-900"
             >
               {newsCategories.map((category) => (
                 <option key={category} value={category}>
@@ -424,7 +424,7 @@ export default function NewsAdminForm() {
               id="news-description"
               value={form.description}
               onChange={(event) => setForm({ ...form, description: event.target.value })}
-              className="mt-2 min-h-36 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-text shadow-sm outline-none transition focus:border-primary dark:border-slate-600 dark:bg-slate-900"
+              className="mt-2 min-h-36 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-text shadow-sm outline-none transition focus:border-secondary dark:border-slate-600 dark:bg-slate-900"
               maxLength={1200}
               required
             />
@@ -438,7 +438,7 @@ export default function NewsAdminForm() {
               id="news-link-label"
               value={form.linkLabel}
               onChange={(event) => setForm({ ...form, linkLabel: event.target.value })}
-              className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-text shadow-sm outline-none transition focus:border-primary dark:border-slate-600 dark:bg-slate-900"
+              className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-text shadow-sm outline-none transition focus:border-secondary dark:border-slate-600 dark:bg-slate-900"
               maxLength={80}
             />
           </div>
@@ -451,7 +451,7 @@ export default function NewsAdminForm() {
               id="news-link-href"
               value={form.linkHref}
               onChange={(event) => setForm({ ...form, linkHref: event.target.value })}
-              className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-text shadow-sm outline-none transition focus:border-primary dark:border-slate-600 dark:bg-slate-900"
+              className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-text shadow-sm outline-none transition focus:border-secondary dark:border-slate-600 dark:bg-slate-900"
               placeholder="/publications"
             />
           </div>
@@ -468,7 +468,7 @@ export default function NewsAdminForm() {
                   accept="image/jpeg,image/png,image/webp,image/gif,image/avif"
                   onChange={handleImageUpload}
                   disabled={uploadState === 'uploading'}
-                  className="block w-full cursor-pointer rounded-lg border border-slate-300 bg-white text-sm text-text file:mr-4 file:cursor-pointer file:rounded-l-lg file:border-0 file:bg-primary file:px-4 file:py-2.5 file:text-sm file:font-semibold file:text-white hover:file:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-60 dark:border-slate-600 dark:bg-slate-900"
+                  className="block w-full cursor-pointer rounded-lg border border-slate-300 bg-white text-sm text-text file:mr-4 file:cursor-pointer file:rounded-l-lg file:border-0 file:bg-secondary file:px-4 file:py-2.5 file:text-sm file:font-semibold file:text-white dark:file:text-slate-950 hover:file:bg-secondary/90 disabled:cursor-not-allowed disabled:opacity-60 dark:border-slate-600 dark:bg-slate-900"
                 />
                 <p className="mt-2 text-xs leading-relaxed text-muted">
                   Choose a picture from your computer, up to 10 MB. It uploads straight to the website.
@@ -501,7 +501,7 @@ export default function NewsAdminForm() {
               id="news-image"
               value={form.image}
               onChange={(event) => setForm({ ...form, image: event.target.value })}
-              className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-text shadow-sm outline-none transition focus:border-primary dark:border-slate-600 dark:bg-slate-900"
+              className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-text shadow-sm outline-none transition focus:border-secondary dark:border-slate-600 dark:bg-slate-900"
               placeholder="https://example.com/photo.jpg"
             />
 
@@ -539,7 +539,7 @@ export default function NewsAdminForm() {
 
         <button
           type="submit"
-          className="mt-6 inline-flex w-full items-center justify-center rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+          className="mt-6 inline-flex w-full items-center justify-center rounded-lg bg-secondary px-4 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-secondary/90 disabled:cursor-not-allowed disabled:opacity-60 dark:text-slate-950 sm:w-auto"
           disabled={!canSubmit || submitState === 'saving' || uploadState === 'uploading'}
         >
           {submitState === 'saving' ? 'Saving...' : editingTarget ? 'Save changes' : 'Add news'}
@@ -549,13 +549,13 @@ export default function NewsAdminForm() {
       <section className="mt-8 rounded-lg border border-slate-300 bg-white p-6 shadow-md dark:border-slate-700 dark:bg-slate-800">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h3 className="text-lg font-semibold text-primary">Existing news</h3>
+            <h3 className="text-lg font-semibold text-secondary">Existing news</h3>
             <p className="mt-1 text-sm text-muted">Edit or delete updates already on the news feed.</p>
           </div>
           <button
             type="button"
             onClick={loadNewsItems}
-            className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-text shadow-sm transition hover:border-primary dark:border-slate-700 dark:bg-slate-900"
+            className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-text shadow-sm transition hover:border-secondary dark:border-slate-700 dark:bg-slate-900"
             disabled={newsListState === 'loading'}
           >
             {newsListState === 'loading' ? 'Refreshing...' : 'Refresh'}
@@ -590,7 +590,7 @@ export default function NewsAdminForm() {
                 <article key={key} className="flex flex-col gap-4 py-4 sm:flex-row sm:items-start sm:justify-between">
                   <div>
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
+                      <span className="rounded-full bg-secondary/10 px-2.5 py-1 text-xs font-semibold text-secondary">
                         {item.category}
                       </span>
                       <time className="text-xs text-muted">{formatDate(item.date)}</time>
@@ -602,7 +602,7 @@ export default function NewsAdminForm() {
                     <button
                       type="button"
                       onClick={() => handleEditNews(item)}
-                      className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-text shadow-sm transition hover:border-primary disabled:cursor-not-allowed disabled:opacity-60 dark:border-slate-700 dark:bg-slate-900"
+                      className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-text shadow-sm transition hover:border-secondary disabled:cursor-not-allowed disabled:opacity-60 dark:border-slate-700 dark:bg-slate-900"
                       disabled={Boolean(deletingKey)}
                     >
                       Edit

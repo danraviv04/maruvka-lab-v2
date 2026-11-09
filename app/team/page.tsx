@@ -33,8 +33,8 @@ export default function TeamPage() {
                   </div>
                 </div>
               )}
-              <div className="text-xs font-semibold text-primary/70">Principal Investigator</div>
-              <h3 className="mt-2 text-xl font-semibold text-primary">{principalInvestigator.name}</h3>
+              <div className="text-xs font-semibold text-secondary">Principal Investigator</div>
+              <h3 className="mt-2 text-xl font-semibold text-secondary">{principalInvestigator.name}</h3>
               <div className="mt-1 text-sm text-muted">{principalInvestigator.role}</div>
               {principalInvestigator.bio ? (
                 <p className="mt-4 font-serif text-sm leading-relaxed text-muted">{principalInvestigator.bio}</p>
@@ -63,7 +63,7 @@ export default function TeamPage() {
                       </div>
                     </div>
                   )}
-                  <h3 className="text-lg font-semibold text-primary">{m.name}</h3>
+                  <h3 className="text-lg font-semibold text-secondary">{m.name}</h3>
                   <div className="mt-1 text-sm text-muted">{m.role}</div>
                   {m.bio ? <p className="mt-3 font-serif text-sm text-muted">{m.bio}</p> : null}
                   {m.links?.length ? (
@@ -86,7 +86,7 @@ export default function TeamPage() {
       <section className="py-16 sm:py-20 bg-slate-50 dark:bg-slate-800/50">
         <Container>
           <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary">
+            <span className="inline-block rounded-full bg-secondary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-secondary">
               Alumni
             </span>
             <h2 className="mt-4 text-3xl font-semibold tracking-tight text-text">Lab Alumni</h2>
@@ -110,7 +110,7 @@ export default function TeamPage() {
                     </div>
                   </div>
                 )}
-                <h3 className="text-lg font-semibold text-primary">{m.name}</h3>
+                <h3 className="text-lg font-semibold text-secondary">{m.name}</h3>
                 <div className="mt-1 text-sm text-muted">{m.role}</div>
                 {m.bio ? <p className="mt-3 font-serif text-sm text-muted">{m.bio}</p> : null}
                 {m.links?.length ? (

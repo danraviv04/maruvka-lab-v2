@@ -36,8 +36,8 @@ export default function ResearchPage() {
                 >
                   <div className={`absolute top-0 left-0 h-1 w-full ${gradients[idx].accent}`} />
                   <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold text-primary">{a.title}</h3>
-                    <span className="text-sm text-primary/60 transition group-hover:translate-x-0.5">→</span>
+                    <h3 className="text-lg font-semibold text-secondary">{a.title}</h3>
+                    <span className="text-sm text-secondary transition group-hover:translate-x-0.5">→</span>
                   </div>
                   <p className="mt-3 font-serif text-sm leading-relaxed text-muted">{a.description}</p>
                   {a.tag && (
@@ -78,8 +78,8 @@ export default function ResearchPage() {
                 >
                   <div className={`absolute top-0 left-0 h-1 w-full ${gradients[idx].accent}`} />
                   <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold text-primary">{a.title}</h3>
-                    <span className="text-sm text-primary/60 transition group-hover:translate-x-0.5">→</span>
+                    <h3 className="text-lg font-semibold text-secondary">{a.title}</h3>
+                    <span className="text-sm text-secondary transition group-hover:translate-x-0.5">→</span>
                   </div>
                   <p className="mt-3 font-serif text-sm leading-relaxed text-muted">{a.description}</p>
                   {a.tag && (
@@ -98,25 +98,25 @@ export default function ResearchPage() {
       <section className="bg-gradient-to-br from-white dark:from-slate-900 via-gray-50 dark:via-slate-800 to-white dark:to-slate-900 py-16 sm:py-20">
         <Container>
           <div className="mx-auto max-w-4xl">
-            <h2 className="text-center text-2xl font-semibold text-primary">Our Approach</h2>
+            <h2 className="text-center text-2xl font-semibold text-secondary">Our Approach</h2>
             <div className="mt-8 grid gap-6 md:grid-cols-3">
               <div className="rounded-xl bg-white dark:bg-slate-800 border-2 border-blue-300 dark:border-blue-900 p-6 shadow-md hover:shadow-xl transition">
                 <div className="text-4xl mb-3">📊</div>
-                <h3 className="mt-3 font-semibold text-primary">Rigorous inference</h3>
+                <h3 className="mt-3 font-semibold text-secondary">Rigorous inference</h3>
                 <p className="mt-2 text-sm text-text/70">
                   We build statistical models that are honest about uncertainty and survive contact with real data.
                 </p>
               </div>
               <div className="rounded-xl bg-white dark:bg-slate-800 border-2 border-purple-300 dark:border-purple-900 p-6 shadow-md hover:shadow-xl transition">
                 <div className="text-4xl mb-3">🔬</div>
-                <h3 className="mt-3 font-semibold text-primary">Collaborative science</h3>
+                <h3 className="mt-3 font-semibold text-secondary">Collaborative science</h3>
                 <p className="mt-2 text-sm text-text/70">
                   Close partnerships with clinicians and wet labs ensure our methods address real biological questions.
                 </p>
               </div>
               <div className="rounded-xl bg-white dark:bg-slate-800 border-2 border-teal-300 dark:border-teal-900 p-6 shadow-md hover:shadow-xl transition">
                 <div className="text-4xl mb-3">💻</div>
-                <h3 className="mt-3 font-semibold text-primary">Reproducible tools</h3>
+                <h3 className="mt-3 font-semibold text-secondary">Reproducible tools</h3>
                 <p className="mt-2 text-sm text-text/70">
                   All methods are released as documented, tested software with clear benchmarking.
                 </p>

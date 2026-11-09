@@ -97,7 +97,7 @@ export default function CollaboratorsPage() {
                 className="group rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-8"
               >
                 <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
-                  <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-3xl transition-transform duration-300 group-hover:scale-110">
+                  <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-secondary/10 text-3xl transition-transform duration-300 group-hover:scale-110">
                     {collab.logo}
                   </div>
                   <div className="flex-1">
@@ -108,12 +108,12 @@ export default function CollaboratorsPage() {
                             href={collab.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-xl font-semibold text-primary hover:underline"
+                            className="text-xl font-semibold text-secondary hover:underline"
                           >
                             {collab.name}
                           </a>
                         ) : (
-                          <h3 className="text-xl font-semibold text-primary">{collab.name}</h3>
+                          <h3 className="text-xl font-semibold text-secondary">{collab.name}</h3>
                         )}
                         {collab.institution && (
                           <p className="mt-1 text-sm text-muted/80">{collab.institution}</p>
@@ -155,12 +155,12 @@ export default function CollaboratorsPage() {
                       href={grant.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-base font-semibold text-primary hover:underline"
+                      className="text-base font-semibold text-secondary hover:underline"
                     >
                       {grant.name}
                     </a>
                   ) : (
-                    <h3 className="text-base font-semibold text-primary">{grant.name}</h3>
+                    <h3 className="text-base font-semibold text-secondary">{grant.name}</h3>
                   )}
                   <p className="mt-2 font-serif text-sm leading-relaxed text-muted">
                     {grant.description}

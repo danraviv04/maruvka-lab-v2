@@ -21,10 +21,13 @@ export default function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <Reveal>
-      <div className="flex flex-wrap items-end justify-between gap-6 border-b border-slate-200 pb-6 dark:border-slate-800">
+      <div className="flex flex-wrap items-end justify-between gap-6 border-b-2 border-secondary/25 pb-6 dark:border-secondary/30">
         <div className="max-w-2xl">
+          {/* The green rule and index are the page's running accent: they are
+              the one mark every section shares. */}
+          <span className="mb-4 block h-1 w-10 rounded-full bg-secondary" aria-hidden="true" />
           <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted">
-            {index} / {kicker}
+            <span className="text-secondary">{index}</span> / {kicker}
           </p>
           <h2 className="mt-3 font-serif text-3xl font-bold tracking-tight text-text sm:text-4xl">
             {title}
@@ -37,7 +40,7 @@ export default function SectionHeading({
         {deepHref ? (
           <Link
             href={deepHref}
-            className="group inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:gap-3"
+            className="group inline-flex items-center gap-2 rounded-full border border-secondary/30 bg-white px-4 py-2 text-sm font-semibold text-secondary transition hover:gap-3 hover:border-secondary hover:bg-secondary/5 dark:border-secondary/40 dark:bg-secondary/15 dark:hover:bg-secondary/25"
           >
             <span>{deepLabel ?? 'See all'}</span>
             <span aria-hidden="true">→</span>

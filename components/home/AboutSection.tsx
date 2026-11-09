@@ -19,7 +19,7 @@ export default function AboutSection() {
           {proofItems.map((item, index) => (
             <Reveal key={item.title} index={index}>
               <HoverLift
-                className="h-full rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900"
+                className="h-full rounded-2xl border border-slate-200 border-t-4 border-t-secondary bg-white p-6 shadow-sm dark:border-slate-800 dark:border-t-secondary dark:bg-slate-900"
                 scale={1.025}
               >
                 <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-secondary">

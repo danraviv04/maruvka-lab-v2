@@ -34,17 +34,17 @@ export default function ToolsPage() {
                 <a
                   key={t.name}
                   href={t.href}
-                  className="group relative overflow-hidden rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-md transition hover:-translate-y-1 hover:shadow-xl hover:border-primary/60"
+                  className="group relative overflow-hidden rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-md transition hover:-translate-y-1 hover:shadow-xl hover:border-secondary/60"
                 >
                   <div className={`absolute top-0 left-0 h-1 w-full bg-gradient-to-r ${gradients[idx % gradients.length]}`} />
                   <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold text-primary group-hover:text-accent transition">{t.name}</h3>
+                    <h3 className="text-lg font-semibold text-secondary group-hover:text-accent transition">{t.name}</h3>
                     <span className="text-sm text-muted transition group-hover:translate-x-0.5 group-hover:text-accent">↗</span>
                   </div>
                   <p className="mt-3 font-serif text-sm leading-relaxed text-muted">{t.description}</p>
                   {t.audience && (
                     <p className="mt-3 text-xs text-muted/80">
-                      <span className="font-semibold text-primary">Who should use it:</span> {t.audience}
+                      <span className="font-semibold text-secondary">Who should use it:</span> {t.audience}
                     </p>
                   )}
                   {t.tags?.length ? (

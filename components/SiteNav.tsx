@@ -73,9 +73,9 @@ export default function SiteNav() {
   const linkClasses = (active: boolean) =>
     `rounded-full px-2 py-1.5 text-[13px] font-medium whitespace-nowrap transition ${
       active
-        ? 'bg-primary/12 text-primary'
+        ? 'bg-secondary/15 text-emerald-800 dark:text-secondary'
         : overHero
-          ? 'text-slate-200 hover:bg-white/10 hover:text-white'
+          ? 'text-slate-600 hover:bg-white/70 hover:text-text dark:text-slate-200 dark:hover:bg-white/10 dark:hover:text-white'
           : 'text-muted hover:bg-slate-100 hover:text-text dark:hover:bg-slate-800'
     }`;
 
@@ -83,17 +83,17 @@ export default function SiteNav() {
     <header
       className={`sticky top-0 z-50 transition-colors duration-300 ${
         overHero
-          ? 'border-b border-white/10 bg-slate-950/80 backdrop-blur-md dark:bg-slate-950/80'
+          ? 'border-b border-emerald-200/60 bg-emerald-50/80 backdrop-blur-md dark:border-white/10 dark:bg-slate-950/80'
           : 'border-b border-slate-200 bg-background/85 backdrop-blur-md dark:border-slate-800'
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-5 py-2.5">
         <Link
           href="/"
-          className="flex shrink-0 items-center gap-2.5 rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+          className="flex shrink-0 items-center gap-2.5 rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary"
           aria-label={`${site.name} home`}
         >
-          <TechnionMark onDark={overHero} className="hidden shrink-0 sm:flex" />
+          <TechnionMark className="hidden shrink-0 sm:flex" />
 
           <Image
             src="/lab-logo.webp"
@@ -108,14 +108,14 @@ export default function SiteNav() {
           <span className="hidden min-[1600px]:block">
             <span
               className={`block text-sm font-semibold leading-tight ${
-                overHero ? 'text-white' : 'text-text'
+                overHero ? 'text-text dark:text-white' : 'text-text'
               }`}
             >
               {site.name}
             </span>
             <span
               className={`block text-[11px] leading-tight ${
-                overHero ? 'text-slate-300' : 'text-muted'
+                overHero ? 'text-muted dark:text-slate-300' : 'text-muted'
               }`}
             >
               Israel Institute of Technology
@@ -156,8 +156,8 @@ export default function SiteNav() {
             onClick={(event) => onSectionClick(event, JOIN_SECTION_ID)}
             className={`group hidden items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-[13px] font-semibold whitespace-nowrap transition sm:inline-flex ${
               overHero
-                ? 'border-white/40 text-white hover:border-white hover:bg-white/10'
-                : 'border-primary/40 text-primary hover:border-primary hover:bg-primary/10'
+                ? 'border-secondary/50 text-secondary hover:border-secondary hover:bg-secondary/10 dark:border-white/40 dark:text-white dark:hover:border-white dark:hover:bg-white/10'
+                : 'border-secondary/40 text-secondary hover:border-secondary hover:bg-secondary/10'
             }`}
           >
             <span>Join the lab</span>
@@ -173,7 +173,7 @@ export default function SiteNav() {
             aria-controls="site-menu"
             className={`rounded-lg border px-3 py-1.5 text-sm font-semibold transition xl:hidden ${
               overHero
-                ? 'border-white/40 text-white'
+                ? 'border-secondary/50 text-secondary dark:border-white/40 dark:text-white'
                 : 'border-slate-300 text-text dark:border-slate-700'
             }`}
           >
@@ -214,7 +214,7 @@ export default function SiteNav() {
           <a
             href={sectionHref(JOIN_SECTION_ID)}
             onClick={(event) => onSectionClick(event, JOIN_SECTION_ID)}
-            className="mt-4 flex items-center justify-center gap-1.5 rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-white"
+            className="mt-4 flex items-center justify-center gap-1.5 rounded-full bg-secondary px-4 py-2.5 text-sm font-semibold text-white dark:text-slate-950"
           >
             <span>Join the lab</span>
             <span aria-hidden="true">↗</span>

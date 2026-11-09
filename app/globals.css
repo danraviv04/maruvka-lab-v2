@@ -4,7 +4,10 @@
 
 @theme {
   --color-primary: #1b8abf;
-  --color-secondary: #20c78a;
+  /* Deep enough to carry white text and to be read as text on white:
+     #20c78a sat at about 3:1 and failed both. Dark mode keeps the bright
+     mint, which it needs against a near-black page. */
+  --color-secondary: #047857;
   --color-accent: #f97316;
   --color-background: #f8fafc;
   --color-text: #0f172a;
@@ -70,7 +73,7 @@ html.dark body {
 
 /* Dark mode for highlight links in dark theme */
 html.dark[data-highlight-links="true"] a {
-  background-color: rgba(59, 157, 216, 0.15);
+  background-color: rgba(45, 217, 148, 0.15);
 }
 
 html {
@@ -151,18 +154,18 @@ html[data-underline-links="true"] a:hover {
 
 /* Accessibility: Highlight Links */
 html[data-highlight-links="true"] a {
-  background-color: rgba(27, 138, 191, 0.1);
+  background-color: rgba(4, 120, 87, 0.1);
   padding: 0.1em 0.2em;
   border-radius: 0.2em;
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 0.2em;
-  text-decoration-color: var(--color-primary);
+  text-decoration-color: var(--color-secondary);
   text-decoration-thickness: 2px;
 }
 
 html[data-highlight-links="true"] a:hover {
-  background-color: rgba(27, 138, 191, 0.2);
+  background-color: rgba(4, 120, 87, 0.2);
   text-decoration-thickness: 3px;
 }
 
@@ -208,14 +211,14 @@ html[data-readable-font="true"] .font-serif {
 
 /* Accessibility: Enhanced Focus Indicators */
 *:focus-visible {
-  outline: 3px solid var(--color-primary);
+  outline: 3px solid var(--color-secondary);
   outline-offset: 2px;
 }
 
 html[data-enhanced-focus="true"] *:focus-visible {
-  outline: 4px solid var(--color-primary);
+  outline: 4px solid var(--color-secondary);
   outline-offset: 4px;
-  box-shadow: 0 0 0 8px rgba(27, 138, 191, 0.2);
+  box-shadow: 0 0 0 8px rgba(4, 120, 87, 0.2);
 }
 
 html[data-enhanced-focus="true"] button:focus-visible,
@@ -223,10 +226,10 @@ html[data-enhanced-focus="true"] a:focus-visible,
 html[data-enhanced-focus="true"] input:focus-visible,
 html[data-enhanced-focus="true"] select:focus-visible,
 html[data-enhanced-focus="true"] textarea:focus-visible {
-  outline: 4px solid var(--color-primary);
+  outline: 4px solid var(--color-secondary);
   outline-offset: 4px;
   background-color: rgba(255, 255, 200, 0.3);
-  box-shadow: 0 0 0 8px rgba(27, 138, 191, 0.2);
+  box-shadow: 0 0 0 8px rgba(4, 120, 87, 0.2);
 }
 
 /* Accessibility: Reduce Motion */

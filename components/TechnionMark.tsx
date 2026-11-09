@@ -12,12 +12,10 @@ import { useEffect, useRef, useState } from 'react';
 const TECHNION_LOGO_SRC = '/technion-logo.png';
 
 type TechnionMarkProps = {
-  /** True while the bar sits on the dark hero. */
-  onDark: boolean;
   className?: string;
 };
 
-export default function TechnionMark({ onDark, className }: TechnionMarkProps) {
+export default function TechnionMark({ className }: TechnionMarkProps) {
   const imageRef = useRef<HTMLImageElement>(null);
   const [failed, setFailed] = useState(false);
 
@@ -45,17 +43,12 @@ export default function TechnionMark({ onDark, className }: TechnionMarkProps) {
         onError={() => setFailed(true)}
         // The badge is already white-on-navy, so it is never inverted. It is
         // clipped to a circle because the PNG has no alpha and would otherwise
-        // show white corners. On the dark hero a hairline ring keeps the navy
+        // show white corners. In dark mode a hairline ring keeps the navy
         // circle from melting into the near-black background.
-        className={`h-11 w-11 shrink-0 rounded-full object-cover ${
-          onDark ? 'ring-1 ring-white/20' : ''
-        }`}
+        className="h-11 w-11 shrink-0 rounded-full object-cover dark:ring-1 dark:ring-white/20"
       />
       {/* Divider sits after the badge, since the Technion mark leads the pair. */}
-      <span
-        className={`h-8 w-px shrink-0 ${onDark ? 'bg-white/25' : 'bg-slate-300 dark:bg-slate-700'}`}
-        aria-hidden="true"
-      />
+      <span className="h-8 w-px shrink-0 bg-slate-300 dark:bg-white/25" aria-hidden="true" />
     </span>
   );
 }

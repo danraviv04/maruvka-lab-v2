@@ -108,7 +108,7 @@ export default function PublicationsPage() {
             </div>
           ) : error ? (
             <div className="mt-12 rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-12 text-center shadow-md">
-              <h3 className="text-xl font-semibold text-primary">
+              <h3 className="text-xl font-semibold text-secondary">
                 Publications are temporarily unavailable
               </h3>
               <p className="mx-auto mt-3 max-w-xl text-muted">
@@ -120,14 +120,14 @@ export default function PublicationsPage() {
                   href={profileUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-primary/90"
+                  className="inline-flex items-center gap-2 rounded-lg bg-secondary px-5 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-secondary/90 dark:text-slate-950"
                 >
                   <span>View on Google Scholar</span>
                   <span aria-hidden="true">→</span>
                 </a>
                 <button
                   onClick={() => window.location.reload()}
-                  className="rounded-lg border-2 border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-text shadow-sm transition hover:border-primary dark:border-slate-700 dark:bg-slate-900"
+                  className="rounded-lg border-2 border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-text shadow-sm transition hover:border-secondary dark:border-slate-700 dark:bg-slate-900"
                 >
                   Try again
                 </button>
@@ -142,7 +142,7 @@ export default function PublicationsPage() {
                   <button
                     onClick={handleRefresh}
                     disabled={refreshing}
-                    className="flex items-center gap-2 rounded-lg bg-primary/10 px-3 py-1.5 text-primary transition hover:bg-primary/20 disabled:opacity-50"
+                    className="flex items-center gap-2 rounded-lg bg-secondary/10 px-3 py-1.5 text-secondary transition hover:bg-secondary/20 disabled:opacity-50"
                     title="Reload the publication list"
                   >
                     <svg 
@@ -167,7 +167,7 @@ export default function PublicationsPage() {
               <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex flex-wrap items-center gap-4">
                   <div>
-                    <label className="mr-2 text-sm font-semibold text-primary">Type:</label>
+                    <label className="mr-2 text-sm font-semibold text-secondary">Type:</label>
                     <select
                       value={selectedType}
                       onChange={(e) => setSelectedType(e.target.value)}
@@ -181,7 +181,7 @@ export default function PublicationsPage() {
                     </select>
                   </div>
                   <div>
-                    <label className="mr-2 text-sm font-semibold text-primary">Topic:</label>
+                    <label className="mr-2 text-sm font-semibold text-secondary">Topic:</label>
                     <select
                       value={selectedTag}
                       onChange={(e) => setSelectedTag(e.target.value)}
@@ -205,7 +205,7 @@ export default function PublicationsPage() {
                 {years.length > 0 ? (
                   years.map((year) => (
                     <div key={year}>
-                      <h2 className="text-xl font-semibold text-primary">{year}</h2>
+                      <h2 className="text-xl font-semibold text-secondary">{year}</h2>
                       <div className="mt-4 space-y-4">
                         {byYear[year].map((p, index) => {
                           const typeColors = {
@@ -218,7 +218,7 @@ export default function PublicationsPage() {
                           return (
                             <article key={`${p.title}-${index}`} className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-md transition hover:shadow-xl hover:-translate-y-0.5">
                               <div className="flex flex-wrap items-start justify-between gap-2">
-                                <h3 className="flex-1 text-lg font-semibold text-primary">
+                                <h3 className="flex-1 text-lg font-semibold text-secondary">
                                   <a 
                                     href={p.link} 
                                     target="_blank" 
@@ -242,7 +242,7 @@ export default function PublicationsPage() {
                                     <button
                                       key={t}
                                       onClick={() => setSelectedTag(t)}
-                                      className="rounded-full bg-primary/5 px-3 py-1 text-xs font-medium text-primary ring-1 ring-primary/10 transition hover:bg-primary/10"
+                                      className="rounded-full bg-secondary/5 px-3 py-1 text-xs font-medium text-secondary ring-1 ring-secondary/10 transition hover:bg-secondary/10"
                                     >
                                       {t}
                                     </button>

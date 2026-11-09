@@ -32,7 +32,7 @@ export default function GalleryPage() {
                 onClick={() => setSelectedCategory(cat.value)}
                 className={`rounded-full px-4 py-2 text-sm font-medium transition shadow-md ${
                   selectedCategory === cat.value
-                    ? 'bg-primary text-white'
+                    ? 'bg-secondary text-white dark:text-slate-950'
                     : 'bg-white dark:bg-slate-800 text-muted hover:bg-slate-100 dark:hover:bg-slate-700 border-2 border-slate-300 dark:border-slate-700'
                 }`}
               >
@@ -60,7 +60,7 @@ export default function GalleryPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
                 </div>
                 <div className="p-4">
-                  <h3 className="font-semibold text-primary">{item.title}</h3>
+                  <h3 className="font-semibold text-secondary">{item.title}</h3>
                   {item.description && (
                     <p className="mt-1 text-sm text-text/70 line-clamp-2">{item.description}</p>
                   )}
@@ -93,7 +93,7 @@ export default function GalleryPage() {
             {/* Close button */}
             <button
               onClick={() => setSelectedImage(null)}
-              className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 dark:bg-slate-800/90 text-2xl text-primary shadow-lg transition hover:bg-white dark:hover:bg-slate-800 hover:scale-110"
+              className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 dark:bg-slate-800/90 text-2xl text-secondary shadow-lg transition hover:bg-white dark:hover:bg-slate-800 hover:scale-110"
               aria-label="Close"
             >
               ×
@@ -113,13 +113,13 @@ export default function GalleryPage() {
 
             {/* Caption */}
             <div className="p-6">
-              <h3 className="text-xl font-semibold text-primary">{selectedImage.title}</h3>
+              <h3 className="text-xl font-semibold text-secondary">{selectedImage.title}</h3>
               {selectedImage.description && (
                 <p className="mt-2 text-sm text-muted">{selectedImage.description}</p>
               )}
               <div className="mt-3 flex items-center gap-3 text-xs text-muted/80">
                 {selectedImage.date && <span>{selectedImage.date}</span>}
-                <span className="rounded-full bg-primary/10 px-2 py-1 text-primary">
+                <span className="rounded-full bg-secondary/10 px-2 py-1 text-secondary">
                   {categories.find(c => c.value === selectedImage.category)?.label}
                 </span>
               </div>

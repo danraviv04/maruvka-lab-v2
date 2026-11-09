@@ -30,7 +30,7 @@ export default function LiquidBiopsyPage() {
 
           <div className="mx-auto mt-12 max-w-4xl space-y-8">
             <div className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-md transition hover:shadow-xl">
-              <h3 className="text-xl font-semibold text-primary">Overview</h3>
+              <h3 className="text-xl font-semibold text-secondary">Overview</h3>
               <p className="mt-4 font-serif leading-relaxed text-muted">
                 Cell-free DNA (cfDNA) in blood carries information about tumor burden, clonal composition, and response to therapy. 
                 The challenge is statistical: tumor-derived fragments are rare, error rates are non-negligible, and the 
@@ -43,31 +43,31 @@ export default function LiquidBiopsyPage() {
             </div>
 
             <div className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-md transition hover:shadow-xl">
-              <h3 className="text-xl font-semibold text-primary">Current Projects</h3>
+              <h3 className="text-xl font-semibold text-secondary">Current Projects</h3>
               <div className="mt-6 space-y-6">
                 <div>
-                  <h4 className="font-semibold text-primary">Error-aware inference for sparse observations</h4>
+                  <h4 className="font-semibold text-secondary">Error-aware inference for sparse observations</h4>
                   <p className="mt-2 text-sm text-muted">
                     Developing statistical tests that maintain calibrated false-positive rates even when expected 
                     variant allele fractions are at or below sequencing error thresholds.
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-primary">Longitudinal monitoring frameworks</h4>
+                  <h4 className="font-semibold text-secondary">Longitudinal monitoring frameworks</h4>
                   <p className="mt-2 text-sm text-muted">
                     Time-series models for tracking minimal residual disease, distinguishing recurrence from technical 
                     noise, and quantifying lead time vs. imaging endpoints.
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-primary">Assay design and power analysis</h4>
+                  <h4 className="font-semibold text-secondary">Assay design and power analysis</h4>
                   <p className="mt-2 text-sm text-muted">
                     Simulation frameworks to optimize panel size, sequencing depth, and sampling frequency for specific 
                     clinical scenarios (adjuvant monitoring, screening cohorts).
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-primary">Multi-cancer early detection</h4>
+                  <h4 className="font-semibold text-secondary">Multi-cancer early detection</h4>
                   <p className="mt-2 text-sm text-muted">
                     Signal integration across mutational, methylation, and fragmentation features for population-level 
                     screening with controlled specificity.
@@ -78,11 +78,11 @@ export default function LiquidBiopsyPage() {
 
             {relatedPubs.length > 0 && (
               <div className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-md transition hover:shadow-xl">
-                <h3 className="text-xl font-semibold text-primary">Related Publications</h3>
+                <h3 className="text-xl font-semibold text-secondary">Related Publications</h3>
                 <div className="mt-6 space-y-4">
                   {relatedPubs.map((p) => (
                     <div key={p.title} className="border-l-2 border-secondary pl-4">
-                      <p className="text-sm font-semibold text-primary">{p.title}</p>
+                      <p className="text-sm font-semibold text-secondary">{p.title}</p>
                       <p className="mt-1 text-xs text-text/70">{p.authors} — {p.venue} ({p.year})</p>
                       {p.links?.length && (
                         <div className="mt-2 flex gap-3">
@@ -99,7 +99,7 @@ export default function LiquidBiopsyPage() {
               </div>
             )}
 
-            <div className="rounded-2xl bg-gradient-to-br from-primary to-secondary p-10 text-white shadow-lg">
+            <div className="rounded-2xl bg-emerald-700 p-10 text-white shadow-lg">
               <h3 className="text-xl font-semibold">Collaborate or Join</h3>
               <p className="mt-3 font-serif text-white/95">
                 We're looking for students and collaborators interested in statistical inference, assay design, 
@@ -108,13 +108,13 @@ export default function LiquidBiopsyPage() {
               <div className="mt-6 flex flex-wrap gap-4">
                 <Link
                   href="/contact"
-                  className="rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-primary shadow-md hover:-translate-y-0.5 hover:shadow-lg transition"
+                  className="rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-emerald-800 shadow-md hover:-translate-y-0.5 hover:shadow-lg transition"
                 >
                   Contact us
                 </Link>
                 <Link
                   href="/open-positions"
-                  className="rounded-full border-2 border-white/40 bg-white/10 backdrop-blur-sm px-6 py-2.5 text-sm font-semibold text-white hover:bg-white/20 hover:-translate-y-0.5 transition"
+                  className="rounded-full border border-white/30 bg-white/5 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10 hover:-translate-y-0.5"
                 >
                   Open positions
                 </Link>

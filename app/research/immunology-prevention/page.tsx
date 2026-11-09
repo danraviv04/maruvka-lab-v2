@@ -30,7 +30,7 @@ export default function ImmunologyPreventionPage() {
 
           <div className="mx-auto mt-12 max-w-4xl space-y-8">
             <div className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-md transition hover:shadow-xl">
-              <h3 className="text-xl font-semibold text-primary">Overview</h3>
+              <h3 className="text-xl font-semibold text-secondary">Overview</h3>
               <p className="mt-4 font-serif leading-relaxed text-muted">
                 Some cancers are highly immunogenic (e.g., microsatellite-unstable tumors), while others evade immune 
                 detection. Understanding why—and designing interventions that tip the balance toward surveillance and 
@@ -43,31 +43,31 @@ export default function ImmunologyPreventionPage() {
             </div>
 
             <div className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-md transition hover:shadow-xl">
-              <h3 className="text-xl font-semibold text-primary">Current Projects</h3>
+              <h3 className="text-xl font-semibold text-secondary">Current Projects</h3>
               <div className="mt-6 space-y-6">
                 <div>
-                  <h4 className="font-semibold text-primary">Immune response modeling</h4>
+                  <h4 className="font-semibold text-secondary">Immune response modeling</h4>
                   <p className="mt-2 text-sm text-muted">
                     Quantifying patterns and constraints in tumor-immune interactions using transcriptomic and 
                     mutational data. Identifying features predictive of immunotherapy response.
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-primary">MSI biology and Lynch syndrome</h4>
+                  <h4 className="font-semibold text-secondary">MSI biology and Lynch syndrome</h4>
                   <p className="mt-2 text-sm text-muted">
                     Statistical frameworks for microsatellite instability detection, neoantigen prediction, and 
                     understanding why MSI-high tumors respond to immune checkpoint blockade.
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-primary">Biomarkers for prevention strategies</h4>
+                  <h4 className="font-semibold text-secondary">Biomarkers for prevention strategies</h4>
                   <p className="mt-2 text-sm text-muted">
                     Developing and validating biomarkers that can stratify individuals for chemoprevention or 
                     early-intervention trials. Focus on germline + somatic integration.
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-primary">Integrating genomics, immunology, and outcomes</h4>
+                  <h4 className="font-semibold text-secondary">Integrating genomics, immunology, and outcomes</h4>
                   <p className="mt-2 text-sm text-muted">
                     Building multi-modal models that link germline risk, somatic evolution, immune contexture, 
                     and long-term clinical outcomes in cohort studies.
@@ -78,11 +78,11 @@ export default function ImmunologyPreventionPage() {
 
             {relatedPubs.length > 0 && (
               <div className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-md transition hover:shadow-xl">
-                <h3 className="text-xl font-semibold text-primary">Related Publications</h3>
+                <h3 className="text-xl font-semibold text-secondary">Related Publications</h3>
                 <div className="mt-6 space-y-4">
                   {relatedPubs.map((p) => (
                     <div key={p.title} className="border-l-2 border-secondary pl-4">
-                      <p className="text-sm font-semibold text-primary">{p.title}</p>
+                      <p className="text-sm font-semibold text-secondary">{p.title}</p>
                       <p className="mt-1 text-xs text-muted">{p.authors} — {p.venue} ({p.year})</p>
                       {p.links?.length && (
                         <div className="mt-2 flex gap-3">
@@ -99,7 +99,7 @@ export default function ImmunologyPreventionPage() {
               </div>
             )}
 
-            <div className="rounded-2xl bg-primary p-8 text-white shadow-soft">
+            <div className="rounded-2xl bg-emerald-700 p-8 text-white shadow-soft">
               <h3 className="text-xl font-semibold">Collaborate or Join</h3>
               <p className="mt-3 font-serif text-white/90">
                 We're interested in collaborations with immunologists, clinicians running prevention trials, 
@@ -108,7 +108,7 @@ export default function ImmunologyPreventionPage() {
               <div className="mt-6 flex flex-wrap gap-4">
                 <Link
                   href="/contact"
-                  className="rounded-full bg-secondary px-5 py-2 text-sm font-semibold text-white hover:bg-secondary/90"
+                  className="rounded-full bg-white px-5 py-2 text-sm font-semibold text-emerald-800 shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
                 >
                   Contact us
                 </Link>

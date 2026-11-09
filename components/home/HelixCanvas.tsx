@@ -20,6 +20,9 @@ type HelixCanvasProps = {
  * front of the far one; and size, brightness and line weight all fall off with
  * depth, which reads as perspective.
  *
+ * It is the lab's mark, not wallpaper, so it is drawn at full strength: heavy
+ * backbones, a halo pass behind the near strand, and solid base-pair nodes.
+ *
  * It is a few KB of code rather than a multi-megabyte video, and it never
  * blocks first paint. HeroStage lays a video over it if one ever exists.
  */
@@ -29,8 +32,10 @@ const STRAND_SEPARATION = (140 * Math.PI) / 180;
 
 type Palette = { strandA: string; strandB: string; rung: string; alpha: number };
 
-const DARK: Palette = { strandA: '#4db4e8', strandB: '#35e3a2', rung: '#94a3b8', alpha: 1 };
-const LIGHT: Palette = { strandA: '#0e7fb5', strandB: '#0f9b6c', rung: '#475569', alpha: 0.62 };
+// Both strands are green, in two values rather than two hues, so the helix
+// reads as one object and matches the green accent the rest of the page uses.
+const DARK: Palette = { strandA: '#34d399', strandB: '#a7f3d0', rung: '#5eead4', alpha: 1 };
+const LIGHT: Palette = { strandA: '#047857', strandB: '#10b981', rung: '#059669', alpha: 0.95 };
 
 function rgba(hex: string, alpha: number): string {
   const value = parseInt(hex.slice(1), 16);
@@ -73,11 +78,16 @@ export default function HelixCanvas({
       if (width === 0 || height === 0) return;
 
       const turns = height / 460;
-      const amplitude = Math.min(width * 0.17, 150);
-      const centerX = width * centerRatio;
+      // On a phone the text runs the full width, so a helix this bold would
+      // cross the paragraph. There it becomes a narrower edge motif, pushed
+      // right and dimmed, rather than a backdrop behind the words.
+      const narrow = width < 640;
+      const amplitude = Math.min(width * (narrow ? 0.14 : 0.21), 205);
+      const centerX = width * (narrow ? 0.86 : centerRatio);
       const steps = 150;
-      const rungEvery = 3;
-      const { strandA, strandB, rung, alpha: tone } = palette;
+      const rungEvery = 6;
+      const { strandA, strandB, rung } = palette;
+      const tone = palette.alpha * (narrow ? 0.6 : 1);
 
       const nodesA: Node[] = [];
       const nodesB: Node[] = [];
@@ -108,34 +118,51 @@ export default function HelixCanvas({
         const near = (a.near + b.near) / 2;
         const midX = (a.x + b.x) / 2;
 
-        context.lineWidth = 0.6 + near * 1.1;
+        context.lineWidth = 1.5 + near * 2.6;
         context.lineCap = 'round';
 
         context.beginPath();
         context.moveTo(a.x, a.y);
         context.lineTo(midX, (a.y + b.y) / 2);
-        context.strokeStyle = rgba(strandA, (0.04 + near * 0.2) * tone);
+        context.strokeStyle = rgba(strandA, (0.14 + near * 0.48) * tone);
         context.stroke();
 
         context.beginPath();
         context.moveTo(midX, (a.y + b.y) / 2);
         context.lineTo(b.x, b.y);
-        context.strokeStyle = rgba(rung, (0.04 + near * 0.18) * tone);
+        context.strokeStyle = rgba(rung, (0.12 + near * 0.44) * tone);
         context.stroke();
       };
 
-      /** A run of backbone between two indices, weighted by depth. */
+      /**
+       * A run of backbone between two indices, weighted by depth. The near half
+       * gets a wide, faint pass underneath it first, which reads as a glow
+       * without the cost of canvas shadowBlur on every segment.
+       */
       const drawBackbone = (nodes: Node[], color: string, from: number, to: number) => {
-        context.beginPath();
-        for (let i = from; i <= to; i += 1) {
-          const point = nodes[i];
-          if (i === from) context.moveTo(point.x, point.y);
-          else context.lineTo(point.x, point.y);
-        }
+        const trace = () => {
+          context.beginPath();
+          for (let i = from; i <= to; i += 1) {
+            const point = nodes[i];
+            if (i === from) context.moveTo(point.x, point.y);
+            else context.lineTo(point.x, point.y);
+          }
+        };
+
         const near = nodes[Math.floor((from + to) / 2)].near;
-        context.lineWidth = 0.9 + near * 2.1;
-        context.strokeStyle = rgba(color, (0.1 + near * 0.42) * tone);
         context.lineJoin = 'round';
+        context.lineCap = 'round';
+
+        if (near >= 0.5) {
+          trace();
+          context.lineWidth = 10 + near * 10;
+          context.strokeStyle = rgba(color, 0.1 * tone);
+          context.stroke();
+        }
+
+        trace();
+        context.lineWidth = 2.4 + near * 4.4;
+        context.strokeStyle = rgba(color, (0.34 + near * 0.62) * tone);
         context.stroke();
       };
 
@@ -145,8 +172,8 @@ export default function HelixCanvas({
           if (point.near >= 0.5 !== wantNear) continue;
 
           context.beginPath();
-          context.arc(point.x, point.y, 0.8 + point.near * 2.6, 0, Math.PI * 2);
-          context.fillStyle = rgba(color, (0.12 + point.near * 0.6) * tone);
+          context.arc(point.x, point.y, 1.8 + point.near * 4.6, 0, Math.PI * 2);
+          context.fillStyle = rgba(color, (0.34 + point.near * 0.62) * tone);
           context.fill();
         }
       };
