@@ -16,7 +16,10 @@ export const navEntries: NavEntry[] = [
   { kind: 'section', id: 'publications', label: 'Publications', deepHref: '/publications' },
   { kind: 'section', id: 'team', label: 'Team', deepHref: '/team' },
   { kind: 'section', id: 'news', label: 'News', deepHref: '/news' },
-  { kind: 'page', href: '/tools', label: 'Tools' },
+  // 'Software' rather than 'Tools': that is the page's own heading, and it
+  // keeps the lab's published software distinct from the internal Lab Tools.
+  { kind: 'page', href: '/tools', label: 'Software' },
+  { kind: 'page', href: '/open-positions', label: 'Open positions' },
   { kind: 'page', href: '/gallery', label: 'Gallery' },
   { kind: 'page', href: '/collaborators', label: 'Collaborators' },
   { kind: 'page', href: '/mission', label: 'In Memoriam' },

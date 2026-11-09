@@ -71,7 +71,7 @@ export default function SiteNav() {
   };
 
   const linkClasses = (active: boolean) =>
-    `rounded-full px-2.5 py-1.5 text-[13px] font-medium whitespace-nowrap transition ${
+    `rounded-full px-2 py-1.5 text-[13px] font-medium whitespace-nowrap transition ${
       active
         ? 'bg-primary/12 text-primary'
         : overHero
@@ -105,7 +105,7 @@ export default function SiteNav() {
           />
 
           {/* Hidden below 2xl: eleven nav items need the room more than this does. */}
-          <span className="hidden 2xl:block">
+          <span className="hidden min-[1600px]:block">
             <span
               className={`block text-sm font-semibold leading-tight ${
                 overHero ? 'text-white' : 'text-text'
@@ -123,7 +123,7 @@ export default function SiteNav() {
           </span>
         </Link>
 
-        <nav aria-label="Main" className="hidden flex-1 items-center justify-center gap-0.5 lg:flex">
+        <nav aria-label="Main" className="hidden flex-1 items-center justify-center gap-0.5 xl:flex">
           {navEntries.map((entry) =>
             entry.kind === 'section' ? (
               <a
@@ -171,7 +171,7 @@ export default function SiteNav() {
             onClick={() => setMenu({ pathname, open: !menuOpen })}
             aria-expanded={menuOpen}
             aria-controls="site-menu"
-            className={`rounded-lg border px-3 py-1.5 text-sm font-semibold transition lg:hidden ${
+            className={`rounded-lg border px-3 py-1.5 text-sm font-semibold transition xl:hidden ${
               overHero
                 ? 'border-white/40 text-white'
                 : 'border-slate-300 text-text dark:border-slate-700'
@@ -185,7 +185,7 @@ export default function SiteNav() {
       {menuOpen ? (
         <div
           id="site-menu"
-          className="border-t border-slate-200 bg-background px-5 py-4 lg:hidden dark:border-slate-800"
+          className="border-t border-slate-200 bg-background px-5 py-4 xl:hidden dark:border-slate-800"
         >
           <nav aria-label="Main" className="grid gap-0.5">
             {navEntries.map((entry) =>
