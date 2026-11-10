@@ -71,7 +71,7 @@ export default function SiteNav() {
   };
 
   const linkClasses = (active: boolean) =>
-    `rounded-full px-2 py-1.5 text-[13px] font-medium whitespace-nowrap transition ${
+    `rounded px-2 py-1.5 text-[13px] font-medium font-button whitespace-nowrap transition ${
       active
         ? 'bg-secondary/15 text-emerald-800 dark:text-secondary'
         : overHero
@@ -154,7 +154,7 @@ export default function SiteNav() {
           <a
             href={sectionHref(JOIN_SECTION_ID)}
             onClick={(event) => onSectionClick(event, JOIN_SECTION_ID)}
-            className={`group hidden items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-[13px] font-semibold whitespace-nowrap transition sm:inline-flex ${
+            className={`group hidden items-center gap-1.5 rounded border px-3.5 py-1.5 text-[13px] font-semibold font-button whitespace-nowrap transition sm:inline-flex ${
               overHero
                 ? 'border-secondary/50 text-secondary hover:border-secondary hover:bg-secondary/10 dark:border-white/40 dark:text-white dark:hover:border-white dark:hover:bg-white/10'
                 : 'border-secondary/40 text-secondary hover:border-secondary hover:bg-secondary/10'
@@ -171,7 +171,7 @@ export default function SiteNav() {
             onClick={() => setMenu({ pathname, open: !menuOpen })}
             aria-expanded={menuOpen}
             aria-controls="site-menu"
-            className={`rounded-lg border px-3 py-1.5 text-sm font-semibold transition xl:hidden ${
+            className={`rounded border px-3 py-1.5 text-sm font-semibold font-button transition xl:hidden ${
               overHero
                 ? 'border-secondary/50 text-secondary dark:border-white/40 dark:text-white'
                 : 'border-slate-300 text-text dark:border-slate-700'
@@ -194,7 +194,7 @@ export default function SiteNav() {
                   key={entry.id}
                   href={sectionHref(entry.id)}
                   onClick={(event) => onSectionClick(event, entry.id)}
-                  className="rounded-lg px-3 py-2.5 text-sm font-medium text-text transition hover:bg-slate-100 dark:hover:bg-slate-800"
+                  className="rounded px-3 py-2.5 text-sm font-medium font-button text-text transition hover:bg-slate-100 dark:hover:bg-slate-800"
                 >
                   {entry.label}
                 </a>
@@ -203,7 +203,7 @@ export default function SiteNav() {
                   key={entry.href}
                   href={entry.href}
                   onClick={closeMenu}
-                  className="rounded-lg px-3 py-2.5 text-sm font-medium text-text transition hover:bg-slate-100 dark:hover:bg-slate-800"
+                  className="rounded px-3 py-2.5 text-sm font-medium font-button text-text transition hover:bg-slate-100 dark:hover:bg-slate-800"
                 >
                   {entry.label}
                 </Link>
@@ -214,7 +214,7 @@ export default function SiteNav() {
           <a
             href={sectionHref(JOIN_SECTION_ID)}
             onClick={(event) => onSectionClick(event, JOIN_SECTION_ID)}
-            className="mt-4 flex items-center justify-center gap-1.5 rounded-full bg-secondary px-4 py-2.5 text-sm font-semibold text-white dark:text-slate-950"
+            className="mt-4 flex items-center justify-center gap-1.5 rounded bg-secondary px-4 py-2.5 text-sm font-semibold font-button text-white dark:text-slate-950"
           >
             <span>Join the lab</span>
             <span aria-hidden="true">↗</span>

@@ -58,7 +58,7 @@ export default function JoinSection() {
           <div className="mt-12 flex flex-wrap items-center gap-4 border-t border-emerald-200/70 pt-10 dark:border-white/10">
             <a
               href={`mailto:${site.email}`}
-              className="group inline-flex items-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-900/20 transition hover:-translate-y-0.5 hover:bg-emerald-800 dark:text-slate-950 dark:hover:bg-secondary/90"
+              className="group inline-flex items-center gap-2 rounded bg-secondary px-6 py-3 text-sm font-semibold font-button text-white shadow-lg shadow-emerald-900/20 transition hover:-translate-y-0.5 hover:bg-emerald-800 dark:text-slate-950 dark:hover:bg-secondary/90"
             >
               <span>Email the lab</span>
               <span className="transition-transform group-hover:translate-x-1" aria-hidden="true">
@@ -67,7 +67,7 @@ export default function JoinSection() {
             </a>
             <Link
               href="/open-positions"
-              className="inline-flex items-center gap-2 rounded-full border border-emerald-600/40 px-6 py-3 text-sm font-semibold text-emerald-900 transition hover:-translate-y-0.5 hover:border-secondary hover:bg-white/70 hover:text-secondary dark:border-white/30 dark:text-white dark:hover:border-secondary dark:hover:bg-white/10 dark:hover:text-secondary"
+              className="inline-flex items-center gap-2 rounded border border-emerald-600/40 px-6 py-3 text-sm font-semibold font-button text-emerald-900 transition hover:-translate-y-0.5 hover:border-secondary hover:bg-white/70 hover:text-secondary dark:border-white/30 dark:text-white dark:hover:border-secondary dark:hover:bg-white/10 dark:hover:text-secondary"
             >
               See open positions
             </Link>

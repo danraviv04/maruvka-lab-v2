@@ -62,7 +62,7 @@ export default function OpenPositionsPage() {
                 Not seeing a perfect match? Interested in a rotation or short-term collaboration? 
                 Send a short note with your background, interests, and availability.
               </p>
-              <a href={`mailto:${site.email}`} className="mt-4 inline-block rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-emerald-800 shadow-md hover:-translate-y-0.5 hover:shadow-lg transition">
+              <a href={`mailto:${site.email}`} className="mt-4 inline-block rounded bg-white px-6 py-2.5 text-sm font-semibold font-button text-emerald-800 shadow-md hover:-translate-y-0.5 hover:shadow-lg transition">
                 Email the lab
               </a>
             </div>

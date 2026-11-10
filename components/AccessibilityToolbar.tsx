@@ -178,7 +178,7 @@ export default function AccessibilityToolbar() {
       <button
         ref={buttonRef}
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed right-4 top-20 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white shadow-lg transition hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+        className="fixed right-4 top-20 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-secondary text-white shadow-lg transition hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
         aria-label="Open accessibility options"
         aria-expanded={isOpen}
       >
@@ -219,12 +219,12 @@ export default function AccessibilityToolbar() {
           >
             <div className="mb-2 flex items-start justify-between">
               <div>
-                <h2 className="text-lg font-semibold text-primary">Accessibility</h2>
+                <h2 className="text-lg font-semibold text-secondary">Accessibility</h2>
                 <p className="text-xs text-muted">These settings are saved on this device.</p>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="rounded-lg p-2 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-primary"
+                className="rounded p-2 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-secondary"
                 aria-label="Close accessibility settings"
               >
                 <svg
@@ -251,7 +251,7 @@ export default function AccessibilityToolbar() {
                   <button
                     onClick={decreaseTextSize}
                     disabled={textSize === '100'}
-                    className="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-text transition hover:bg-slate-50 dark:hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white dark:disabled:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="flex h-10 w-10 items-center justify-center rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-text transition hover:bg-slate-50 dark:hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white dark:disabled:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-secondary font-button"
                     aria-label="Decrease text size"
                   >
                     <span className="text-xl font-bold" aria-hidden="true">A-</span>
@@ -262,7 +262,7 @@ export default function AccessibilityToolbar() {
                   <button
                     onClick={increaseTextSize}
                     disabled={textSize === '140'}
-                    className="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-text transition hover:bg-slate-50 dark:hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white dark:disabled:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="flex h-10 w-10 items-center justify-center rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-text transition hover:bg-slate-50 dark:hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white dark:disabled:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-secondary font-button"
                     aria-label="Increase text size"
                   >
                     <span className="text-xl font-bold" aria-hidden="true">A+</span>
@@ -278,9 +278,9 @@ export default function AccessibilityToolbar() {
                 <div className="grid grid-cols-1 gap-2">
                   <button
                     onClick={() => setDisplayMode('default')}
-                    className={`rounded-lg border-2 px-4 py-2.5 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-primary ${
+                    className={`rounded border-2 px-4 py-2.5 text-sm font-medium font-button transition focus:outline-none focus:ring-2 focus:ring-secondary ${
                       displayMode === 'default'
-                        ? 'border-primary bg-primary/5 text-primary'
+                        ? 'border-secondary bg-secondary/5 text-secondary'
                         : 'border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-text hover:border-slate-400 dark:hover:border-slate-500'
                     }`}
                     aria-pressed={displayMode === 'default'}
@@ -289,9 +289,9 @@ export default function AccessibilityToolbar() {
                   </button>
                   <button
                     onClick={() => setDisplayMode('high-dark')}
-                    className={`rounded-lg border-2 px-4 py-2.5 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-primary ${
+                    className={`rounded border-2 px-4 py-2.5 text-sm font-medium font-button transition focus:outline-none focus:ring-2 focus:ring-secondary ${
                       displayMode === 'high-dark'
-                        ? 'border-primary bg-primary/5 text-primary'
+                        ? 'border-secondary bg-secondary/5 text-secondary'
                         : 'border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-text hover:border-slate-400 dark:hover:border-slate-500'
                     }`}
                     aria-pressed={displayMode === 'high-dark'}
@@ -300,9 +300,9 @@ export default function AccessibilityToolbar() {
                   </button>
                   <button
                     onClick={() => setDisplayMode('high-light')}
-                    className={`rounded-lg border-2 px-4 py-2.5 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-primary ${
+                    className={`rounded border-2 px-4 py-2.5 text-sm font-medium font-button transition focus:outline-none focus:ring-2 focus:ring-secondary ${
                       displayMode === 'high-light'
-                        ? 'border-primary bg-primary/5 text-primary'
+                        ? 'border-secondary bg-secondary/5 text-secondary'
                         : 'border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-text hover:border-slate-400 dark:hover:border-slate-500'
                     }`}
                     aria-pressed={displayMode === 'high-light'}
@@ -320,9 +320,9 @@ export default function AccessibilityToolbar() {
                 <div className="space-y-2">
                   <button
                     onClick={() => setUnderlineLinks(!underlineLinks)}
-                    className={`w-full rounded-lg border-2 px-4 py-3 text-left text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-primary ${
+                    className={`w-full rounded border-2 px-4 py-3 text-left text-sm font-medium font-button transition focus:outline-none focus:ring-2 focus:ring-secondary ${
                       underlineLinks
-                        ? 'border-primary bg-primary/5 text-primary'
+                        ? 'border-secondary bg-secondary/5 text-secondary'
                         : 'border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-text hover:border-slate-400 dark:hover:border-slate-500'
                     }`}
                     role="switch"
@@ -333,7 +333,7 @@ export default function AccessibilityToolbar() {
                       <span>Underline All Links</span>
                       <div
                         className={`h-6 w-11 rounded-full transition ${
-                          underlineLinks ? 'bg-primary' : 'bg-slate-300'
+                          underlineLinks ? 'bg-secondary' : 'bg-slate-300'
                         }`}
                       >
                         <div
@@ -346,9 +346,9 @@ export default function AccessibilityToolbar() {
                   </button>
                   <button
                     onClick={() => setHighlightLinks(!highlightLinks)}
-                    className={`w-full rounded-lg border-2 px-4 py-3 text-left text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-primary ${
+                    className={`w-full rounded border-2 px-4 py-3 text-left text-sm font-medium font-button transition focus:outline-none focus:ring-2 focus:ring-secondary ${
                       highlightLinks
-                        ? 'border-primary bg-primary/5 text-primary'
+                        ? 'border-secondary bg-secondary/5 text-secondary'
                         : 'border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-text hover:border-slate-400 dark:hover:border-slate-500'
                     }`}
                     role="switch"
@@ -359,7 +359,7 @@ export default function AccessibilityToolbar() {
                       <span>Highlight Links</span>
                       <div
                         className={`h-6 w-11 rounded-full transition ${
-                          highlightLinks ? 'bg-primary' : 'bg-slate-300'
+                          highlightLinks ? 'bg-secondary' : 'bg-slate-300'
                         }`}
                       >
                         <div
@@ -380,9 +380,9 @@ export default function AccessibilityToolbar() {
                 </label>
                 <button
                   onClick={() => setLineHeight(lineHeight === 'normal' ? 'comfortable' : 'normal')}
-                  className={`w-full rounded-lg border-2 px-4 py-3 text-left text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-primary ${
+                  className={`w-full rounded border-2 px-4 py-3 text-left text-sm font-medium font-button transition focus:outline-none focus:ring-2 focus:ring-secondary ${
                     lineHeight === 'comfortable'
-                      ? 'border-primary bg-primary/5 text-primary'
+                      ? 'border-secondary bg-secondary/5 text-secondary'
                       : 'border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-text hover:border-slate-400 dark:hover:border-slate-500'
                   }`}
                   role="switch"
@@ -393,7 +393,7 @@ export default function AccessibilityToolbar() {
                     <span>Comfortable Line Height</span>
                     <div
                       className={`h-6 w-11 rounded-full transition ${
-                        lineHeight === 'comfortable' ? 'bg-primary' : 'bg-slate-300'
+                        lineHeight === 'comfortable' ? 'bg-secondary' : 'bg-slate-300'
                       }`}
                     >
                       <div
@@ -410,9 +410,9 @@ export default function AccessibilityToolbar() {
               <div>
                 <button
                   onClick={() => setLetterSpacing(letterSpacing === 'normal' ? 'wide' : 'normal')}
-                  className={`w-full rounded-lg border-2 px-4 py-3 text-left text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-primary ${
+                  className={`w-full rounded border-2 px-4 py-3 text-left text-sm font-medium font-button transition focus:outline-none focus:ring-2 focus:ring-secondary ${
                     letterSpacing === 'wide'
-                      ? 'border-primary bg-primary/5 text-primary'
+                      ? 'border-secondary bg-secondary/5 text-secondary'
                       : 'border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-text hover:border-slate-400 dark:hover:border-slate-500'
                   }`}
                   role="switch"
@@ -423,7 +423,7 @@ export default function AccessibilityToolbar() {
                     <span>Wide Letter Spacing</span>
                     <div
                       className={`h-6 w-11 rounded-full transition ${
-                        letterSpacing === 'wide' ? 'bg-primary' : 'bg-slate-300'
+                        letterSpacing === 'wide' ? 'bg-secondary' : 'bg-slate-300'
                       }`}
                     >
                       <div
@@ -443,9 +443,9 @@ export default function AccessibilityToolbar() {
                 </label>
                 <button
                   onClick={() => setReadableFont(!readableFont)}
-                  className={`w-full rounded-lg border-2 px-4 py-3 text-left text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-primary ${
+                  className={`w-full rounded border-2 px-4 py-3 text-left text-sm font-medium font-button transition focus:outline-none focus:ring-2 focus:ring-secondary ${
                     readableFont
-                      ? 'border-primary bg-primary/5 text-primary'
+                      ? 'border-secondary bg-secondary/5 text-secondary'
                       : 'border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-text hover:border-slate-400 dark:hover:border-slate-500'
                   }`}
                   role="switch"
@@ -456,7 +456,7 @@ export default function AccessibilityToolbar() {
                     <span>Readable Font</span>
                     <div
                       className={`h-6 w-11 rounded-full transition ${
-                        readableFont ? 'bg-primary' : 'bg-slate-300'
+                        readableFont ? 'bg-secondary' : 'bg-slate-300'
                       }`}
                     >
                       <div
@@ -476,9 +476,9 @@ export default function AccessibilityToolbar() {
                 </label>
                 <button
                   onClick={() => setReduceMotion(!reduceMotion)}
-                  className={`w-full rounded-lg border-2 px-4 py-3 text-left text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-primary ${
+                  className={`w-full rounded border-2 px-4 py-3 text-left text-sm font-medium font-button transition focus:outline-none focus:ring-2 focus:ring-secondary ${
                     reduceMotion
-                      ? 'border-primary bg-primary/5 text-primary'
+                      ? 'border-secondary bg-secondary/5 text-secondary'
                       : 'border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-text hover:border-slate-400 dark:hover:border-slate-500'
                   }`}
                   role="switch"
@@ -489,7 +489,7 @@ export default function AccessibilityToolbar() {
                     <span>Reduce Motion</span>
                     <div
                       className={`h-6 w-11 rounded-full transition ${
-                        reduceMotion ? 'bg-primary' : 'bg-slate-300'
+                        reduceMotion ? 'bg-secondary' : 'bg-slate-300'
                       }`}
                     >
                       <div
@@ -509,9 +509,9 @@ export default function AccessibilityToolbar() {
                 </label>
                 <button
                   onClick={() => setEnhancedFocus(!enhancedFocus)}
-                  className={`w-full rounded-lg border-2 px-4 py-3 text-left text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-primary ${
+                  className={`w-full rounded border-2 px-4 py-3 text-left text-sm font-medium font-button transition focus:outline-none focus:ring-2 focus:ring-secondary ${
                     enhancedFocus
-                      ? 'border-primary bg-primary/5 text-primary'
+                      ? 'border-secondary bg-secondary/5 text-secondary'
                       : 'border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-text hover:border-slate-400 dark:hover:border-slate-500'
                   }`}
                   role="switch"
@@ -522,7 +522,7 @@ export default function AccessibilityToolbar() {
                     <span>Enhanced Focus Indicators</span>
                     <div
                       className={`h-6 w-11 rounded-full transition ${
-                        enhancedFocus ? 'bg-primary' : 'bg-slate-300'
+                        enhancedFocus ? 'bg-secondary' : 'bg-slate-300'
                       }`}
                     >
                       <div
@@ -539,7 +539,7 @@ export default function AccessibilityToolbar() {
               <div className="pt-2">
                 <button
                   onClick={resetSettings}
-                  className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 py-2 text-sm font-medium text-text transition hover:bg-slate-50 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 py-2 text-sm font-medium font-button text-text transition hover:bg-slate-50 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-secondary"
                 >
                   Reset to Defaults
                 </button>

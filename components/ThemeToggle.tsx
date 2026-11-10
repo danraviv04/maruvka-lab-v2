@@ -34,7 +34,7 @@ export default function ThemeToggle() {
   if (!mounted) {
     return (
       <button
-        className="rounded-lg p-2 text-muted hover:bg-slate-100 transition focus:outline-none focus:ring-2 focus:ring-secondary"
+        className="rounded p-2 text-muted hover:bg-slate-100 transition focus:outline-none focus:ring-2 focus:ring-secondary"
         aria-label="Toggle theme"
         disabled
       >
@@ -59,7 +59,7 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="rounded-lg p-2 text-muted hover:bg-slate-100 dark:hover:bg-slate-800 transition focus:outline-none focus:ring-2 focus:ring-secondary"
+      className="rounded p-2 text-muted hover:bg-slate-100 dark:hover:bg-slate-800 transition focus:outline-none focus:ring-2 focus:ring-secondary"
       aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
     >
       {theme === 'light' ? (

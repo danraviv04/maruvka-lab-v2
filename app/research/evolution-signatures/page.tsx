@@ -115,13 +115,13 @@ export default function EvolutionSignaturesPage() {
               <div className="mt-6 flex flex-wrap gap-4">
                 <Link
                   href="/contact"
-                  className="rounded-full bg-white px-5 py-2 text-sm font-semibold text-emerald-800 shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
+                  className="rounded bg-white px-5 py-2 text-sm font-semibold font-button text-emerald-800 shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
                 >
                   Contact us
                 </Link>
                 <Link
                   href="/open-positions"
-                  className="rounded-full border border-white/30 bg-white/5 px-5 py-2 text-sm font-semibold text-white hover:bg-white/10"
+                  className="rounded border border-white/30 bg-white/5 px-5 py-2 text-sm font-semibold font-button text-white hover:bg-white/10"
                 >
                   Open positions
                 </Link>

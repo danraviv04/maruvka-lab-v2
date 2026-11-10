@@ -30,7 +30,7 @@ export default function GalleryPage() {
               <button
                 key={cat.value}
                 onClick={() => setSelectedCategory(cat.value)}
-                className={`rounded-full px-4 py-2 text-sm font-medium transition shadow-md ${
+                className={`rounded px-4 py-2 text-sm font-medium font-button transition shadow-md ${
                   selectedCategory === cat.value
                     ? 'bg-secondary text-white dark:text-slate-950'
                     : 'bg-white dark:bg-slate-800 text-muted hover:bg-slate-100 dark:hover:bg-slate-700 border-2 border-slate-300 dark:border-slate-700'

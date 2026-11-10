@@ -323,7 +323,7 @@ export default function NewsAdminForm() {
         {loginError ? <p className="mt-3 text-sm font-medium text-red-600 dark:text-red-300">{loginError}</p> : null}
         <button
           type="submit"
-          className="mt-5 inline-flex w-full items-center justify-center rounded-lg bg-secondary px-4 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-secondary/90 disabled:cursor-not-allowed disabled:opacity-60 dark:text-slate-950"
+          className="mt-5 inline-flex w-full items-center justify-center rounded bg-secondary px-4 py-2.5 text-sm font-semibold font-button text-white shadow-md transition hover:bg-secondary/90 disabled:cursor-not-allowed disabled:opacity-60 dark:text-slate-950"
           disabled={!password}
         >
           Sign in
@@ -345,7 +345,7 @@ export default function NewsAdminForm() {
         <button
           type="button"
           onClick={handleLogout}
-          className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-text shadow-sm transition hover:border-secondary dark:border-slate-700 dark:bg-slate-800"
+          className="rounded border border-slate-300 bg-white px-3 py-2 text-sm font-semibold font-button text-text shadow-sm transition hover:border-secondary dark:border-slate-700 dark:bg-slate-800"
         >
           Sign out
         </button>
@@ -362,7 +362,7 @@ export default function NewsAdminForm() {
             <button
               type="button"
               onClick={resetForm}
-              className="rounded-lg border border-amber-300 px-3 py-1.5 text-xs font-semibold transition hover:bg-amber-100 dark:border-amber-700 dark:hover:bg-amber-900/40"
+              className="rounded border border-amber-300 px-3 py-1.5 text-xs font-semibold font-button transition hover:bg-amber-100 dark:border-amber-700 dark:hover:bg-amber-900/40"
             >
               Cancel edit
             </button>
@@ -539,7 +539,7 @@ export default function NewsAdminForm() {
 
         <button
           type="submit"
-          className="mt-6 inline-flex w-full items-center justify-center rounded-lg bg-secondary px-4 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-secondary/90 disabled:cursor-not-allowed disabled:opacity-60 dark:text-slate-950 sm:w-auto"
+          className="mt-6 inline-flex w-full items-center justify-center rounded bg-secondary px-4 py-2.5 text-sm font-semibold font-button text-white shadow-md transition hover:bg-secondary/90 disabled:cursor-not-allowed disabled:opacity-60 dark:text-slate-950 sm:w-auto"
           disabled={!canSubmit || submitState === 'saving' || uploadState === 'uploading'}
         >
           {submitState === 'saving' ? 'Saving...' : editingTarget ? 'Save changes' : 'Add news'}
@@ -555,7 +555,7 @@ export default function NewsAdminForm() {
           <button
             type="button"
             onClick={loadNewsItems}
-            className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-text shadow-sm transition hover:border-secondary dark:border-slate-700 dark:bg-slate-900"
+            className="rounded border border-slate-300 bg-white px-3 py-2 text-sm font-semibold font-button text-text shadow-sm transition hover:border-secondary dark:border-slate-700 dark:bg-slate-900"
             disabled={newsListState === 'loading'}
           >
             {newsListState === 'loading' ? 'Refreshing...' : 'Refresh'}
@@ -602,7 +602,7 @@ export default function NewsAdminForm() {
                     <button
                       type="button"
                       onClick={() => handleEditNews(item)}
-                      className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-text shadow-sm transition hover:border-secondary disabled:cursor-not-allowed disabled:opacity-60 dark:border-slate-700 dark:bg-slate-900"
+                      className="inline-flex items-center justify-center rounded border border-slate-300 bg-white px-3 py-2 text-sm font-semibold font-button text-text shadow-sm transition hover:border-secondary disabled:cursor-not-allowed disabled:opacity-60 dark:border-slate-700 dark:bg-slate-900"
                       disabled={Boolean(deletingKey)}
                     >
                       Edit
@@ -610,7 +610,7 @@ export default function NewsAdminForm() {
                     <button
                       type="button"
                       onClick={() => handleDeleteNews(item)}
-                      className="inline-flex items-center justify-center rounded-lg border border-red-300 bg-white px-3 py-2 text-sm font-semibold text-red-700 shadow-sm transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-60 dark:border-red-800 dark:bg-slate-900 dark:text-red-300 dark:hover:bg-red-950/40"
+                      className="inline-flex items-center justify-center rounded border border-red-300 bg-white px-3 py-2 text-sm font-semibold font-button text-red-700 shadow-sm transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-60 dark:border-red-800 dark:bg-slate-900 dark:text-red-300 dark:hover:bg-red-950/40"
                       disabled={Boolean(deletingKey)}
                     >
                       {isDeleting ? 'Deleting...' : 'Delete'}

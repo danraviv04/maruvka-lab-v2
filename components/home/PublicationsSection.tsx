@@ -79,7 +79,7 @@ export default function PublicationsSection() {
                 href={profileUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center gap-2 rounded-full bg-secondary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-800 dark:text-slate-950"
+                className="mt-4 inline-flex items-center gap-2 rounded bg-secondary px-5 py-2.5 text-sm font-semibold font-button text-white transition hover:bg-emerald-800 dark:text-slate-950"
               >
                 <span>View on Google Scholar</span>
                 <span aria-hidden="true">→</span>
@@ -125,7 +125,7 @@ export default function PublicationsSection() {
           <div className="mt-8 text-center">
             <Link
               href="/publications"
-              className="inline-flex items-center gap-2 rounded-full border-2 border-secondary/40 bg-white px-5 py-2.5 text-sm font-semibold text-secondary transition hover:-translate-y-0.5 hover:border-secondary hover:bg-secondary/5 dark:border-secondary/40 dark:bg-slate-900 dark:hover:bg-secondary/10"
+              className="inline-flex items-center gap-2 rounded border-2 border-secondary/40 bg-white px-5 py-2.5 text-sm font-semibold font-button text-secondary transition hover:-translate-y-0.5 hover:border-secondary hover:bg-secondary/5 dark:border-secondary/40 dark:bg-slate-900 dark:hover:bg-secondary/10"
             >
               <span>Browse the full list</span>
               <span aria-hidden="true">→</span>

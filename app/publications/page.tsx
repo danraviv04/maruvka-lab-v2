@@ -120,14 +120,14 @@ export default function PublicationsPage() {
                   href={profileUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg bg-secondary px-5 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-secondary/90 dark:text-slate-950"
+                  className="inline-flex items-center gap-2 rounded bg-secondary px-5 py-2.5 text-sm font-semibold font-button text-white shadow-md transition hover:bg-secondary/90 dark:text-slate-950"
                 >
                   <span>View on Google Scholar</span>
                   <span aria-hidden="true">→</span>
                 </a>
                 <button
                   onClick={() => window.location.reload()}
-                  className="rounded-lg border-2 border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-text shadow-sm transition hover:border-secondary dark:border-slate-700 dark:bg-slate-900"
+                  className="rounded border-2 border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold font-button text-text shadow-sm transition hover:border-secondary dark:border-slate-700 dark:bg-slate-900"
                 >
                   Try again
                 </button>
@@ -142,7 +142,7 @@ export default function PublicationsPage() {
                   <button
                     onClick={handleRefresh}
                     disabled={refreshing}
-                    className="flex items-center gap-2 rounded-lg bg-secondary/10 px-3 py-1.5 text-secondary transition hover:bg-secondary/20 disabled:opacity-50"
+                    className="flex items-center gap-2 rounded bg-secondary/10 px-3 py-1.5 text-secondary transition hover:bg-secondary/20 disabled:opacity-50 font-button"
                     title="Reload the publication list"
                   >
                     <svg 

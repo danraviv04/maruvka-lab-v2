@@ -40,7 +40,7 @@ export default function SectionHeading({
         {deepHref ? (
           <Link
             href={deepHref}
-            className="group inline-flex items-center gap-2 rounded-full border border-secondary/30 bg-white px-4 py-2 text-sm font-semibold text-secondary transition hover:gap-3 hover:border-secondary hover:bg-secondary/5 dark:border-secondary/40 dark:bg-secondary/15 dark:hover:bg-secondary/25"
+            className="group inline-flex items-center gap-2 rounded border border-secondary/30 bg-white px-4 py-2 text-sm font-semibold font-button text-secondary transition hover:gap-3 hover:border-secondary hover:bg-secondary/5 dark:border-secondary/40 dark:bg-secondary/15 dark:hover:bg-secondary/25"
           >
             <span>{deepLabel ?? 'See all'}</span>
             <span aria-hidden="true">→</span>
