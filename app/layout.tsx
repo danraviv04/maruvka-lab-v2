@@ -1,23 +1,19 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Merriweather, Noto_Sans_Cypro_Minoan, Overlock } from 'next/font/google';
+import { Noto_Sans_Cypro_Minoan, Overlock } from 'next/font/google';
 import SiteShell from '../components/SiteShell';
 import AccessibilityToolbar from '../components/AccessibilityToolbar';
 import ThemeProvider from '../components/ThemeProvider';
 import { Toaster } from 'sonner';
 import { site } from '../content/site';
 
-// The site's text face. It ships one weight (400) and no bold, which is why
-// headings stay on Merriweather below.
+// The site's only text face, headings included. It ships weight 400 and no
+// bold, so font-bold and font-semibold have nothing to resolve to and every
+// size renders at 400.
 const cypro = Noto_Sans_Cypro_Minoan({
   weight: '400',
   subsets: ['latin'],
   variable: '--font-cypro',
-});
-const merriweather = Merriweather({
-  weight: ['300', '400', '700'],
-  subsets: ['latin'],
-  variable: '--font-merriweather',
 });
 // Button labels. Overlock ships 400/700/900 and no 600, so the font-semibold
 // the buttons carry resolves to 700 — which is the weight they want anyway.
@@ -94,7 +90,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body
-        className={`${cypro.variable} ${merriweather.variable} ${overlock.variable} bg-background text-text antialiased`}
+        className={`${cypro.variable} ${overlock.variable} bg-background text-text antialiased`}
       >
         <ThemeProvider>
           <a

@@ -92,7 +92,7 @@ export default function HeroStage() {
 
         <h1
           id="hero-title"
-          className="mt-6 max-w-3xl font-serif text-4xl font-bold leading-[1.1] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl dark:text-white"
+          className="mt-6 max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl dark:text-white"
         >
           Deciphering cancer evolution
           <br className="hidden sm:block" /> through computation.

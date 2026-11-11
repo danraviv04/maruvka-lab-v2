@@ -29,7 +29,7 @@ export default function SectionHeading({
           <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted">
             <span className="text-secondary">{index}</span> / {kicker}
           </p>
-          <h2 className="mt-3 font-serif text-3xl font-bold tracking-tight text-text sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-text sm:text-4xl">
             {title}
           </h2>
           {description ? (

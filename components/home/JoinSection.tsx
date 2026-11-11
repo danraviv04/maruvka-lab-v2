@@ -24,7 +24,7 @@ export default function JoinSection() {
           <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted">
             <span className="text-secondary">06</span> / Join us
           </p>
-          <h2 className="mt-3 max-w-2xl font-serif text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
+          <h2 className="mt-3 max-w-2xl text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
             Come work on cancer with us.
           </h2>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-600 dark:text-slate-300">
