@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Container from '../../components/Container';
 import SectionHeader from '../../components/SectionHeader';
 
@@ -38,29 +39,57 @@ const collaborators = [
   },
 ];
 
-const grants = [
+type Grant = {
+  name: string;
+  /** Path under public/grants. Any aspect ratio: the plate letterboxes it. */
+  logo: string;
+  url?: string;
+  description?: string;
+};
+
+const grants: Grant[] = [
   {
     name: 'Israel Science Foundation (ISF)',
-    logo: '🔬',
+    logo: '/grants/isf.webp',
     url: 'https://www.isf.org.il/',
     description: 'Supporting fundamental and applied research in Israel.',
   },
   {
     name: 'Israel Cancer Association (ICA)',
-    logo: '🎗️',
+    logo: '/grants/israel-cancer-association.png',
     url: 'https://en.cancer.org.il/',
     description: 'Supporting cancer research and prevention initiatives.',
   },
   {
     name: 'Stephen and Sharon Seiden',
-    logo: '🏆',
+    logo: '/grants/seiden.jpg',
     description: 'The Stephen and Sharon Seiden Frontiers in Science and Engineering Forum.',
   },
   {
     name: 'D. Dan and Betty Kahn Michigan-Israel Partnership',
-    logo: '🤝',
+    logo: '/grants/kahn-michigan-israel.jpg',
     url: 'https://um-israel.org/',
     description: 'Fostering research collaboration between Michigan and Israel.',
+  },
+  {
+    name: 'The Starr Foundation',
+    logo: '/grants/starr-foundation.jpg',
+    url: 'https://starrfoundation.org/',
+    description: 'Description (placeholder).',
+  },
+  {
+    name: 'NCI Community Oncology Research Program',
+    logo: '/grants/nci-ncorp.png',
+    url: 'https://ncorp.cancer.gov/',
+    description:
+      'A program of the National Cancer Institute of the National Institutes of Health.',
+  },
+  {
+    // The logo gives only the acronym, so the full name and link are left for
+    // the lab to fill in rather than guessed at.
+    name: 'IPMP',
+    logo: '/grants/ipmp.webp',
+    description: 'Description (placeholder).',
   },
 ];
 
@@ -132,8 +161,20 @@ export default function CollaboratorsPage() {
                 key={grant.name}
                 className="group rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-secondary/10 text-2xl transition-transform duration-300 group-hover:scale-110">
-                  {grant.logo}
+                {/* White in both themes: several of these marks are dark ink on
+                    transparency and would vanish against the dark card. */}
+                <div className="relative h-28 w-full overflow-hidden rounded-xl bg-white ring-1 ring-slate-200 transition-transform duration-300 group-hover:scale-105 dark:ring-slate-600">
+                  <Image
+                    src={grant.logo}
+                    alt=""
+                    fill
+                    // The plate is ~290px at its widest. Stating that lets the
+                    // browser pick the 2x candidate on a retina screen; next/image
+                    // never upscales past the source, so a small logo file stays
+                    // the limit rather than this hint.
+                    sizes="(min-width: 1024px) 320px, (min-width: 640px) 45vw, 90vw"
+                    className="object-contain p-3"
+                  />
                 </div>
                 <div className="mt-4">
                   {grant.url ? (
@@ -148,9 +189,11 @@ export default function CollaboratorsPage() {
                   ) : (
                     <h3 className="text-base font-semibold text-secondary">{grant.name}</h3>
                   )}
-                  <p className="mt-2 font-serif text-sm leading-relaxed text-muted">
-                    {grant.description}
-                  </p>
+                  {grant.description ? (
+                    <p className="mt-2 font-serif text-sm leading-relaxed text-muted">
+                      {grant.description}
+                    </p>
+                  ) : null}
                 </div>
               </div>
             ))}
