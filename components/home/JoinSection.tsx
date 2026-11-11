@@ -45,7 +45,7 @@ export default function JoinSection() {
                     {position.level}
                   </span>
                   <h3 className="mt-3 text-lg font-semibold text-slate-900 dark:text-white">{position.title}</h3>
-                  <p className="mt-2 font-serif text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
                     {position.summary}
                   </p>
                 </HoverLift>

@@ -37,7 +37,7 @@ export default function TeamPage() {
               <h3 className="mt-2 text-xl font-semibold text-secondary">{principalInvestigator.name}</h3>
               <div className="mt-1 text-sm text-muted">{principalInvestigator.role}</div>
               {principalInvestigator.bio ? (
-                <p className="mt-4 font-serif text-sm leading-relaxed text-muted">{principalInvestigator.bio}</p>
+                <p className="mt-4 text-sm leading-relaxed text-muted">{principalInvestigator.bio}</p>
               ) : null}
               <div className="mt-5 flex flex-wrap gap-3">
                 {(principalInvestigator.links ?? []).map((l) => (
@@ -65,7 +65,7 @@ export default function TeamPage() {
                   )}
                   <h3 className="text-lg font-semibold text-secondary">{m.name}</h3>
                   <div className="mt-1 text-sm text-muted">{m.role}</div>
-                  {m.bio ? <p className="mt-3 font-serif text-sm text-muted">{m.bio}</p> : null}
+                  {m.bio ? <p className="mt-3 text-sm text-muted">{m.bio}</p> : null}
                   {m.links?.length ? (
                     <div className="mt-4 flex flex-wrap gap-3">
                       {m.links.map((l) => (
@@ -112,7 +112,7 @@ export default function TeamPage() {
                 )}
                 <h3 className="text-lg font-semibold text-secondary">{m.name}</h3>
                 <div className="mt-1 text-sm text-muted">{m.role}</div>
-                {m.bio ? <p className="mt-3 font-serif text-sm text-muted">{m.bio}</p> : null}
+                {m.bio ? <p className="mt-3 text-sm text-muted">{m.bio}</p> : null}
                 {m.links?.length ? (
                   <div className="mt-4 flex flex-wrap gap-3">
                     {m.links.map((l) => (

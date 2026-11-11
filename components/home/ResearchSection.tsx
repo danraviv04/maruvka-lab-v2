@@ -37,7 +37,7 @@ export default function ResearchSection() {
                 ) : null}
 
                 <h3 className="mt-3 text-lg font-semibold text-text">{area.title}</h3>
-                <p className="mt-2 flex-1 font-serif text-sm leading-relaxed text-muted">
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
                   {area.description}
                 </p>
 

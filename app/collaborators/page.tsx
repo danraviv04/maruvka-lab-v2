@@ -135,7 +135,7 @@ export default function CollaboratorsPage() {
                         )}
                       </div>
                     </div>
-                    <p className="mt-3 font-serif text-base leading-relaxed text-muted">
+                    <p className="mt-3 text-base leading-relaxed text-muted">
                       {collab.description}
                     </p>
                   </div>
@@ -190,7 +190,7 @@ export default function CollaboratorsPage() {
                     <h3 className="text-base font-semibold text-secondary">{grant.name}</h3>
                   )}
                   {grant.description ? (
-                    <p className="mt-2 font-serif text-sm leading-relaxed text-muted">
+                    <p className="mt-2 text-sm leading-relaxed text-muted">
                       {grant.description}
                     </p>
                   ) : null}

@@ -26,7 +26,7 @@ export default function MissionPage() {
                 <h2 className="text-2xl font-semibold text-secondary">In Memory</h2>
               </div>
               <div className="mt-6 space-y-6">
-                <p className="font-serif text-base leading-relaxed text-muted">
+                <p className="text-base leading-relaxed text-muted">
                   Due to the loss of two dear and beloved people, my research shifted from a theoretical focus to a more applied cancer focus.
                 </p>
                 
@@ -41,7 +41,7 @@ export default function MissionPage() {
                         className="w-full h-auto"
                       />
                     </div>
-                    <p className="mt-3 text-center font-serif text-sm text-muted font-medium">
+                    <p className="mt-3 text-center text-sm text-muted font-medium">
                       My father-in-law, Abraham Colton,
                       <br />
                       passed away at age 77 from Lymphoma cancer
@@ -57,7 +57,7 @@ export default function MissionPage() {
                         className="w-full h-auto"
                       />
                     </div>
-                    <p className="mt-3 text-center font-serif text-sm text-muted font-medium">
+                    <p className="mt-3 text-center text-sm text-muted font-medium">
                       My cousin, Dov (Irad) Eisenbach,
                       <br />
                       passed away at age 33 from tongue cancer.

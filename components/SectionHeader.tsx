@@ -16,11 +16,11 @@ export default function SectionHeader({
           <Badge>{eyebrow}</Badge>
         </div>
       ) : null}
-      <h2 className="text-balance text-3xl font-semibold tracking-tight text-secondary sm:text-4xl">
+      <h2 className="text-balance font-serif text-3xl font-bold tracking-tight text-secondary sm:text-4xl">
         {title}
       </h2>
       {description ? (
-        <p className="mt-4 font-serif text-base leading-relaxed text-muted sm:text-lg">
+        <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
           {description}
         </p>
       ) : null}

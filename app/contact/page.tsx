@@ -46,7 +46,7 @@ export default function ContactPage() {
 
               {/* 
               <div className="mt-6 text-sm font-semibold text-secondary">For applicants</div>
-              <p className="mt-2 font-serif text-sm text-text/80">
+              <p className="mt-2 text-sm text-text/80">
                 Include a CV and one paragraph about what you want to work on.
               </p> */}
             </div>
@@ -86,7 +86,7 @@ export default function ContactPage() {
               {/* </div> */}
 
               {/* <div className="mt-6 text-sm font-semibold text-secondary">Message template</div>
-              <div className="mt-3 rounded-xl bg-background p-4 font-serif text-sm leading-relaxed text-muted">
+              <div className="mt-3 rounded-xl bg-background p-4 text-sm leading-relaxed text-muted">
                 <div className="font-semibold text-secondary">Subject:</div>
                 <div className="mt-1">Collaboration / rotation / position inquiry</div>
                 <div className="mt-4 font-semibold text-secondary">Body:</div>

@@ -31,12 +31,12 @@ export default function EvolutionSignaturesPage() {
           <div className="mx-auto mt-12 max-w-4xl space-y-8">
             <div className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-md transition hover:shadow-xl">
               <h3 className="text-xl font-semibold text-secondary">Overview</h3>
-              <p className="mt-4 font-serif leading-relaxed text-muted">
+              <p className="mt-4 leading-relaxed text-muted">
                 Tumors evolve through accumulation of mutations shaped by mutational processes (signatures) and selective 
                 pressures. Every observed genome is a snapshot of a hidden evolutionary trajectory. Our goal is to infer 
                 plausible histories from these snapshots and connect them to therapeutic outcomes.
               </p>
-              <p className="mt-4 font-serif leading-relaxed text-muted">
+              <p className="mt-4 leading-relaxed text-muted">
                 We develop models that quantify mutational signature activities, reconstruct clonal phylogenies, and 
                 characterize therapy-induced selection—always with careful attention to uncertainty and identifiability.
               </p>
@@ -107,7 +107,7 @@ export default function EvolutionSignaturesPage() {
 
             <div className="rounded-2xl bg-emerald-700 p-8 text-white shadow-soft">
               <h3 className="text-xl font-semibold">Collaborate or Join</h3>
-              <p className="mt-3 font-serif text-white/90">
+              <p className="mt-3 text-white/90">
                 We're interested in collaborations around longitudinal tumor sequencing, signature validation, 
                 and evolutionary modeling. If you have cohort data or mechanistic questions about mutational processes, 
                 let's talk.

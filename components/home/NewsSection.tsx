@@ -55,7 +55,7 @@ export default async function NewsSection() {
                 </div>
 
                 <h3 className="mt-3 line-clamp-2 text-lg font-semibold text-text">{item.title}</h3>
-                <p className="mt-2 line-clamp-3 flex-1 font-serif text-sm leading-relaxed text-muted">
+                <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-muted">
                   {item.description}
                 </p>
 

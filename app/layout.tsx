@@ -1,13 +1,19 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter, Merriweather, Overlock } from 'next/font/google';
+import { Merriweather, Noto_Sans_Cypro_Minoan, Overlock } from 'next/font/google';
 import SiteShell from '../components/SiteShell';
 import AccessibilityToolbar from '../components/AccessibilityToolbar';
 import ThemeProvider from '../components/ThemeProvider';
 import { Toaster } from 'sonner';
 import { site } from '../content/site';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+// The site's text face. It ships one weight (400) and no bold, which is why
+// headings stay on Merriweather below.
+const cypro = Noto_Sans_Cypro_Minoan({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-cypro',
+});
 const merriweather = Merriweather({
   weight: ['300', '400', '700'],
   subsets: ['latin'],
@@ -88,7 +94,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body
-        className={`${inter.variable} ${merriweather.variable} ${overlock.variable} bg-background text-text antialiased`}
+        className={`${cypro.variable} ${merriweather.variable} ${overlock.variable} bg-background text-text antialiased`}
       >
         <ThemeProvider>
           <a

@@ -31,12 +31,12 @@ export default function LiquidBiopsyPage() {
           <div className="mx-auto mt-12 max-w-4xl space-y-8">
             <div className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-md transition hover:shadow-xl">
               <h3 className="text-xl font-semibold text-secondary">Overview</h3>
-              <p className="mt-4 font-serif leading-relaxed text-muted">
+              <p className="mt-4 leading-relaxed text-muted">
                 Cell-free DNA (cfDNA) in blood carries information about tumor burden, clonal composition, and response to therapy. 
                 The challenge is statistical: tumor-derived fragments are rare, error rates are non-negligible, and the 
                 question "is this a real signal or noise?" demands careful modeling.
               </p>
-              <p className="mt-4 font-serif leading-relaxed text-muted">
+              <p className="mt-4 leading-relaxed text-muted">
                 We build probabilistic frameworks that account for technical variation, incorporate prior information 
                 from tissue sequencing when available, and provide honest uncertainty estimates for clinical decision-making.
               </p>
@@ -101,7 +101,7 @@ export default function LiquidBiopsyPage() {
 
             <div className="rounded-2xl bg-emerald-700 p-10 text-white shadow-lg">
               <h3 className="text-xl font-semibold">Collaborate or Join</h3>
-              <p className="mt-3 font-serif text-white/95">
+              <p className="mt-3 text-white/95">
                 We're looking for students and collaborators interested in statistical inference, assay design, 
                 or clinical validation of ctDNA methods. If you have a dataset or a methodological question, reach out.
               </p>

@@ -26,7 +26,7 @@ export default function AboutSection() {
                   {item.kicker}
                 </p>
                 <h3 className="mt-3 text-lg font-semibold text-text">{item.title}</h3>
-                <p className="mt-2 font-serif text-sm leading-relaxed text-muted">{item.body}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{item.body}</p>
               </HoverLift>
             </Reveal>
           ))}

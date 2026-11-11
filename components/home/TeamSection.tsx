@@ -31,7 +31,7 @@ export default function TeamSection() {
                 </div>
               </div>
               {principalInvestigator.bio ? (
-                <p className="mt-4 font-serif text-sm leading-relaxed text-muted">
+                <p className="mt-4 text-sm leading-relaxed text-muted">
                   {principalInvestigator.bio}
                 </p>
               ) : null}

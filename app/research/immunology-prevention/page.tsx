@@ -31,12 +31,12 @@ export default function ImmunologyPreventionPage() {
           <div className="mx-auto mt-12 max-w-4xl space-y-8">
             <div className="rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-md transition hover:shadow-xl">
               <h3 className="text-xl font-semibold text-secondary">Overview</h3>
-              <p className="mt-4 font-serif leading-relaxed text-muted">
+              <p className="mt-4 leading-relaxed text-muted">
                 Some cancers are highly immunogenic (e.g., microsatellite-unstable tumors), while others evade immune 
                 detection. Understanding why—and designing interventions that tip the balance toward surveillance and 
                 prevention—requires quantitative models that integrate genomic, immunologic, and clinical data.
               </p>
-              <p className="mt-4 font-serif leading-relaxed text-muted">
+              <p className="mt-4 leading-relaxed text-muted">
                 We apply computational methods to MSI biology, immune-response signatures, and prevention trial design. 
                 The goal is to identify biomarkers robust enough to support clinical interventions, not just correlations.
               </p>
@@ -101,7 +101,7 @@ export default function ImmunologyPreventionPage() {
 
             <div className="rounded-2xl bg-emerald-700 p-8 text-white shadow-soft">
               <h3 className="text-xl font-semibold">Collaborate or Join</h3>
-              <p className="mt-3 font-serif text-white/90">
+              <p className="mt-3 text-white/90">
                 We're interested in collaborations with immunologists, clinicians running prevention trials, 
                 and groups with MSI-focused cohorts. If you have a dataset or a prevention-oriented question, reach out.
               </p>

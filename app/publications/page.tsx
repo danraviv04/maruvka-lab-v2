@@ -234,7 +234,7 @@ export default function PublicationsPage() {
                                   </span>
                                 )}
                               </div>
-                              <p className="mt-2 font-serif text-sm text-muted">{p.authors}</p>
+                              <p className="mt-2 text-sm text-muted">{p.authors}</p>
                               {p.venue && <p className="mt-2 text-sm text-text/70">{p.venue}</p>}
                               {p.tags?.length ? (
                                 <div className="mt-4 flex flex-wrap gap-2">

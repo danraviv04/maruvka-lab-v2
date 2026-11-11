@@ -41,7 +41,7 @@ export default function ToolsPage() {
                     <h3 className="text-lg font-semibold text-secondary group-hover:text-accent transition">{t.name}</h3>
                     <span className="text-sm text-muted transition group-hover:translate-x-0.5 group-hover:text-accent">↗</span>
                   </div>
-                  <p className="mt-3 font-serif text-sm leading-relaxed text-muted">{t.description}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-muted">{t.description}</p>
                   {t.audience && (
                     <p className="mt-3 text-xs text-muted/80">
                       <span className="font-semibold text-secondary">Who should use it:</span> {t.audience}

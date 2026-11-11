@@ -39,7 +39,7 @@ export default function ResearchPage() {
                     <h3 className="text-lg font-semibold text-secondary">{a.title}</h3>
                     <span className="text-sm text-secondary transition group-hover:translate-x-0.5">→</span>
                   </div>
-                  <p className="mt-3 font-serif text-sm leading-relaxed text-muted">{a.description}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-muted">{a.description}</p>
                   {a.tag && (
                     <span className={`mt-4 inline-block rounded-full ${gradients[idx].accent} px-3 py-1 text-xs font-medium text-white shadow-sm`}>
                       {a.tag}
@@ -81,7 +81,7 @@ export default function ResearchPage() {
                     <h3 className="text-lg font-semibold text-secondary">{a.title}</h3>
                     <span className="text-sm text-secondary transition group-hover:translate-x-0.5">→</span>
                   </div>
-                  <p className="mt-3 font-serif text-sm leading-relaxed text-muted">{a.description}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-muted">{a.description}</p>
                   {a.tag && (
                     <span className={`mt-4 inline-block rounded-full ${gradients[idx].accent} px-3 py-1 text-xs font-medium text-white shadow-sm`}>
                       {a.tag}
