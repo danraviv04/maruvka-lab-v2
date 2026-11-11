@@ -36,20 +36,6 @@ const collaborators = [
     institution: 'Tel Aviv University',
     description: 'Collaborative research in leukemia and cancer genomics.',
   },
-  {
-    name: 'Jacob Mueller, PhD',
-    logo: '👨‍🔬',
-    url: 'https://mueller.lab.medicine.umich.edu/home',
-    institution: 'University of Michigan',
-    description: 'Collaborative research in cancer evolution and genomics.',
-  },
-  {
-    name: 'Zsofia K. Stadler, MD',
-    logo: '👩‍⚕️',
-    url: 'https://www.mskcc.org/cancer-care/doctors/zsofia-stadler',
-    institution: 'Memorial Sloan Kettering Cancer Center',
-    description: 'Collaborative research in cancer genetics and prevention.',
-  },
 ];
 
 const grants = [
